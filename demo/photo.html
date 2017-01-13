@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>上传图片</title>
+	<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+	<style>
+		*{box-sizing: border-box;}
+		html,body{margin: 0;padding: 0;}
+		.u-container:after {
+			content: '';
+			display: table;
+			clear: both;
+		}
+		.u-col4 {
+			float: left;
+			position: relative;
+			width: 33.33333333%;
+		  min-height: 1px;
+		  padding-right: 10px;
+		  padding-left: 10px;
+		}
+		.u-photo-img1,
+		.u-photo-img2,
+		.u-photo-img3,
+		.u-photo-img4,
+		.u-photo-img5,
+		.u-photo-img6 {
+			position: relative;
+			overflow: hidden;
+			border-radius: 50%;
+			display: block;
+			margin: 0 auto;
+			padding: 0;
+			padding-bottom: 100%;
+			background-repeat: no-repeat;
+			background-position: center;
+			background-size: 100% 100%;
+		}
+		.u-img-figure {
+			background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABwAAAAcCAYAAAByDd+UAAAAB3RJTUUH4AwaCDAQ7Cac9wAAAOxJREFUeJzt1jFKA0EUxvFfRKySFJYewkKWAS0kJ/AYouAJcgBPENDjBAshy9p4EJsEBBst3F3IFgMvuhZxv2Z4M2/ef5hhvhn2XaNIclWWY9yjQIV5kdImUuMgkowbXOCobm+D88PAWSe+7Bs47sSTvoE/1gAcgGGNoCrLY9zhDNNM/sS2O31incl/xwqLIqU3OKwHGrvaZcG5BU5xhRPfLtVu6ekOsIja+g3wtWdgW7/Z0jmucS5vV9EzXOMFi6Yj+jwtbfvppkhpFqmx//dwAP4/YPeHlruDvwJcduKnvoGPeMZH3T5EgX+uL+tDJlVbqpP9AAAAAElFTkSuQmCC');
+			background-repeat: no-repeat;
+			background-position: center;
+		}
+		.u-img-figure,
+		.u-figcaption,
+		.u-img-figure {
+			display: block;
+			text-align: center;
+		}
+		.visibility-hidden{
+			position: absolute !important;
+			clip: rect(0,0,0,0) !important;
+			width: 1px !important;
+			height: 1px !important;
+			margin: -1px !important;
+			padding: 0 !important;
+			border-width: 0px !important;
+			overflow: hidden !important;
+		}
+	</style>
+</head>
+<body>
+	<div class="u-photo-box">
+	<form action="#" method="post" enctype="multipart/form-data"></form>
+	<div class="u-container">
+		<div class="u-col4">
+			<div class="u-img-group">
+				<span class="u-img-figure">
+					<label class="u-photo-img1" for="img1"></label>
+					<input type="file" accept="image/*" class="visibility-hidden" id="img1">
+				</span>
+				<span class="u-figcaption">上传图片1</span>
+			</div>
+		</div>
+	  <div class="u-col4">
+			<div class="u-img-group">
+				<span class="u-img-figure">
+					<label class="u-photo-img2" for="img2"></label>
+					<input type="file" accept="image/*" class="visibility-hidden" id="img2">
+				</span>
+				<span class="u-figcaption">上传图片2</span>
+			</div>
+	  </div>
+	  <div class="u-col4">
+			<div class="u-img-group">
+				<span class="u-img-figure">
+					<label class="u-photo-img3" for="img3"></label>
+					<input type="file" accept="image/*" class="visibility-hidden" id="img3">
+				</span>
+				<span class="u-figcaption">上传图片3</span>
+			</div>
+	  </div>
+		<div class="u-col4">
+			<div class="u-img-group">
+				<span class="u-img-figure">
+					<label class="u-photo-img4" for="img4"></label>
+					<input type="file" accept="image/*" class="visibility-hidden" id="img4">
+				</span>
+				<span class="u-figcaption">上传图片4</span>
+			</div>
+		</div>
+	  <div class="u-col4">
+			<div class="u-img-group">
+				<span class="u-img-figure">
+					<label class="u-photo-img5" for="img5"></label>
+					<input type="file" accept="image/*" class="visibility-hidden" id="img5">
+				</span>
+				<span class="u-figcaption">上传图片5</span>
+			</div>
+	  </div>
+	  <div class="u-col4">
+			<div class="u-img-group">
+				<span class="u-img-figure">
+					<label class="u-photo-img6" for="img6"></label>
+					<input type="file" accept="image/*" class="visibility-hidden" id="img6">
+				</span>
+				<span class="u-figcaption">上传图片6</span>
+			</div>
+	  </div>
+	</div>
+	</div>
+	<script>
+		(function(win, doc){
+			var oFReader = new FileReader();
+			var imgs = ["img1","img2","img3","img4","img5","img6"];
+			var imgLength = imgs.length;
+
+			for(var img = 0; img < imgLength; img++){
+				imgs[img] = doc.getElementById(imgs[img]);
+				imgs[img].addEventListener('change', function(e){
+					loadImageFile(this);
+				});
+			}
+
+			function loadImageFile(file){
+				if(file.files.length === 0){
+					return;
+				}
+
+				var oFile = file.files[0];
+
+				oFReader.readAsDataURL(oFile);
+
+				oFReader.onload = function(oFREvent) {
+					if(file.previousElementSibling.tagName){
+						file.previousElementSibling.style.backgroundColor = '#fff';
+						file.previousElementSibling.style.backgroundImage = 'url('+oFREvent.target.result+')';
+					}
+				}
+			}
+		})(window, document);
+	</script>
+</body>
+</html>

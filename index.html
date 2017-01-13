@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<!-- META -->
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<title>首页</title>
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<meta name="format-detection" content="telephone=no">
+	<meta name="author" content="jiangzhongzheng">
+	<link rel="icon" href="" type="image/png">
+	<link rel="stylesheet" href="css/style.css?v=1.0">
+	<style>
+		.body__container, .body__list {
+			height: 100%;
+		}
+	</style>
+</head>
+<body class="bg-grid">
+	<main>
+		<header class="header header--fixed">
+			<nav class="header__nav">
+				<section class="header__body">
+					<i class="header-icon">blog</i>
+				</section>
+			</nav>
+		</header>
+		<article class="body body--scroll">
+			<h3 class="body__title visibility--hidden">内容列表</h3>
+			<section class="list j-list">
+				<aside class="loading-box">
+					<div class="_box">
+						<span class="loading-icon _i1"></span>
+						<span class="loading-icon _i2"></span>
+						<span class="loading-icon _i3"></span>
+					</div>
+				</aside>
+				<template class="j-template">
+					<div class="j-root list__li" data-index="">
+						<span class="log j-log none-events"></span>
+						<p class="list__title j-title none-events"></p>
+						<aside class="none-events">
+							<mark class="list__mack j-make"></mark>
+						</aside>
+						<span class="list__time j-time none-events"></span>
+					</div>
+				</template>
+			</section>
+		</article>
+		<section class="newpagebox j-newpagebox i-hide">
+			<i class="close-btn j-page-close">
+				<svg id="s-tip" width="40" height="40" viewbox="0 0 40 40" preserveAspectRatio="xMidYMid slice">
+					<g stroke="#fff" stroke-width="2" fill="transparent">
+						<path d="M10 10 L 30 30"></path>
+						<path d="M10 30 L 30 10"></path>
+					</g>
+				</svg>
+			</i>
+			<aside class="loading-box">
+				<div class="_box">
+					<span class="loading-icon _i1"></span>
+					<span class="loading-icon _i2"></span>
+					<span class="loading-icon _i3"></span>
+				</div>
+			</aside>
+			<section class="body__container j-page-container">
+			</section>
+		</section>
+		<footer class="footer f-bottom">
+			<div class="copyright">&copy; 2017 JiangZhongZheng</div>
+			<div class="about j-about">
+				<a href="javascript:void(0);">关于博客</a>
+			</div>
+		</footer>
+	</main>
+	<script src="js/dom.js"></script>
+</body>
+</html>
