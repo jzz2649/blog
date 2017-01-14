@@ -322,8 +322,6 @@ figure img {
 	margin: 0 auto;
 }
 
-.list { margin: auto; }
-
 .list__li {
 	padding: 5px;
 	overflow: hidden;
