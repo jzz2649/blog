@@ -79,9 +79,11 @@
 (function(win,doc,j){
 	var about = j('.j-about').d;
 	var box = j('.j-newpagebox').d;
+	var boxloading = box.querySelector('.loading-box');
 	var pagebox = j('.j-page-container').d;
 	var close = j('.j-page-close').d;
 	var list = j('.j-list').d;
+	var listloading = list.querySelector('.loading-box');
 	var template = j('.j-template').d;
 	var dc = template.content;
 	var div = dc.querySelector('.j-root');
@@ -93,7 +95,7 @@
 	about.addEventListener('click', function(){pagehandle(1)});
 
 	ajax('js/title.js?1814','text',function(data){
-		list.querySelector('.loading-box') && (list.querySelector('.loading-box').style.display = 'none');
+		listloading && (listloading.style.display = 'none');
 		var title = JSON.parse(data);
 		j.each(title, function(i,k){
 			_div = div.cloneNode(true);
@@ -139,6 +141,7 @@
 		});
 		close.addEventListener('click', function(e){
 			box.classList.toggle('i-hide');
+			boxloading && (boxloading.style.display = 'block');
 		});
 	});
 
@@ -146,7 +149,7 @@
 		pagebox.innerHTML = '';
 		box.classList.toggle('i-hide');
 		ajax('page/page'+n+'.html','document',function(data,type){
-			box.querySelector('.loading-box') && (box.querySelector('.loading-box').style.display = 'none');
+			boxloading && (boxloading.style.display = 'none');
 			if ( type == 404 ){
 				pagebox.innerHTML = '<p style="text-align:center;">'+data+'</p>';
 				return;
