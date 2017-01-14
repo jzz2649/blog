@@ -1,0 +1,33 @@
+<section class="body__list body--scroll">
+	<div class="body__item">
+		<h3 class="item__title i-action">关于移动端border 1px问题</h3>
+		<div class="item__body">
+			<span class="item__list">
+				<h4>问题</h4>
+				<p>有时候我们设置的1px的border比我们想象中的要宽些</p>
+			</span>
+			<span class="item__list">
+				<h4>知识点</h4>
+				<p>这里涉及到设备像素比devicePixelRatio，我们在pc端上看到的一个个小点(物理像素)，就是1px，这是物理像素，也跟css 1px大小一样，所以它的devicePixelRatio像素比为1。但是在移动端，各设备的devicePixelRatio就不同了，以iphone5s为例，它的devicePixelRatio为2，分辨率是1136x640，screen.width是320px，screen.height是568px，正好是分辨率的1/2，就是说css 1px等于4px(物理像素)，设置的border 1px的宽度占用了2px(物理像素)，</p>
+			</span>
+			<span class="item__list">
+				<h4>解决</h4>
+				<p>@media可以根据device-pixel-ratio来判断devicePixelRatio，transform属性中有个scale属性能缩放比例，所以我们可以借助上面两个属性来达到目的</p>
+			</span>
+			<figure>
+				<figcaption class="t-center">实际中的1px border</figcaption>
+				<div class="border-1px"></div>
+			</figure>
+			<figure>
+				<figcaption class="t-center">理想中的1px border</figcaption>
+				<div class="border-1px mobile-border-px"></div>
+			</figure>
+			<figure>
+				<figcaption class="t-center">代码</figcaption>
+				<img src="img/page4.jpg" class="img-center" alt="无法显示">
+			</figure>
+		</div>
+	</div>
+	<style hidden>
+	</style>
+</section>

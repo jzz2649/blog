@@ -37,6 +37,7 @@ template {
 
 img {
   border-style: none;
+  max-width: 100%;
 }
 
 a {
@@ -78,6 +79,28 @@ a:hover {
 .img-center {
 	margin: 0 auto;
 	text-align: center;
+}
+
+.w100 {
+	width: 100%;
+}
+
+.border-1px{
+	border-top: 1px solid #00bcd4;
+}
+
+@media (-webkit-min-device-pixel-ratio: 1.5){
+	.mobile-border-px{
+    -webkit-transform: scaleY(0.7);
+    transform: scaleY(0.7);
+	}
+}
+
+@media (-webkit-min-device-pixel-ratio:2) {
+	.mobile-border-px {
+		-webkit-transform: scaleY(0.5);
+	  transform: scaleY(0.5);
+	}
 }
 
 /*-#img-*/
