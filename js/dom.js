@@ -143,6 +143,7 @@
 	});
 
 	function pagehandle(n){
+		pagebox.innerHTML = '';
 		box.classList.toggle('i-hide');
 		ajax('page/page'+n+'.html','document',function(data,type){
 			box.querySelector('.loading-box') && (box.querySelector('.loading-box').style.display = 'none');
@@ -151,7 +152,6 @@
 				return;
 			}
 			var page = data.body.firstElementChild;
-			pagebox.innerHTML = '';
 			pagebox.appendChild(page);
 		})
 	}
