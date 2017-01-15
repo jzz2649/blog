@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="renderer" content="webkit">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="format-detection" content="telephone=no">
+	<title>主页</title>
+	<link rel="stylesheet" href="css/swiper.min.css">
+	<link rel="stylesheet" href="css/header.css">
+	<style rel="stylesheet">
+		body{background-color: #f7f7f7;}
+		.swiper-container {
+	        width: 100%;
+	        height: 100%;
+	    }
+	    .swiper-slide {
+	        text-align: center;
+	        font-size: 18px;
+	        background: #fff;
+	        /* Center slide text vertically */
+	        display: -webkit-box;
+	        display: -ms-flexbox;
+	        display: -webkit-flex;
+	        display: flex;
+	        -webkit-box-pack: center;
+	        -ms-flex-pack: center;
+	        -webkit-justify-content: center;
+	        justify-content: center;
+	        -webkit-box-align: center;
+	        -ms-flex-align: center;
+	        -webkit-align-items: center;
+	        align-items: center;
+	    }
+	    .img-box{display: block;width: 100%;padding-bottom: 50%;overflow: hidden;}
+	    .img1,.img2,.img3{background-size: cover;background-repeat: no-repeat;background-position: center;}
+	    .img1{background-image: url('img/page1.jpg');}
+	    .img2{background-image: url('img/page2.jpg');}
+	    .img3{background-image: url('img/page3.jpg');}
+	    .g-li{margin: 4px 0;}
+	    .g-li:after{content: '';display: table;clear: both;}
+	    .g-link:first-child{padding-right: 2px;}
+	    .g-link:last-child{padding-left: 2px;}
+	    .g-link{float: left;width: 50%;background-color: #fff;background-clip: content-box;}
+	    .g-link > img{display: block;width: 100%;height: auto;}
+	    .g-text{padding: 4px;}
+	    .g-orig,.g-price,.g-detail{display: block;font-size: 14px;line-height: 1.1;padding: 2px 0;}
+	    .g-orig,.g-price{color: #ff464e;}
+	    .g-detail{font-size: 12px;}
+	    .about{position: relative;color: #bbb;font-size: 12px;padding: 10px 0;text-align: center;background-color: #fff;margin: 5px auto;margin-bottom: 0;}
+		.about:before{content: '';position: absolute;top: 19px;left: 10px;right: 10px;z-index: 0;height: 1px;background-color: #e7e7e7;}
+		.about > span{position: relative;z-index: 1;padding: 0 5px;background-color: #fff;}
+	    .unline{text-decoration: line-through;}
+	</style>
+</head>
+<body>
+	<div class="main">
+		<div class="u-header u-header--fixed">
+			<div class="u-box h40">
+				<div class="u-header__title">zhuye</div>
+				<div class="u-header__return j-return">返回</div>
+			</div>
+		</div>
+		<div class="u-popup j-popup">
+			<div class="popup__box">
+				<div class="popup__title j-popup-text">提示消息</div>
+				<div class="popup__btn j-btn">确认</div>
+			</div>
+		</div>
+		<div class="u-body">
+			<div class="u-panel">
+				<!-- Swiper -->
+			    <div class="swiper-container">
+			        <div class="swiper-wrapper">
+			            <div class="swiper-slide">
+			            	<span class="img-box img1"></span>
+			            </div>
+			            <div class="swiper-slide">
+			            	<span class="img-box img2"></span>
+			            </div>
+			            <div class="swiper-slide">
+			            	<span class="img-box img3"></span>
+			            </div>
+			        </div>
+			        <!-- Add Pagination -->
+			        <div class="swiper-pagination"></div>
+			    </div>
+			</div>
+			<div class="u-goods">
+				<div class="g-con">
+					<ul class="g-list">
+						<li class="g-li">
+							<a href="detail.html" class="g-link">
+								<img src="img/goods/g1.jpg" alt="无法显示">
+								<div class="g-text">
+									<span class="g-orig unline">原价<span class="o_price">800</span></span>
+									<span class="g-price">现价<span class="_price">399</span></span>
+									<span class="g-detail">冬季羽绒服</span>
+								</div>
+							</a>
+							<a href="detail.html" class="g-link">
+								<img src="img/goods/g2.jpg" alt="无法显示">
+								<div class="g-text">
+									<span class="g-orig unline">原价<span class="o_price">499</span></span>
+									<span class="g-price">现价<span class="_price">199</span></span>
+									<span class="g-detail">红色长靴</span>
+								</div>
+							</a>
+						</li>
+						<li class="g-li">
+							<a href="detail.html" class="g-link">
+								<img src="img/goods/g3.jpg" alt="无法显示">
+								<div class="g-text">
+									<span class="g-orig unline">原价<span class="o_price">599</span></span>
+									<span class="g-price">现价<span class="_price">239</span></span>
+									<span class="g-detail">冬季粉红长衣</span>
+								</div>
+							</a>
+							<a href="detail.html" class="g-link">
+								<img src="img/goods/g4.jpg" alt="无法显示">
+								<div class="g-text">
+									<span class="g-orig unline">原价<span class="o_price">319</span></span>
+									<span class="g-price">现价<span class="_price">99</span></span>
+									<span class="g-detail">保暖内衣</span>
+								</div>
+							</a>
+						</li>
+						<li class="g-li">
+							<a href="detail.html" class="g-link">
+								<img src="img/goods/g5.jpg" alt="无法显示">
+								<div class="g-text">
+									<span class="g-orig unline">原价<span class="o_price">599</span></span>
+									<span class="g-price">现价<span class="_price">239</span></span>
+									<span class="g-detail">女性冬季羽绒服</span>
+								</div>
+							</a>
+							<a href="detail.html" class="g-link">
+								<img src="img/goods/g6.jpg" alt="无法显示">
+								<div class="g-text">
+									<span class="g-orig unline">原价<span class="o_price">299</span></span>
+									<span class="g-price">现价<span class="_price">99</span></span>
+									<span class="g-detail">修身长裤</span>
+								</div>
+							</a>
+						</li>
+						<li class="g-li">
+							<a href="detail.html" class="g-link">
+								<img src="img/goods/g7.jpg" alt="无法显示">
+								<div class="g-text">
+									<span class="g-orig unline">原价<span class="o_price">499</span></span>
+									<span class="g-price">现价<span class="_price">199</span></span>
+									<span class="g-detail">时尚红色皮包</span>
+								</div>
+							</a>
+							<a href="detail.html" class="g-link">
+								<img src="img/goods/g8.jpg" alt="无法显示">
+								<div class="g-text">
+									<span class="g-orig unline">原价<span class="o_price">299</span></span>
+									<span class="g-price">现价<span class="_price">99</span></span>
+									<span class="g-detail" id="ttt">休闲牛仔裤</span>
+								</div>
+							</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+			<div class="about"><span>copyright © 上海某某科技有限公司</span></div>
+		</div>
+	</div>
+	<script src="js/swiper.min.js"></script>
+	<script src="js/jquery.min.js"></script>
+	<script>
+	$(function(){
+		var swiper = new Swiper('.swiper-container', {
+	        pagination: '.swiper-pagination',
+	        paginationClickable: true,
+	        loop:true
+	    });
+	    var $r=$('.j-return').eq(0);
+		$r.on('click',function(e){history.back();});
+		var $all = $('.g-link');
+		$all.each(function(i,e){
+			var h=e.href;
+			var m=e.firstElementChild.src;o=e.querySelector('.o_price').textContent,p=e.querySelector('._price').textContent,d=e.querySelector('.g-detail').textContent;
+			var href=h+'?o='+o+'&p='+p+'&d='+encodeURIComponent(d)+'&m='+encodeURIComponent(m);
+			$(e).on('click',function(e){
+				location.href=href;
+				e.preventDefault();
+			})
+		})
+	})
+	</script>
+</body>
+</html>

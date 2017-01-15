@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="renderer" content="webkit">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="format-detection" content="telephone=no">
+	<title>详情</title>
+	<link rel="stylesheet" href="css/header.css">
+	<style rel="stylesheet">
+		body{background-color: #f7f7f7;font-family: arial;}
+		.u-img > img{display: block;width: 100%;}
+		.detail{padding: 0 10px 10px 10px;background-color: #fff;}
+		.d-title > h2{font-size: 18px;padding-top: 14px;font-weight: 400;color: #4a4a4a;margin: 0;}
+		.d-price{padding: 10px 0 6px 0;}
+		i{font-style: normal;font-size: 13px;}
+		.d-orig{margin-right: 5px;font-size: 18px;color: #ff464e;vertical-align: middle;}
+		.o-price{font-size: 12px;color: #ababab;text-decoration: line-through;vertical-align: middle;}
+		.d-kdf{display: inline-block;padding: 2px;background-color: #ff464e;color: #fff;font-size: 12px;vertical-align: middle;}
+		.d-time{padding-left: 20px;color: #9a9a9a;font-size: 13px;line-height: 20px;background-image: url('img/star_time.png');background-repeat: no-repeat;background-size: 12px;background-position: left 4px top 3px;}
+		.line{display: block;margin: 5px 0;width: 100%;height: 1px;background-color: #e7e7e7;}
+		.fhtime{padding: 5px 0;}
+		.fhtime > span{display: inline-block;padding-left: 16px;font-size: 12px;color: #777;background-image: url('img/promise.png');background-repeat: no-repeat;background-size: 10px;background-position: left 2px top 3px;}
+		.about{position: relative;color: #bbb;font-size: 12px;padding: 10px 0;text-align: center;background-color: #fff;margin: 5px auto;margin-bottom: 40px;}
+		.about:before{content: '';position: absolute;top: 19px;left: 10px;right: 10px;z-index: 0;height: 1px;background-color: #e7e7e7;}
+		.about > span{position: relative;z-index: 1;padding: 0 5px;background-color: #fff;}
+		.gm{position: fixed;bottom: 0;z-index:9;width: 100%;height: 40px;overflow: hidden;background-color: #fff;}
+		.g-sc,.g-gwc,.g-gm{float: left;height: 40px;text-align: center;}
+		.g-sc,.g-gwc{width: 20%;line-height: 60px;font-size: 12px;color: #4a4a4a;background-repeat: no-repeat;}
+		.g-sc{background-image: url('img/collect.png');background-size: 20px;background-position: center top 2px;}
+		.g-gwc{background-image: url('img/bag-icon-new.png');background-size: 20px;background-position: center top 2px;}
+		.g-gm{width: 60%;line-height: 40px;font-size: 18px;background-color: #ff464e;color: #fff;}
+	</style>
+</head>
+<body>
+	<div class="main">
+		<div class="u-header u-header--fixed">
+			<div class="u-box h40">
+				<div class="u-header__title">详情</div>
+				<div class="u-header__return j-return">返回</div>
+			</div>
+		</div>
+		<div class="u-popup j-popup">
+			<div class="popup__box">
+				<div class="popup__title j-popup-text">提示消息</div>
+				<div class="popup__btn j-btn">确认</div>
+			</div>
+		</div>
+		<div class="u-body">
+			<div class="u-panel">
+				<div class="u-img">
+					<img class="j-img" alt="无法显示">
+				</div>
+			</div>
+			<div class="detail">
+				<div class="d-title">
+					<h2 class="j-title"></h2>
+				</div>
+				<div class="d-price">
+					<span class="d-orig"><i>￥</i><span class="j-price"></span></span>
+					<span class="o-price">¥<span class="j-oprice"></span></span>
+					<span class="d-kdf">免运费</span>
+				</div>
+				<div class="d-time">剩6天17小时</div>
+				<div class="line"></div>
+				<div class="fhtime">
+					<span>24小时发货</span>
+					<span>7天包退</span>
+					<span>售后补贴</span>
+				</div>
+			</div>
+			<div class="about"><span>copyright © 上海某某科技有限公司</span></div>
+		</div>
+	</div>
+	<div class="gm">
+		<span class="g-sc">收藏</span>
+		<span class="g-gwc">购物车</span>
+		<span class="g-gm">点击购买</span>
+	</div>
+	<script src="js/jquery.min.js"></script>
+	<script>
+		$(function(){
+			var s=location.search;
+			var n,arr,o,p,d,m;
+			if(s){
+				n=s.slice(1);
+				arr=n.split('&');
+				o=arr[0].split('=')[1];
+				p=arr[1].split('=')[1];
+				d=decodeURIComponent(arr[2].split('=')[1]),
+				m=decodeURIComponent(arr[3].split('=')[1]);
+				$('.j-title').text(d);
+				$('.j-oprice').text(o);
+				$('.j-price').text(p);
+				$('.j-img').attr('src',m);
+			}
+			var $r=$('.j-return').eq(0);
+			$r.on('click',function(e){history.back();});
+			var $gm=$('.g-gm').eq(0);
+			$gm.on('click',function(e){
+				location.href='payment.html?p='+p+'&d='+encodeURIComponent(d);
+			});
+		});
+	</script>
+</body>
+</html>
