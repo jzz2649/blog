@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no">
+  <title>没有出现可视区域</title>
+  <style>
+    html,body{margin: 0;padding: 0;font-size: 16px;}
+    ._slide-box {padding: 20px;background-color: #00bcd4;}
+    ._box {overflow: hidden;height: 20px;background-color: #fff;}
+    ._slide {display: inline-block;line-height: 20px;}
+  </style>
+</head>
+<body>
+  <div class="_slide-box">
+    <div class="_box">
+      <!-- <span class="_slide">我是滚动的文字</span> -->
+    </div>
+  </div>
+  <p style="text-align: center;">滚动一圈后，等待一下滑动下屏幕</p>
+  <script>
+    (function(win,doc){
+      var dw = win.innerWidth;
+      var _box = doc.querySelector('._box');
+      
+      var right = dw - 40 + 2;
+      
+      var position = right;
+
+      var step = dw/64;
+
+      var timer = null;
+      var slide = null;
+      slideFN();
+      function slideFN() {
+        clearTimeout(timer);
+        if(slide){
+          _box.removeChild(slide);
+        }
+
+        slide = doc.createElement('span');
+
+        slide.className = '_slide';
+        slide.textContent = '我是滚动的文字';
+        slide.style.transform = 'translateX('+position+'px)';
+        _box.appendChild(slide);
+
+        var box = slide.getBoundingClientRect();
+        var left = -(box.width + 20);
+
+
+        requestAnimationFrame(function(){
+          slide.style.transition = 'transform '+step+'s linear 0s';
+          slide.style.transform = 'translateX('+left+'px)';
+        })
+
+        timer = setTimeout(slideFN, step * 1000)
+      }
+    })(window,document);
+  </script>
+</body>
+</html>

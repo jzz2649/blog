@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>slider</title>
+  <style>
+    body{position: relative;background-color: #fafafa;margin: 0;border: 5px solid #ddd;}
+    .p{position: absolute;margin: 3px 0;background-color: transparent;width: 100%;height: 20px;line-height: 20px;}
+    .p:nth-child(3n+3){position: relative;}
+    .span{position: absolute;height: inherit;line-height: inherit;transform: translateX(1000px);transition: transform 0s linear 0s;}
+  </style>
+</head>
+<body>
+  <p class="p"><span class="span">slider1</span></p>
+  <p class="p"><span class="span">slider2</span></p>
+  <p class="p"><span class="span">slider3</span></p>
+  <p class="p"><span class="span">slider4</span></p>
+  <p class="p"><span class="span">slider5</span></p>
+  <p class="p"><span class="span">slider6</span></p>
+  <p class="p"><span class="span">slider7</span></p>
+  <p class="p"><span class="span">slider8</span></p>
+  <p class="p"><span class="span">slider9</span></p>
+  <p class="p"><span class="span">slider10</span></p>
+  <p class="p"><span class="span">slider11</span></p>
+  <p class="p"><span class="span">slider12</span></p>
+  <p class="p"><span class="span">slider13</span></p>
+  <p class="p"><span class="span">slider14</span></p>
+  <p class="p"><span class="span">slider15</span></p>
+  <p class="p"><span class="span">slider16</span></p>
+  <p class="p"><span class="span">slider17</span></p>
+  <p class="p"><span class="span">slider18</span></p>
+  <p class="p"><span class="span">slider19</span></p>
+  <p class="p"><span class="span">slider20</span></p>
+  <p class="p"><span class="span">slider31</span></p>
+  <p class="p"><span class="span">slider32</span></p>
+  <p class="p"><span class="span">slider33</span></p>
+  <p class="p"><span class="span">slider34</span></p>
+  <p class="p"><span class="span">slider35</span></p>
+  <p class="p"><span class="span">slider36</span></p>
+  <p class="p"><span class="span">slider37</span></p>
+  <p class="p"><span class="span">slider38</span></p>
+  <p class="p"><span class="span">slider39</span></p>
+  <p class="p"><span class="span">slider40</span></p>
+  <p class="p"><span class="span">slider41</span></p>
+  <p class="p"><span class="span">slider42</span></p>
+  <p class="p"><span class="span">slider43</span></p>
+  <p class="p"><span class="span">slider44</span></p>
+  <p class="p"><span class="span">slider45</span></p>
+  <p class="p"><span class="span">slider46</span></p>
+  <p class="p"><span class="span">slider47</span></p>
+  <p class="p"><span class="span">slider48</span></p>
+  <p class="p"><span class="span">slider49</span></p>
+  <p class="p"><span class="span">slider50</span></p>
+  <p class="p"><span class="span">slider51</span></p>
+  <p class="p"><span class="span">slider52</span></p>
+  <p class="p"><span class="span">slider53</span></p>
+  <p class="p"><span class="span">slider54</span></p>
+  <p class="p"><span class="span">slider55</span></p>
+  <p class="p"><span class="span">slider56</span></p>
+  <p class="p"><span class="span">slider57</span></p>
+  <p class="p"><span class="span">slider58</span></p>
+  <p class="p"><span class="span">slider59</span></p>
+  <p class="p"><span class="span">slider60</span></p>
+  <p class="p"><span class="span">slider61</span></p>
+  <p class="p"><span class="span">slider62</span></p>
+  <p class="p"><span class="span">slider63</span></p>
+  <p class="p"><span class="span">slider64</span></p>
+  <p class="p"><span class="span">slider65</span></p>
+  <p class="p"><span class="span">slider66</span></p>
+  <p class="p"><span class="span">slider67</span></p>
+  <p class="p"><span class="span">slider68</span></p>
+  <p class="p"><span class="span">slider69</span></p>
+  <p class="p"><span class="span">slider70</span></p>
+  <p class="p"><span class="span">slider71</span></p>
+  <p class="p"><span class="span">slider72</span></p>
+  <p class="p"><span class="span">slider73</span></p>
+  <p class="p"><span class="span">slider74</span></p>
+  <p class="p"><span class="span">slider75</span></p>
+  <p class="p"><span class="span">slider76</span></p>
+  <p class="p"><span class="span">slider77</span></p>
+  <p class="p"><span class="span">slider78</span></p>
+  <p class="p"><span class="span">slider79</span></p>
+  <p class="p"><span class="span">slider80</span></p>
+  <p class="p"><span class="span">slider81</span></p>
+  <p class="p"><span class="span">slider82</span></p>
+  <p class="p"><span class="span">slider83</span></p>
+  <p class="p"><span class="span">slider84</span></p>
+  <p class="p"><span class="span">slider85</span></p>
+  <p class="p"><span class="span">slider86</span></p>
+  <p class="p"><span class="span">slider87</span></p>
+  <p class="p"><span class="span">slider88</span></p>
+  <p class="p"><span class="span">slider99</span></p>
+  <p class="p"><span class="span">slider100</span></p>
+  <p class="p"><span class="span">slider101</span></p>
+  <script>
+    (function(win, doc){
+      var spans = doc.querySelectorAll('.span');
+      var len = spans.length;
+      var distances = 1000;
+      var arr = [];
+
+      for(var i=0; i<len; i++){
+        arr[i] = spans[i];
+        arr[i].s = distances;
+        arr[i].r = (Math.random()*4).toFixed(2);
+        arr[i].r = arr[i].r >=2?arr[i].r:+arr[i].r+2;
+        arr[i].n = 1;
+        arr[i].timer = null;
+        slide(arr[i]);
+      }
+
+      function slide(d){
+        _slide()
+        function _slide(){
+            d.s -= d.n*d.r;
+          if(d.s>200){
+            d.style.transform = 'translateX('+d.s+'px)';
+            d.timer = requestAnimationFrame(_slide);
+          }else{
+            d.style.transform = 'translateX(200px)';
+            cancelAnimationFrame(d.timer);
+          }
+        }
+      }
+    })(window, document);
+  </script>
+</body>
+</html>

@@ -50,6 +50,15 @@ a:hover {
   outline-width: 0;
 }
 
+.link {
+	margin: 0 5px;
+	background-color: rgba(0,188,212,.3);
+}
+
+.out--link{
+	background-color: rgba(255,255,0,.3);
+}
+
 ::selection {
 	color: #fff;
  background-color: #00bcd4;
@@ -448,7 +457,7 @@ figure img {
 }
 
 .item__body {
-	max-height: 1000px;
+	/*max-height: 1000px;*/
 	overflow-y: hidden;
 	transition: max-height .8s cubic-bezier(.23,1,.32,1);
 }

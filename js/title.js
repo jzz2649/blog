@@ -23,4 +23,16 @@
 		"href":"demo/demo4/index.html",
 		"make":"html",
 		"time":"2017-1-15"
+	},
+	{
+		"index":6,
+		"title":"ios dom元素滚动到可视区域不可见bug",
+		"make":"js",
+		"time":"2017-1-17"
+	},
+	{
+		"index":7,
+		"title":"requestAnimationFrame之切换tab暂停问题",
+		"make":"js",
+		"time":"2017-1-17"
 	}]
