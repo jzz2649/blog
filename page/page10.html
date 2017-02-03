@@ -1,0 +1,30 @@
+<section class="body__list body--scroll">
+  <div class="body__item">
+    <h3 class="item__title i-action">关于RGBA色彩知识</h3>
+    <div class="item__body">
+      <span class="item__list">
+        <h4>说明</h4>
+        <p>我觉得作为前端开发人员，色彩知识还是要了解的，当初学习ps的时候，就补了下色彩知识，但还是在探索的路上。以下photoshop简称ps</p>
+      </span>
+      <span class="item__list">
+        <h4>RGB</h4>
+        <p>1，先谈RGB(三原色光模式),又称RGB颜色模型或红绿蓝颜色模型，是一种加色模型，将红（Red）、绿（Green）、蓝（Blue）三原色的色光以不同的比例相加，以产生多种多样的色光(取自wiki)，计算机屏幕由RGB组合。<br/>
+        2，学过ps的了解，黑色表示无色，白色表示最强度，这是RGB中的表示，而CMYK则表示相反，用数值表示范围则是0-255,RGB(0-255,0-255,0-255)<br/>
+        3，rgb(0,0,0)在ps中表示无值，显示最黑 黑色，rgb(255,255,255)在ps中表示最大值，显示最白 白色<br/>
+        4，上面中说的都是rbg相同的值，下面说说，在只有一个值(>0)存在，其他为无值(0)情况。rgb(255,0,0)，同学们知道什么颜色吗，答对了，红色，只有红色有值，<br/>
+        5，下面说说二个值(>0)或者更多值存在情况。rgb(255,255,0)，同学们知道什么颜色吗，黄色，为什么呢？因为有个组合的公式<a href="https://www.douban.com/note/76494523/">正确理解RGB三种色彩的组合原理</a><br/>
+        6，谈谈大于0小于255,如果是rgb(200,0,0)呢，也是红色，只不过没有255那么红，先来想想，黑色到白色是如何变化的<span style="display: inline-block;width: 100px;height: 20px;text-indent: -9999px;vertical-align: -5px;color:transparent;background:linear-gradient(90deg,rgb(0,0,0) 0%,rgb(255,255,255) 100%);">none</span>由黑到灰(黑灰到白灰)到白，那么红色<span style="display: inline-block;width: 100px;height: 20px;text-indent: -9999px;vertical-align: -5px;color:transparent;background:linear-gradient(90deg,rgb(0,0,0) 0%,rgb(255,0,0) 100%);">none</span>黑渐渐变红(到最红)，那么rgb(200,200,0)是黄色，只不过没255那么黄<br/>
+        7，谈谈不相等的值，如rgb(255,200,0),也是黄色，只不过偏红，为什么呢，可以这么理解，rbg(255,200,0)等于rgb(200+55,200,0)=rgb(200,200,0)(黄色)+rgb(55,0,0)(红色)<br/>
+        </p>
+      </span>
+      <figure>
+        <figcaption class="t-center">RGB合成图</figcaption>
+        <img src="demo/demo10/rgb.jpg" class="img-center" alt="无法显示">
+      </figure>
+      <span class="item__list">
+        <h4>RGBA</h4>
+        <p>谈了RGB，现在谈谈A(Alpha通道),就是透明度的大小了，数值0%-100%，其实也不用详解，大家也明白透明度是怎么回事</p>
+      </span>
+    </div>
+  </div>
+</section>

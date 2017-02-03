@@ -35,4 +35,23 @@
 		"title":"requestAnimationFrame之切换tab暂停问题",
 		"make":"js",
 		"time":"2017-1-17"
-	}]
+	},
+  {
+    "index":8,
+    "title":"css sticky footer",
+    "href":"https://css-tricks.com/couple-takes-sticky-footer/",
+    "make":"css",
+    "time":"2017-2-3"
+  },
+  {
+    "index":9,
+    "title":"关于flex与margin auto",
+    "make":"css",
+    "time":"2017-2-3"
+  },
+  {
+    "index":10,
+    "title":"关于rgba色彩知识",
+    "make":"css",
+    "time":"2017-2-3"
+  }]
