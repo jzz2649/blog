@@ -1,0 +1,32 @@
+<section class="body__list body--scroll">
+  <div class="body__item">
+    <h3 class="item__title i-action">margin:auto浅谈</h3>
+    <div class="item__body">
+      <span class="item__list">
+        <h4>说明</h4>
+        <p>margin是我们最常用的属性，大多数用来设置间距，关于它，其实是有很多知识点可说的</p>
+      </span>
+      <span class="item__list">
+        <h4>属性值</h4>
+        <p>margin的取值有三大类，固定值(length),百分比(percentage),auto,我们今天就谈auto</p>
+      </span>
+      <span class="item__list">
+        <h4>auto</h4>
+        <p>我们知道，设置margin:0 auto;block元素会水平居中，想margin:auto垂直居中，但不起作用，这里谈谈block，block的width默认100%；如果我们设置block的width为50%;那么margin-right:会只能填充剩下的50%(如图1)，margin-left默认为0；如果设置margin:0 auto；那么margin-left和margin-right会自动填充各25%(如图2)，达到水平居中</p>
+      </span>
+      <figure>
+        <figcaption class="t-center">图1</figcaption>
+        <img src="demo/demo13/img1.jpg" class="img-center" alt="无法显示">
+      </figure>
+      <figure>
+        <figcaption class="t-center">图2</figcaption>
+        <img src="demo/demo13/img2.jpg" class="img-center" alt="无法显示">
+      </figure>
+      <span class="item__list">
+        <h4>auto</h4>
+        <p>但是margin:auto在垂直方向不起作用呢，为什么呢？因为block的height是根据内容自适应的，没用剩余的空间，如何填充呢，但是没关系，毕竟存在这个值，有它生效的情况，那就是使用position:absolute;left:0;right:0;left:0;bottom:0;把它拉伸，然后设置width和height，margin:auto生效了，能垂直居中的，twitter移动端网页就是用此方法来显示图片的</p>
+      </span>
+      <iframe height='265' scrolling='no' title='RKyXZY' src='//codepen.io/jzz7280/embed/RKyXZY/?height=265&theme-id=0&default-tab=css,result&embed-version=2' frameborder='no' allowtransparency='true' allowfullscreen='true' style='width: 100%;'>See the Pen <a href='http://codepen.io/jzz7280/pen/RKyXZY/'>RKyXZY</a> by jzz7280 (<a href='http://codepen.io/jzz7280'>@jzz7280</a>) on <a href='http://codepen.io'>CodePen</a>.</iframe>
+    </div>
+  </div>
+</section>

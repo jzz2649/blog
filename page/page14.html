@@ -1,0 +1,32 @@
+<section class="body__list body--scroll">
+  <div class="body__item">
+    <h3 class="item__title i-action">jsonp新人入门理解</h3>
+    <div class="item__body">
+      <span class="item__list">
+        <h4>说明</h4>
+        <p>跨域的方式有很多中，iframe，script标签，postMessage，CORS等，今天我们谈script标签跨域，因为js可以跨域请求，所以script标签可以进行跨域处理，也只能支持get请求，不支持post</p>
+      </span>
+      <span class="item__list">
+        <h4>方法</h4>
+        <p>1,先用document.createElement('script')创建一个script标签<br/>
+        2,赋予一个id(后期好获取进行删除标签)<br/>
+        3,给script设置src属性来进行get请求,设置的时候带上?callback=fnucname (回调函数名)，方便后端好处理<br/>
+        4,用document.body.appendChild(script)添加到body后面进行执行，之后获取id删除<br/>
+        5，前端写好callback处理方法<br/>
+        6,后端获取到callback的funcname方法之后插入数据返回执行</p>
+      </span>
+      <figure>
+        <figcaption class="t-center">前端代码，jsonp请求</figcaption>
+        <img src="demo/demo14/code2.jpg" class="img-center" alt="无法显示">
+      </figure>
+      <figure>
+        <figcaption class="t-center">前端代码，需要执行的回调</figcaption>
+        <img src="demo/demo14/code1.jpg" class="img-center" alt="无法显示">
+      </figure>
+      <figure>
+        <figcaption class="t-center">后端代码，采用php</figcaption>
+        <img src="demo/demo14/code3.jpg" class="img-center" alt="无法显示">
+      </figure>
+    </div>
+  </div>
+</section>
