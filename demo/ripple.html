@@ -1,510 +1,510 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-	<meta charset="UTF-8">
-	<title>ripple</title>
-	<style>
-		body{font-family: Arial;}
-		ul,li{list-style: none;margin: 0;padding: 0;}
-		.box{width: 300px;margin-left: 50px;}
-		.input{display: block;position: relative;width: 100%;height: 40px;cursor: pointer;}
-		.input>input{margin: 0;padding: 7px 5px;width: 100%;height: 40px;line-height: 40px;font-size: 16px;border-width: 0;border-bottom:1px solid #ddd;outline-style: none;box-sizing: border-box;}
-		.highlight{position: absolute; height: 60%; width: 100px; top: 25%; left: 0; pointer-events: none; opacity: 0.5;}
-		.input>label{position: absolute;top:8px;left:5px;font-size: 16px;color: #999;pointer-events: none;transition: all .2s ease 0s;}
-		.bar{position: relative;width: 300px;display: block;pointer-events: none;}
-		.bar::after,
-		.bar::before{
-			content: '';
-			position: absolute;
-			bottom: 0;
-			width: 0;
-			height: 2px;
-			background-color: #00bcd4;
-			transition:all 0.2s ease 0s;
-		}
-		.bar::before{left: 50%;}
-		.bar::after{right: 50%;}
-		.input>input:focus ~ .highlight{animation: inputHighlighter .2s ease;}
-		@keyframes inputHighlighter{
-			from{background-color: #00bcd4;}
-			to{width: 0;background-color: transparent;}
-		}
-		.input>input:focus ~ label,.input>input:valid ~ label{top:-10px;color: #00bcd4;font-size: 14px;}
-		.input>input:focus ~ .bar::before,
-		.input>input:focus ~ .bar::after{
-			width: 50%;
-		}
-		.btnbox{
-			width: 200px;height: 200px;background-color: #fafafa;cursor: pointer;margin: 50px;margin-left: 100px;
-		}
-		.ripple{position: relative;display: block;width: 100%;height: 100%;overflow: hidden;}
-		.add{position:absolute;height:20px;width:20px;background-color:rgba(0,0,0,0.45);transform: scale(0);transition:all 0.7s ease-out 0ms;border-radius: 50%;pointer-events: none;user-select:none;}
-		.slider{position: relative;height: 2px;user-select:none;}
-		.s1{position: absolute;left: 0;height: 2px;width: calc(0%);background-color: #00bcd4;user-select:none;}
-		.s2{position: absolute;right: 0;height: 2px;width: calc(100%);background-color: #bdbdbd;user-select:none;}
-		.slider-icon{position: absolute;top:0px;left: 0%;margin-top: 1px;width: 12px;height: 12px;border-radius:50%;transform: translate(-50%,-50%) scale(1);transition: transform .1s linear 0s;background-color: #00bcd4;cursor: pointer;user-select:none;}
-		.slider-icon:active{transform:translate(-50%,-50%) scale(1.5);}
-		.shadow{position: absolute;width: 100%;height: 100%;transform: scale(1);transition: transform .1s linear 0s;background-color: rgba(0,188,212,.2);border-radius: 50%;pointer-events: none;user-select:none;}
-		.slider-icon:hover > .shadow{transform: scale(2);}
-		.slider-icon:active > .shadow{transform: scale(1);}
-		.text{color: #aaa;margin-top: 50px;user-select:none;text-align: center;}
-		.circle{position: relative;width: 20px;height: 20px;background-color: #00bcd4;border-radius: 50%;cursor: pointer;user-select:none;}
-		.circle-box{position: absolute;top:-10px;left:-10px;width: 200%;height: 200%;pointer-events: none;user-select:none;}
-		.grid{float: right;width: 900px;height: 600px;}
-		.g-child{float: left;width: 50%;height: 50%;box-sizing: border-box;}
-		.g1,.g2,.g3,.g4{padding-top: 20px;}
-		.slide,.tab,.top,.tip{width: 80%;margin: 0 auto;box-shadow: 0 2px 2px rgba(0,0,0,.3);}
-		.slide .nav,.tab .nav,.top .nav,.tip .nav{height: 34px;background-color: #f2f2f2;}
-		.slide .container{max-height: 1000px;overflow: hidden;background-color: #fff;transition: max-height .5s ease-in-out 0s;}
-		.t-container,.t-container1{position: relative;overflow: auto;height: 260px;background-color: #f1f1f1;}
-		.slide li,.top li,.tip li{height: 20px;margin: 10px;background-color: #fafafa;box-sizing: border-box;}
-		.s-click{position: relative;float: right;margin: 8px 10px 0 0;width: 36px;height: 18px;border-top:2px solid transparent;border-bottom:2px solid transparent;border-radius: 8px;box-sizing: border-box;background-color: rgba(189,189,189,1);transition: background-color .5s cubic-bezier(0.23,1,0.32,1) 0s;background-clip: padding-box;cursor: pointer;user-select:none;}
-		.s-click > i{position: absolute;width: 20px;height: 20px;top: -3px;left: 0;border-radius: 50%;background-color: #f5f5f5;box-shadow: rgba(0, 0, 0, 0.117647) 0px 1px 6px, rgba(0, 0, 0, 0.117647) 0px 1px 4px;transition: left .5s cubic-bezier(0.23,1,0.32,1) 0s,background-color .5s cubic-bezier(0.23,1,0.32,1) 0s;}
-		.on-click{background-color: rgba(0,189,212,0.5);}
-		.on-click > i{left:16px;background-color: #00bcd4;}
-		.tab .container1{height: 220px;overflow: hidden;background-color: #fff;}
-		.c1-box{width: 300%;transform: translate3d(0,0,0);transition: transform .7s cubic-bezier(0.23,1,0.32,1) 0s;}
-		.c1-box::after,.tab .nav::after{content: '';display: table;clear: both;}
-		.n1{float: left;width: 33.333%;height: 34px;line-height: 34px;text-align: center;color: #999;cursor: pointer;user-select:none;}
-		.t-on{color: #fff;background-color: #00bcd4;}
-		.c1-con{float: left;width: 33.333%;height: 220px;line-height: 220px;font-size: 24px;font-weight: 700;color:#999;text-align: center;}
-		.t-con-box{overflow: hidden;background-color: #fff;}
-		.t-con-box + .t-con-box{margin-top: 10px;}
-		.price{overflow:hidden;margin: 10px;}
-		.p-logo{float: left;width: 40px;height: 40px;background-color: #fafafa;border-radius: 50%;}
-		.p-title{margin:5px 0 0 50px;height: 30px;border-top:10px solid #fafafa;border-bottom:10px solid #fafafa;box-sizing: border-box;}
-		.top-btn{display: none;position: absolute;bottom:20px;right:40px;z-index: 9;width: 40px;height: 40px;background-color: rgba(0,188,212,.5);cursor: pointer;user-select:none;}
-		.tip-box{visibility: hidden;position: absolute;top:34px;right:0;bottom:0;left:0;z-index: 1;user-select:none;transition: width .5s linear 0s;transition: height .5s linear 0s;background-color: rgba(0,0,0,0);transition: background-color .3s linear 0s;}
-		.tip-con-box{position: absolute;top:0;right:0;bottom:0;left:0;margin: auto;width: 240px;height: 140px;border: 0px solid #fff;background-color: #fff;transition: border .3s linear 0s;}
-		.tip-on .tip-con-box{border-width: 20px;}
-		.tip-btn{position: absolute;top:54px;right:37px;z-index: 9;overflow: hidden;width: 40px;height: 40px;background-color: rgba(0,188,212,.5);cursor: pointer;user-select:none;transition: right .3s linear 0s;}
-		#s-tip{transform: translate(0,0);transition: transform .3s linear 0s;}
-		.t-container1 > .t-con-box{transform: scale(1);transition: transform .3s linear 0s;}
-		.tip-on .t-container1{overflow-y: hidden;}
-		.tip-on .t-con-box{transform: scale(.9);}
-		.tip-on .tip-btn{right:20px;}
-		.tip-on .tip-box{visibility: visible;background-color: rgba(0,0,0,.2)}
-		.tip-on #s-tip{transform: translate(-40px,0);}
-		.top-btn:hover,.tip-btn:hover{background-color: rgba(0,188,212,1)}
-		.top-bon,.t-show{display: block;}
-		.mac-page-ui{display: inline-block;margin: 11px 0 0 5px;width: 12px;height: 12px;border-radius: 50%;background-color: red;}
-		.ui1{background-color: #f86159;margin-left: 10px}
-		.ui2{background-color: #f8bf2f;}
-		.ui3{background-color: #2ac73e;}
-		
-		.text-slide{position: relative;overflow: hidden;font-size: 48px;line-height: 56px;height: 56px;margin-top: 20px;margin-bottom: 20px;color: #00bcd4;font-weight: 200;}
-		.i-slide-list{position: relative;}
-		.i-slide {
-			position: absolute;
-			white-space: nowrap;
-			opacity: 1;
-			will-change:transform;
-			-webkit-transform: translateY(56px);
-				 -moz-transform: translateY(56px);
-					-ms-transform: translateY(56px);
-					 -o-transform: translateY(56px);
-							transform: translateY(56px);
-			-webkit-transform: translate3d(0,56px,0);
-				 -moz-transform: translate3d(0,56px,0);
-					-ms-transform: translate3d(0,56px,0);
-					 -o-transform: translate3d(0,56px,0);
-							transform: translate3d(0,56px,0);
-			-webkit-transition: -webkit-transform .8s cubic-bezier(0.23,1,0.32,1) 0s, opacity .8s cubic-bezier(0.23,1,0.32,1) 0s;
-				 -moz-transition: -moz-transform .8s cubic-bezier(0.23,1,0.32,1) 0s, opacity .8s cubic-bezier(0.23,1,0.32,1) 0s;
-					-ms-transition: -ms-transform .8s cubic-bezier(0.23,1,0.32,1) 0s, opacity .8s cubic-bezier(0.23,1,0.32,1) 0s;
-					 -o-transition: -o-transform .8s cubic-bezier(0.23,1,0.32,1) 0s, opacity .8s cubic-bezier(0.23,1,0.32,1) 0s;
-							transition: transform .8s cubic-bezier(0.23,1,0.32,1) 0s, opacity .8s cubic-bezier(0.23,1,0.32,1) 0s;
-		}
-		.i-slide--prev{
-			-webkit-transform: translateY(-56px);
-				 -moz-transform: translateY(-56px);
-					-ms-transform: translateY(-56px);
-					 -o-transform: translateY(-56px);
-							transform: translateY(-56px);
-			-webkit-transform: translate3d(0,-56px,0);
-				 -moz-transform: translate3d(0,-56px,0);
-					-ms-transform: translate3d(0,-56px,0);
-					 -o-transform: translate3d(0,-56px,0);
-							transform: translate3d(0,-56px,0);
-							opacity: 0;
-		}
-		.i-slide--curr{
-			-webkit-transform: translateY(0px);
-				 -moz-transform: translateY(0px);
-					-ms-transform: translateY(0px);
-					 -o-transform: translateY(0px);
-							transform: translateY(0px);
-			-webkit-transform: translate3d(0,0,0);
-				 -moz-transform: translate3d(0,0,0);
-					-ms-transform: translate3d(0,0,0);
-					 -o-transform: translate3d(0,0,0);
-							transform: translate3d(0,0,0);
-		}
-		@media only screen and (max-width:1300px){
-			.grid{float: none;}
-			._b1{margin-top: 50px;}
-		}
-		@media only screen and (max-width:930px){
-			.grid{width: 450px;height: 1200px;}
-			.g-child{width: 100%;height: 25%;}
-		}
-	</style>
+  <meta charset="UTF-8">
+  <title>ripple</title>
+  <style>
+    body{font-family: Arial;}
+    ul,li{list-style: none;margin: 0;padding: 0;}
+    .box{width: 300px;margin-left: 50px;}
+    .input{display: block;position: relative;width: 100%;height: 40px;cursor: pointer;}
+    .input>input{margin: 0;padding: 7px 5px;width: 100%;height: 40px;line-height: 40px;font-size: 16px;border-width: 0;border-bottom:1px solid #ddd;outline-style: none;box-sizing: border-box;}
+    .highlight{position: absolute; height: 60%; width: 100px; top: 25%; left: 0; pointer-events: none; opacity: 0.5;}
+    .input>label{position: absolute;top:8px;left:5px;font-size: 16px;color: #999;pointer-events: none;transition: all .2s ease 0s;}
+    .bar{position: relative;width: 300px;display: block;pointer-events: none;}
+    .bar::after,
+    .bar::before{
+      content: '';
+      position: absolute;
+      bottom: 0;
+      width: 0;
+      height: 2px;
+      background-color: #00bcd4;
+      transition:all 0.2s ease 0s;
+    }
+    .bar::before{left: 50%;}
+    .bar::after{right: 50%;}
+    .input>input:focus ~ .highlight{animation: inputHighlighter .2s ease;}
+    @keyframes inputHighlighter{
+      from{background-color: #00bcd4;}
+      to{width: 0;background-color: transparent;}
+    }
+    .input>input:focus ~ label,.input>input:valid ~ label{top:-10px;color: #00bcd4;font-size: 14px;}
+    .input>input:focus ~ .bar::before,
+    .input>input:focus ~ .bar::after{
+      width: 50%;
+    }
+    .btnbox{
+      width: 200px;height: 200px;background-color: #fafafa;cursor: pointer;margin: 50px;margin-left: 100px;
+    }
+    .ripple{position: relative;display: block;width: 100%;height: 100%;overflow: hidden;}
+    .add{position:absolute;height:20px;width:20px;background-color:rgba(0,0,0,0.45);transform: scale(0);transition:all 0.7s ease-out 0ms;border-radius: 50%;pointer-events: none;user-select:none;}
+    .slider{position: relative;height: 2px;user-select:none;}
+    .s1{position: absolute;left: 0;height: 2px;width: calc(0%);background-color: #00bcd4;user-select:none;}
+    .s2{position: absolute;right: 0;height: 2px;width: calc(100%);background-color: #bdbdbd;user-select:none;}
+    .slider-icon{position: absolute;top:0px;left: 0%;margin-top: 1px;width: 12px;height: 12px;border-radius:50%;transform: translate(-50%,-50%) scale(1);transition: transform .1s linear 0s;background-color: #00bcd4;cursor: pointer;user-select:none;}
+    .slider-icon:active{transform:translate(-50%,-50%) scale(1.5);}
+    .shadow{position: absolute;width: 100%;height: 100%;transform: scale(1);transition: transform .1s linear 0s;background-color: rgba(0,188,212,.2);border-radius: 50%;pointer-events: none;user-select:none;}
+    .slider-icon:hover > .shadow{transform: scale(2);}
+    .slider-icon:active > .shadow{transform: scale(1);}
+    .text{color: #aaa;margin-top: 50px;user-select:none;text-align: center;}
+    .circle{position: relative;width: 20px;height: 20px;background-color: #00bcd4;border-radius: 50%;cursor: pointer;user-select:none;}
+    .circle-box{position: absolute;top:-10px;left:-10px;width: 200%;height: 200%;pointer-events: none;user-select:none;}
+    .grid{float: right;width: 900px;height: 600px;}
+    .g-child{float: left;width: 50%;height: 50%;box-sizing: border-box;}
+    .g1,.g2,.g3,.g4{padding-top: 20px;}
+    .slide,.tab,.top,.tip{width: 80%;margin: 0 auto;box-shadow: 0 2px 2px rgba(0,0,0,.3);}
+    .slide .nav,.tab .nav,.top .nav,.tip .nav{height: 34px;background-color: #f2f2f2;}
+    .slide .container{max-height: 1000px;overflow: hidden;background-color: #fff;transition: max-height .5s ease-in-out 0s;}
+    .t-container,.t-container1{position: relative;overflow: auto;height: 260px;background-color: #f1f1f1;}
+    .slide li,.top li,.tip li{height: 20px;margin: 10px;background-color: #fafafa;box-sizing: border-box;}
+    .s-click{position: relative;float: right;margin: 8px 10px 0 0;width: 36px;height: 18px;border-top:2px solid transparent;border-bottom:2px solid transparent;border-radius: 8px;box-sizing: border-box;background-color: rgba(189,189,189,1);transition: background-color .5s cubic-bezier(0.23,1,0.32,1) 0s;background-clip: padding-box;cursor: pointer;user-select:none;}
+    .s-click > i{position: absolute;width: 20px;height: 20px;top: -3px;left: 0;border-radius: 50%;background-color: #f5f5f5;box-shadow: rgba(0, 0, 0, 0.117647) 0px 1px 6px, rgba(0, 0, 0, 0.117647) 0px 1px 4px;transition: left .5s cubic-bezier(0.23,1,0.32,1) 0s,background-color .5s cubic-bezier(0.23,1,0.32,1) 0s;}
+    .on-click{background-color: rgba(0,189,212,0.5);}
+    .on-click > i{left:16px;background-color: #00bcd4;}
+    .tab .container1{height: 220px;overflow: hidden;background-color: #fff;}
+    .c1-box{width: 300%;transform: translate3d(0,0,0);transition: transform .7s cubic-bezier(0.23,1,0.32,1) 0s;}
+    .c1-box::after,.tab .nav::after{content: '';display: table;clear: both;}
+    .n1{float: left;width: 33.333%;height: 34px;line-height: 34px;text-align: center;color: #999;cursor: pointer;user-select:none;}
+    .t-on{color: #fff;background-color: #00bcd4;}
+    .c1-con{float: left;width: 33.333%;height: 220px;line-height: 220px;font-size: 24px;font-weight: 700;color:#999;text-align: center;}
+    .t-con-box{overflow: hidden;background-color: #fff;}
+    .t-con-box + .t-con-box{margin-top: 10px;}
+    .price{overflow:hidden;margin: 10px;}
+    .p-logo{float: left;width: 40px;height: 40px;background-color: #fafafa;border-radius: 50%;}
+    .p-title{margin:5px 0 0 50px;height: 30px;border-top:10px solid #fafafa;border-bottom:10px solid #fafafa;box-sizing: border-box;}
+    .top-btn{display: none;position: absolute;bottom:20px;right:40px;z-index: 9;width: 40px;height: 40px;background-color: rgba(0,188,212,.5);cursor: pointer;user-select:none;}
+    .tip-box{visibility: hidden;position: absolute;top:34px;right:0;bottom:0;left:0;z-index: 1;user-select:none;transition: width .5s linear 0s;transition: height .5s linear 0s;background-color: rgba(0,0,0,0);transition: background-color .3s linear 0s;}
+    .tip-con-box{position: absolute;top:0;right:0;bottom:0;left:0;margin: auto;width: 240px;height: 140px;border: 0px solid #fff;background-color: #fff;transition: border .3s linear 0s;}
+    .tip-on .tip-con-box{border-width: 20px;}
+    .tip-btn{position: absolute;top:54px;right:37px;z-index: 9;overflow: hidden;width: 40px;height: 40px;background-color: rgba(0,188,212,.5);cursor: pointer;user-select:none;transition: right .3s linear 0s;}
+    #s-tip{transform: translate(0,0);transition: transform .3s linear 0s;}
+    .t-container1 > .t-con-box{transform: scale(1);transition: transform .3s linear 0s;}
+    .tip-on .t-container1{overflow-y: hidden;}
+    .tip-on .t-con-box{transform: scale(.9);}
+    .tip-on .tip-btn{right:20px;}
+    .tip-on .tip-box{visibility: visible;background-color: rgba(0,0,0,.2)}
+    .tip-on #s-tip{transform: translate(-40px,0);}
+    .top-btn:hover,.tip-btn:hover{background-color: rgba(0,188,212,1)}
+    .top-bon,.t-show{display: block;}
+    .mac-page-ui{display: inline-block;margin: 11px 0 0 5px;width: 12px;height: 12px;border-radius: 50%;background-color: red;}
+    .ui1{background-color: #f86159;margin-left: 10px}
+    .ui2{background-color: #f8bf2f;}
+    .ui3{background-color: #2ac73e;}
+    
+    .text-slide{position: relative;overflow: hidden;font-size: 48px;line-height: 56px;height: 56px;margin-top: 20px;margin-bottom: 20px;color: #00bcd4;font-weight: 200;}
+    .i-slide-list{position: relative;}
+    .i-slide {
+      position: absolute;
+      white-space: nowrap;
+      opacity: 1;
+      will-change:transform;
+      -webkit-transform: translateY(56px);
+         -moz-transform: translateY(56px);
+          -ms-transform: translateY(56px);
+           -o-transform: translateY(56px);
+              transform: translateY(56px);
+      -webkit-transform: translate3d(0,56px,0);
+         -moz-transform: translate3d(0,56px,0);
+          -ms-transform: translate3d(0,56px,0);
+           -o-transform: translate3d(0,56px,0);
+              transform: translate3d(0,56px,0);
+      -webkit-transition: -webkit-transform .8s cubic-bezier(0.23,1,0.32,1) 0s, opacity .8s cubic-bezier(0.23,1,0.32,1) 0s;
+         -moz-transition: -moz-transform .8s cubic-bezier(0.23,1,0.32,1) 0s, opacity .8s cubic-bezier(0.23,1,0.32,1) 0s;
+          -ms-transition: -ms-transform .8s cubic-bezier(0.23,1,0.32,1) 0s, opacity .8s cubic-bezier(0.23,1,0.32,1) 0s;
+           -o-transition: -o-transform .8s cubic-bezier(0.23,1,0.32,1) 0s, opacity .8s cubic-bezier(0.23,1,0.32,1) 0s;
+              transition: transform .8s cubic-bezier(0.23,1,0.32,1) 0s, opacity .8s cubic-bezier(0.23,1,0.32,1) 0s;
+    }
+    .i-slide--prev{
+      -webkit-transform: translateY(-56px);
+         -moz-transform: translateY(-56px);
+          -ms-transform: translateY(-56px);
+           -o-transform: translateY(-56px);
+              transform: translateY(-56px);
+      -webkit-transform: translate3d(0,-56px,0);
+         -moz-transform: translate3d(0,-56px,0);
+          -ms-transform: translate3d(0,-56px,0);
+           -o-transform: translate3d(0,-56px,0);
+              transform: translate3d(0,-56px,0);
+              opacity: 0;
+    }
+    .i-slide--curr{
+      -webkit-transform: translateY(0px);
+         -moz-transform: translateY(0px);
+          -ms-transform: translateY(0px);
+           -o-transform: translateY(0px);
+              transform: translateY(0px);
+      -webkit-transform: translate3d(0,0,0);
+         -moz-transform: translate3d(0,0,0);
+          -ms-transform: translate3d(0,0,0);
+           -o-transform: translate3d(0,0,0);
+              transform: translate3d(0,0,0);
+    }
+    @media only screen and (max-width:1300px){
+      .grid{float: none;}
+      ._b1{margin-top: 50px;}
+    }
+    @media only screen and (max-width:930px){
+      .grid{width: 450px;height: 1200px;}
+      .g-child{width: 100%;height: 25%;}
+    }
+  </style>
 </head>
 <body>
-	<div class="grid">
-		<span class="g-child g1">
-			<div class="slide">
-				<nav class="nav">
-					<span style="margin-left: 10px;line-height: 34px;color: #999;">滑动面板</span>
-					<span class="s-click on-click">
-						<i></i>
-					</span>
-				</nav>
-				<section class="container">
-					<ul>
-						<li></li>
-						<li></li>
-						<li></li>
-						<li></li>
-						<li></li>
-						<li></li>
-						<li></li>
-					</ul>
-				</section>
-			</div>
-		</span>
-		<span class="g-child g2">
-			<div class="tab">
-				<nav class="nav">
-					<span class="n1 t-on" data-s="1">标签一</span>
-					<span class="n1" data-s="2">标签二</span>
-					<span class="n1" data-s="3">标签三</span>
-				</nav>
-				<section class="container1">
-					<div class="c1-box">
-						<span class="c1-con">demo1</span>
-						<span class="c1-con">demo2</span>
-						<span class="c1-con">demo3</span>
-					</div>
-				</section>
-			</div>
-		</span>
-		<span class="g-child g3">
-			<div class="top" style="position: relative;">
-				<nav class="nav">
-					<span class="mac-page-ui ui1"></span><span class="mac-page-ui ui2"></span><span class="mac-page-ui ui3"></span>
-				</nav>
-				<section class="t-container">
-				<template class="t-template">
-					<div class="t-con-box">
-						<nav class="price">
-							<div class="p-logo"></div>
-							<div class="p-title"></div>
-						</nav>
-						<section class="t-con-body">
-							<ul>
-								<li></li>
-								<li></li>
-								<li></li>
-							</ul>
-						</section>
-					</div>
-				</template>
-				</section>
-				<div class="top-btn">
-					<svg viewbox="0 0 40 40">
-						<g stroke="#fff" stroke-width="2" fill="transparent">
-							<path d="M10 20 L 20 10 L 30 20"></path>
-							<path d="M20 10 L 20 30"></path>
-						</g>
-					</svg>
-				</div>
-			</div>
-		</span>
-		<span class="g-child g4">
-			<div class="tip" style="position: relative;">
-				<nav class="nav">
-					<span class="mac-page-ui ui1"></span><span class="mac-page-ui ui2"></span><span class="mac-page-ui ui3"></span>
-				</nav>
-				<section class="t-container1"></section>
-				<div class="tip-box">
-					<span class="tip-con-box"></span>
-				</div>
-				<div class="tip-btn">
-					<svg id="s-tip" width="80" height="40" viewbox="0 0 80 40" preserveAspectRatio="xMidYMid slice">
-						<g stroke="#fff" stroke-width="2" fill="transparent">
-							<path d="M20 30 L 10 20 L 20 10"></path>
-							<path d="M10 20 L 30 20"></path>
-							<path d="M50 10 L 70 30"></path>
-							<path d="M50 30 L 70 10"></path>
-						</g>
-					</svg>
-				</div>
-			</div>
-		</span>
-	</div>
-	<div class="box _b1">
-		<span class="input">
-			<input type="text" required>
-			<span class="highlight"></span>
-			<span class="bar"></span>
-			<label>Name</label>
-		</span>
-	</div>
-	<div class="btnbox">
-		<span class="ripple">
-		</span>
-	</div>
-	<div class="box">
-		<div class="slider">
-			<span class="s1"></span>
-			<span class="s2"></span>
-			<i class="slider-icon">
-				<span class="shadow"></span>
-			</i>
-		</div>
-	</div>
-	<div class="box text"><span class="content">0</span>%</div>
-	<div class="box" style="display: flex;justify-content: center;align-items: center;height: 200px;">
-		<div class="circle">
-			<span class="circle-box"></span>
-		</div>
-	</div>
-	<div class="box text-slide">
-		<span class="i-slide-list j-slide-list"></span>
-	</div>
-	<script>
-		(function(w){
-			"use strict";
+  <div class="grid">
+    <span class="g-child g1">
+      <div class="slide">
+        <nav class="nav">
+          <span style="margin-left: 10px;line-height: 34px;color: #999;">滑动面板</span>
+          <span class="s-click on-click">
+            <i></i>
+          </span>
+        </nav>
+        <section class="container">
+          <ul>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+          </ul>
+        </section>
+      </div>
+    </span>
+    <span class="g-child g2">
+      <div class="tab">
+        <nav class="nav">
+          <span class="n1 t-on" data-s="1">标签一</span>
+          <span class="n1" data-s="2">标签二</span>
+          <span class="n1" data-s="3">标签三</span>
+        </nav>
+        <section class="container1">
+          <div class="c1-box">
+            <span class="c1-con">demo1</span>
+            <span class="c1-con">demo2</span>
+            <span class="c1-con">demo3</span>
+          </div>
+        </section>
+      </div>
+    </span>
+    <span class="g-child g3">
+      <div class="top" style="position: relative;">
+        <nav class="nav">
+          <span class="mac-page-ui ui1"></span><span class="mac-page-ui ui2"></span><span class="mac-page-ui ui3"></span>
+        </nav>
+        <section class="t-container">
+        <template class="t-template">
+          <div class="t-con-box">
+            <nav class="price">
+              <div class="p-logo"></div>
+              <div class="p-title"></div>
+            </nav>
+            <section class="t-con-body">
+              <ul>
+                <li></li>
+                <li></li>
+                <li></li>
+              </ul>
+            </section>
+          </div>
+        </template>
+        </section>
+        <div class="top-btn">
+          <svg viewbox="0 0 40 40">
+            <g stroke="#fff" stroke-width="2" fill="transparent">
+              <path d="M10 20 L 20 10 L 30 20"></path>
+              <path d="M20 10 L 20 30"></path>
+            </g>
+          </svg>
+        </div>
+      </div>
+    </span>
+    <span class="g-child g4">
+      <div class="tip" style="position: relative;">
+        <nav class="nav">
+          <span class="mac-page-ui ui1"></span><span class="mac-page-ui ui2"></span><span class="mac-page-ui ui3"></span>
+        </nav>
+        <section class="t-container1"></section>
+        <div class="tip-box">
+          <span class="tip-con-box"></span>
+        </div>
+        <div class="tip-btn">
+          <svg id="s-tip" width="80" height="40" viewbox="0 0 80 40" preserveAspectRatio="xMidYMid slice">
+            <g stroke="#fff" stroke-width="2" fill="transparent">
+              <path d="M20 30 L 10 20 L 20 10"></path>
+              <path d="M10 20 L 30 20"></path>
+              <path d="M50 10 L 70 30"></path>
+              <path d="M50 30 L 70 10"></path>
+            </g>
+          </svg>
+        </div>
+      </div>
+    </span>
+  </div>
+  <div class="box _b1">
+    <span class="input">
+      <input type="text" required>
+      <span class="highlight"></span>
+      <span class="bar"></span>
+      <label>Name</label>
+    </span>
+  </div>
+  <div class="btnbox">
+    <span class="ripple">
+    </span>
+  </div>
+  <div class="box">
+    <div class="slider">
+      <span class="s1"></span>
+      <span class="s2"></span>
+      <i class="slider-icon">
+        <span class="shadow"></span>
+      </i>
+    </div>
+  </div>
+  <div class="box text"><span class="content">0</span>%</div>
+  <div class="box" style="display: flex;justify-content: center;align-items: center;height: 200px;">
+    <div class="circle">
+      <span class="circle-box"></span>
+    </div>
+  </div>
+  <div class="box text-slide">
+    <span class="i-slide-list j-slide-list"></span>
+  </div>
+  <script>
+    (function(w){
+      "use strict";
 
-			var ripple = gdom('ripple'),
-				icon = gdom('slider-icon'),
-				sw = gdom('slider').getBoundingClientRect().left,
-				s1 = gdom('s1'),
-				s2 = gdom('s2'),
-				t = gdom('content'),
-				circle = gdom('circle'),
-				c_box = circle.firstElementChild,
-				click = gdom('s-click'),
-				container = gdom('container'),
-				nav1 = gdom('tab').firstElementChild,
-				c1b = gdom('c1-box'),
-				con1 = gdom('t-container'),
-				con2 = gdom('t-container1'),
-				t_template = gdom('t-template').content,
-				t_btn = gdom('top-btn'),
-				t_btn1 = gdom('tip-btn'),
-				tip = gdom('tip'),
-				t_box1 = gdom('tip-box'),
-				SWITCH=0,
-				ON=0,
-				pointer=0,
-				left=0;
-				(function(){
-					for(var i=0;i<10;i++){
-						con1.appendChild(t_template.cloneNode(true));
-						con2.appendChild(t_template.cloneNode(true));
-					}
-				})()
-			ripple.addEventListener('click',(e)=>{
-				var div=document.createElement('div');
-					div.className='add';
-					div.style.top=(e.offsetY-10)+'px';
-					div.style.left=(e.offsetX-10)+'px';
-					e.currentTarget.appendChild(div);
-					requestAnimationFrame(()=>{div.style.transform='scale(30)';div.style.opacity='0';})
-					rdom(e.currentTarget,div,1000);
-			});
-			circle.addEventListener('click',(e)=>{
-				var div=document.createElement('div');
-				div.style.cssText='position:absolute;height:100%;width:100%;background-color:rgba(0,0,0,0.45);transform:scale(0);transition:transform 0.7s cubic-bezier(0.23,1,0.32,1) 0ms,opacity 1s cubic-bezier(0.23,1,0.32,1) 0s;border-radius: 50%;pointer-events: none;user-select:none;';
-				c_box.appendChild(div);
-				requestAnimationFrame(()=>{div.style.transform='scale(1)';div.style.opacity='0';})
-				rdom(c_box,div,1300);
-			})
-			icon.addEventListener('mousedown',(e)=>{
-				SWITCH=1;
-			})
-			document.documentElement.addEventListener('mousemove',(e)=>{
-				if(SWITCH){
-					slider(e);
-				}
-			})
-			document.documentElement.addEventListener('mouseup',(e)=>{
-				SWITCH=0;
-			})
-			click.addEventListener('click',(e)=>{
-				if(!ON){
-					container.style.maxHeight='0px';
-					e.currentTarget.classList.remove('on-click');
-					ON=1;
-					return;
-				}
-				container.style.maxHeight='1000px';
-				e.currentTarget.classList.add('on-click');
-					ON=0;
-			})
-			nav1.addEventListener('click',(e)=>{
-				var me = e.target,
-					prev = e.currentTarget,
-					children = prev.children,
-					len=children.length;
-				if(me.tagName=='SPAN'){
-					if(me.classList.contains('t-on')){
-						return;
-					}
-					for(var i=0;i<len;i++){
-						if(children[i].classList.contains('t-on')){
-							children[i].classList.remove('t-on');
-							break;
-						}
-					}
-					me.classList.add('t-on');
-					switch (me.dataset.s) {
-						case '1':
-						c1b.style.transform='translate3d(0%,0,0)';
-							break;
-						case '2':
-						c1b.style.transform='translate3d(-33.333%,0,0)';
-							break;
-						case '3':
-						c1b.style.transform='translate3d(-66.666%,0,0)';
-							break;
-						default:
-						c1b.style.transform='translate3d(0,0,0)';
-							break;
-					}
-				}
-			})
-			var T_ON=0,T_CLICK=1;
-			con1.addEventListener('scroll',(e)=>{
-				if(e.currentTarget.scrollTop>200){
-					if(!T_ON){
-						t_btn.classList.add("t-show");
-					}
-					T_ON=1;
-				}else {
-					if(T_ON){
-						t_btn.classList.remove("t-show");
-					}
-					T_ON=0;
-				}
-			})
-			t_btn.addEventListener('click',(e)=>{
-				if(T_CLICK){
-					top();
-				}
-				T_CLICK=0;
-			})
-			function top(){
-				var top=con1.scrollTop,
-					s=top,
-					i=0;
-					_top();
-				function _top(){
-					if(s>=0){
-						i++;
-						s-=i;
-						requestAnimationFrame(_top)
-						con1.scrollTop=s;
-					}else{
-						con1.scrollTop=0;
-						T_CLICK=1;
-					}
-				}
-			}
-			t_btn1.addEventListener('click',(e)=>{
-				tip.classList.toggle('tip-on');
-			})
-			function slider(e){
-				var n=e.clientX-sw;
-				var l=Math.abs(n-pointer);
-				if(n>=pointer+3&&left<100){
-					for(var i=0;i<Math.floor(l/3);i++){
-						if(left>=100)return;
-						pointer+=3;
-						left++;
-						_slider(left);
-					}
-				}else if (n<=pointer-3&&left>0) {
-					for(var j=0;j<Math.floor(l/3);j++){
-						if(left<=0)return;
-						pointer-=3;
-						left--;
-						_slider(left);
-					}
-				}
-			}
-			function _slider(left){
-				icon.style.left=left+'%';
-				s1.style.width='calc('+left+'%)';
-				s2.style.width='calc('+(100-left)+'%)';
-				t.textContent=left;
-			}
+      var ripple = gdom('ripple'),
+        icon = gdom('slider-icon'),
+        sw = gdom('slider').getBoundingClientRect().left,
+        s1 = gdom('s1'),
+        s2 = gdom('s2'),
+        t = gdom('content'),
+        circle = gdom('circle'),
+        c_box = circle.firstElementChild,
+        click = gdom('s-click'),
+        container = gdom('container'),
+        nav1 = gdom('tab').firstElementChild,
+        c1b = gdom('c1-box'),
+        con1 = gdom('t-container'),
+        con2 = gdom('t-container1'),
+        t_template = gdom('t-template').content,
+        t_btn = gdom('top-btn'),
+        t_btn1 = gdom('tip-btn'),
+        tip = gdom('tip'),
+        t_box1 = gdom('tip-box'),
+        SWITCH=0,
+        ON=0,
+        pointer=0,
+        left=0;
+        (function(){
+          for(var i=0;i<10;i++){
+            con1.appendChild(t_template.cloneNode(true));
+            con2.appendChild(t_template.cloneNode(true));
+          }
+        })()
+      ripple.addEventListener('click',(e)=>{
+        var div=document.createElement('div');
+          div.className='add';
+          div.style.top=(e.offsetY-10)+'px';
+          div.style.left=(e.offsetX-10)+'px';
+          e.currentTarget.appendChild(div);
+          requestAnimationFrame(()=>{div.style.transform='scale(30)';div.style.opacity='0';})
+          rdom(e.currentTarget,div,1000);
+      });
+      circle.addEventListener('click',(e)=>{
+        var div=document.createElement('div');
+        div.style.cssText='position:absolute;height:100%;width:100%;background-color:rgba(0,0,0,0.45);transform:scale(0);transition:transform 0.7s cubic-bezier(0.23,1,0.32,1) 0ms,opacity 1s cubic-bezier(0.23,1,0.32,1) 0s;border-radius: 50%;pointer-events: none;user-select:none;';
+        c_box.appendChild(div);
+        requestAnimationFrame(()=>{div.style.transform='scale(1)';div.style.opacity='0';})
+        rdom(c_box,div,1300);
+      })
+      icon.addEventListener('mousedown',(e)=>{
+        SWITCH=1;
+      })
+      document.documentElement.addEventListener('mousemove',(e)=>{
+        if(SWITCH){
+          slider(e);
+        }
+      })
+      document.documentElement.addEventListener('mouseup',(e)=>{
+        SWITCH=0;
+      })
+      click.addEventListener('click',(e)=>{
+        if(!ON){
+          container.style.maxHeight='0px';
+          e.currentTarget.classList.remove('on-click');
+          ON=1;
+          return;
+        }
+        container.style.maxHeight='1000px';
+        e.currentTarget.classList.add('on-click');
+          ON=0;
+      })
+      nav1.addEventListener('click',(e)=>{
+        var me = e.target,
+          prev = e.currentTarget,
+          children = prev.children,
+          len=children.length;
+        if(me.tagName=='SPAN'){
+          if(me.classList.contains('t-on')){
+            return;
+          }
+          for(var i=0;i<len;i++){
+            if(children[i].classList.contains('t-on')){
+              children[i].classList.remove('t-on');
+              break;
+            }
+          }
+          me.classList.add('t-on');
+          switch (me.dataset.s) {
+            case '1':
+            c1b.style.transform='translate3d(0%,0,0)';
+              break;
+            case '2':
+            c1b.style.transform='translate3d(-33.333%,0,0)';
+              break;
+            case '3':
+            c1b.style.transform='translate3d(-66.666%,0,0)';
+              break;
+            default:
+            c1b.style.transform='translate3d(0,0,0)';
+              break;
+          }
+        }
+      })
+      var T_ON=0,T_CLICK=1;
+      con1.addEventListener('scroll',(e)=>{
+        if(e.currentTarget.scrollTop>200){
+          if(!T_ON){
+            t_btn.classList.add("t-show");
+          }
+          T_ON=1;
+        }else {
+          if(T_ON){
+            t_btn.classList.remove("t-show");
+          }
+          T_ON=0;
+        }
+      })
+      t_btn.addEventListener('click',(e)=>{
+        if(T_CLICK){
+          top();
+        }
+        T_CLICK=0;
+      })
+      function top(){
+        var top=con1.scrollTop,
+          s=top,
+          i=0;
+          _top();
+        function _top(){
+          if(s>=0){
+            i++;
+            s-=i;
+            requestAnimationFrame(_top)
+            con1.scrollTop=s;
+          }else{
+            con1.scrollTop=0;
+            T_CLICK=1;
+          }
+        }
+      }
+      t_btn1.addEventListener('click',(e)=>{
+        tip.classList.toggle('tip-on');
+      })
+      function slider(e){
+        var n=e.clientX-sw;
+        var l=Math.abs(n-pointer);
+        if(n>=pointer+3&&left<100){
+          for(var i=0;i<Math.floor(l/3);i++){
+            if(left>=100)return;
+            pointer+=3;
+            left++;
+            _slider(left);
+          }
+        }else if (n<=pointer-3&&left>0) {
+          for(var j=0;j<Math.floor(l/3);j++){
+            if(left<=0)return;
+            pointer-=3;
+            left--;
+            _slider(left);
+          }
+        }
+      }
+      function _slider(left){
+        icon.style.left=left+'%';
+        s1.style.width='calc('+left+'%)';
+        s2.style.width='calc('+(100-left)+'%)';
+        t.textContent=left;
+      }
 
-			var spans = gdom('j-slide-list');
-			var doms = ['这是','一个','向上','滚动','文字','这是'];
-			var domslen = doms.length;
-			var span;
+      var spans = gdom('j-slide-list');
+      var doms = ['这是','一个','向上','滚动','文字','这是'];
+      var domslen = doms.length;
+      var span;
 
-			var n = 0,step = 3000,timer=null;
+      var n = 0,step = 3000,timer=null;
 
-			slidehandle();
-				function slidehandle(){
-					var df = document.createDocumentFragment();
+      slidehandle();
+        function slidehandle(){
+          var df = document.createDocumentFragment();
 
-					for(var i=0;i<domslen;i++){
-						span = createspan(doms[i]);
-						df.appendChild(span);
-					}
-					spans.appendChild(df);
+          for(var i=0;i<domslen;i++){
+            span = createspan(doms[i]);
+            df.appendChild(span);
+          }
+          spans.appendChild(df);
 
-					df = null;
-						
-					var span_child = spans.childNodes;
+          df = null;
+            
+          var span_child = spans.childNodes;
 
-					slide();
+          slide();
 
-					function slide(){
-						clearTimeout(timer);
+          function slide(){
+            clearTimeout(timer);
 
-						if(n > 0){
-							span_child[n-1].classList.remove('i-slide--curr');
-							span_child[n-1].classList.add('i-slide--prev');
-						}
+            if(n > 0){
+              span_child[n-1].classList.remove('i-slide--curr');
+              span_child[n-1].classList.add('i-slide--prev');
+            }
 
-						if(n<domslen){
-							span_child[n].classList.add('i-slide--curr');
-						}
+            if(n<domslen){
+              span_child[n].classList.add('i-slide--curr');
+            }
 
-						n +=1;
+            n +=1;
 
-						if(n<=domslen){
-							timer = setTimeout(slide, step);
-						}else{
-							while(spans.firstElementChild){
-								spans.removeChild(spans.firstElementChild);
-							}
-							n = 0;
-							slidehandle();
-						}
-					}			
-				}
+            if(n<=domslen){
+              timer = setTimeout(slide, step);
+            }else{
+              while(spans.firstElementChild){
+                spans.removeChild(spans.firstElementChild);
+              }
+              n = 0;
+              slidehandle();
+            }
+          }      
+        }
 
-			function createspan(text){
-				var span = document.createElement('span');
-				span.className = 'i-slide';
-				span.textContent = text;
-				return span;
-			}
+      function createspan(text){
+        var span = document.createElement('span');
+        span.className = 'i-slide';
+        span.textContent = text;
+        return span;
+      }
 
-			function rdom(me,d,t){
-				setTimeout(()=>{
-					me.removeChild(d);
-				}, t);
-			}
-			function gdom(c){return document.querySelector('.'+c)}
-		})(window);
-	</script>
+      function rdom(me,d,t){
+        setTimeout(()=>{
+          me.removeChild(d);
+        }, t);
+      }
+      function gdom(c){return document.querySelector('.'+c)}
+    })(window);
+  </script>
 </body>
 </html>
