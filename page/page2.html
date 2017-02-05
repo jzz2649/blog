@@ -1,0 +1,91 @@
+<section class="body__list body--scroll">
+  <div class="body__item">
+    <h3 class="item__title i-action">美化下载失败图片丑陋的占位符</h3>
+    <div class="item__body">
+      <span class="item__list">
+        <h4>问题</h4>
+        <p>图片下载失败时候会出现如下比较丑的图片</p>
+      </span>
+      <figure>
+        <figcaption class="t-center">下载失败图片占位符</figcaption>
+        <img src="404.jpg" class="img-center" alt="无法显示">
+      </figure>
+      <span class="item__list">
+        <h4>知识点</h4>
+        <p>图片在加载失败的时候img标签的:after(::after)与:before(::before)伪元素会起作用,加载成功的时候伪元素不起作用</p>
+      </span>
+      <figure>
+        <figcaption class="t-center">加载失败</figcaption>
+        <img src="404.jpg" class="t-center page3-img-after-before" alt="无法显示">
+      </figure>
+      <figure>
+        <figcaption class="t-center">加载成功</figcaption>
+        <img src="img/success.png" class="img-center page3-img-after-before" alt="无法显示">
+      </figure>
+      <span class="item__list">
+        <h4>解决</h4>
+        <p>既然我们已经知道伪元素会在图片加载失败的时候生效,那我们可以通过伪元素来覆盖占位付的图示,如何想添加一些图形可以实用iconfont图标字体</p>
+      </span>
+      <figure>
+        <figcaption class="t-center">美化图片</figcaption>
+        <img src="404.jpg" class="img-center page3-img-after-before-icon" alt="无法显示">
+      </figure>
+      <span class="item__list">
+        <h4>兼容性</h4>
+        <p>目前Chrome Firefox Opera支持</p>
+      </span>
+      <figure class="w100">
+        <figcaption class="t-center">兼容性如下图</figcaption>
+        <img src="demo/demo2/page2.jpg" class="img-center w100" alt="无法显示">
+      </figure>
+    </div>
+  </div>
+  <style hidden>
+    .page3-img-after-before:before {
+      content:'我是before';
+      background-color: #
+    }
+    .page3-img-after-before:after {
+      content:'我是after';
+    }
+    @font-face {
+      font-family: 'aftericon';
+      src: url('font/iconfont.woff') format('woff');
+      unicode-range: U+e60b;
+      font-style: normal;
+      font-weight: 400;
+    }
+    .page3-img-after-before-icon {
+      position: relative;
+      width: 200px;
+      height: 50px;
+      line-height: 50px;
+      font-size: 16px;
+      border-style: none;
+    }
+    .page3-img-after-before-icon:before,
+    .page3-img-after-before-icon:after {
+      position: absolute;
+      top: 0;
+      z-index: 1;
+      height: 100%;
+    }
+    .page3-img-after-before-icon:before {
+      left: 0;
+      width: 40%;
+      font-size: 24px;
+      line-height: 45px;
+      font-family: aftericon;
+      content: '\e60b';
+      background-color: #ccc;
+      text-align: right;
+    }
+    .page3-img-after-before-icon:after {
+      right: 0;
+      width: 60%;
+      content: attr(alt);
+      background-color: #ccc;
+      text-align: left;
+    }
+  </style>
+</section>

@@ -92,7 +92,7 @@
   var _div;
   var i=0;
 
-  about.addEventListener('click', function(){pagehandle(1)});
+  about.addEventListener('click', function(){pagehandle(0)});
 
   ajax('js/title.js','text',function(data){
     listloading && (listloading.style.display = 'none');

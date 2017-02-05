@@ -1,32 +1,39 @@
 <section class="body__list body--scroll">
   <div class="body__item">
-    <h3 class="item__title i-action">css新属性之var</h3>
+    <h3 class="item__title i-action">medium网站图片模糊处理</h3>
     <div class="item__body">
       <span class="item__list">
         <h4>说明</h4>
-        <p>在此之前，有很多关于var属性的文章介绍，本来是不想写，但还是想分享下自己知道的，关于var属性介绍<a class="link out--link" href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/var" target="_blank">这里</a></p>
+        <p>medium网站加载之后，都是模糊的图片，之后再变的清晰，速度取决与你的网速</p>
       </span>
       <span class="item__list">
-        <h4>使用方法</h4>
-        <p>1，定义：--varname(两个横杠加变量名)<br/>
-           2，使用：var(--varname)</p>
+        <h4>小图片</h4>
+        <p>网页第一次加载的时候，全部使用处理成宽30px高度auto的图片(按比例缩放至宽度30px)</p>
       </span>
       <figure>
-        <figcaption class="t-center">例子</figcaption>
-        <img src="demo/demo11/code.jpg" class="img-center" alt="无法显示">
+        <figcaption class="t-center">压缩的小图片</figcaption>
+        <img src="demo/demo11/img1.jpg" class="img-center" alt="无法显示">
       </figure>
       <span class="item__list">
-        <h4>作用域</h4>
-        <p>跟js一样，var属性也有作用域，只能应用到自身及其子元素上</p>
+        <h4>模糊处理</h4>
+        <p>把小图片在canvas中进行模糊处理，也可以使用css3的属性filter:blur进行模糊处理，页面图片呈现模糊状态</p>
       </span>
-      <iframe height='265' scrolling='no' title='OWZepO' src='//codepen.io/jzz7280/embed/OWZepO/?height=265&theme-id=0&default-tab=css,result&embed-version=2' frameborder='no' allowtransparency='true' allowfullscreen='true' style='width: 100%;'>See the Pen <a href='http://codepen.io/jzz7280/pen/OWZepO/'>OWZepO</a> by jzz7280 (<a href='http://codepen.io/jzz7280'>@jzz7280</a>) on <a href='http://codepen.io'>CodePen</a>.
-      </iframe>
+      <figure>
+        <figcaption class="t-center">canvas处理的图片</figcaption>
+        <img src="demo/demo11/img2.jpg" class="img-center" alt="无法显示">
+      </figure>
       <span class="item__list">
-        <h4>继承</h4>
-        <p>子元素可以使用祖先元素var属性，如果后代定义相同var属性呢，后面会覆盖前面定义的值</p>
+        <h4>显示原图</h4>
+        <p>在页面加载完成之后，用js进行加载图片，当图片加载完成触发img的onload事件，显示原图图片，并隐藏canvas</p>
       </span>
-      <iframe height='265' scrolling='no' title='ggzNGX' src='//codepen.io/jzz7280/embed/ggzNGX/?height=265&theme-id=0&default-tab=css,result&embed-version=2' frameborder='no' allowtransparency='true' allowfullscreen='true' style='width: 100%;'>See the Pen <a href='http://codepen.io/jzz7280/pen/ggzNGX/'>ggzNGX</a> by jzz7280 (<a href='http://codepen.io/jzz7280'>@jzz7280</a>) on <a href='http://codepen.io'>CodePen</a>.
-      </iframe>
+      <figure>
+        <figcaption class="t-center">原图片</figcaption>
+        <img src="demo/demo11/img3.jpg" class="img-center" alt="无法显示">
+      </figure>
+      <span class="item__list">
+        <h4>结语</h4>
+        <p>多翻翻一些漂亮的网站总能学到新的知识，关于本教程更多知识<a class="link out--link" href="https://jmperezperez.com/medium-image-progressive-loading-placeholder/" target="_blank">How Medium does progressive image loading</a></p>
+      </span>
     </div>
   </div>
 </section>

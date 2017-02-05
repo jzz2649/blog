@@ -1,0 +1,23 @@
+<section class="body__list body--scroll">
+  <div class="body__item">
+    <h3 class="item__title i-action">ios dom元素滚动(transision)到可视区域不可见bug</h3>
+    <div class="item__body">
+      <span class="item__list">
+        <h4>问题</h4>
+        <p>在项目中需要做一个滚动的文字，隔一段时间滚动一次(使用transision进行transform:translateX移动)，但是从不可见区域滚动到可视区域，在ios下元素依然不可见，需要触发页面重绘，才能显示<a class="link" href="demo/demo5/page1.html" target="_blank">请点击这里查看</a></p>
+      </span>
+      <figure>
+        <figcaption class="t-center">从不可见区域滚到可视区域</figcaption>
+        <img src="demo/demo5/img1.jpg" class="img-center" alt="无法显示">
+      </figure>
+      <span class="item__list">
+        <h4>思路</h4>
+        <p>在可视区域内不存在这个不可见问题,所以在重新开始滚动的时候，让它出现1px<a class="link" href="demo/demo5/page2.html" target="_blank">请点击这里查看</a></p>
+      </span>
+      <figure>
+        <figcaption class="t-center">让它一开始就出现</figcaption>
+        <img src="demo/demo5/img2.jpg" class="img-center" alt="无法显示">
+      </figure>
+    </div>
+  </div>
+</section>

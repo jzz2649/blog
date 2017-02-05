@@ -1,39 +1,32 @@
 <section class="body__list body--scroll">
   <div class="body__item">
-    <h3 class="item__title i-action">medium网站图片模糊处理</h3>
+    <h3 class="item__title i-action">margin:auto浅谈</h3>
     <div class="item__body">
       <span class="item__list">
         <h4>说明</h4>
-        <p>medium网站加载之后，都是模糊的图片，之后再变的清晰，速度取决与你的网速</p>
+        <p>margin是我们最常用的属性，大多数用来设置间距，关于它，其实是有很多知识点可说的</p>
       </span>
       <span class="item__list">
-        <h4>小图片</h4>
-        <p>网页第一次加载的时候，全部使用处理成宽30px高度auto的图片(按比例缩放至宽度30px)</p>
+        <h4>属性值</h4>
+        <p>margin的取值有三大类，固定值(length),百分比(percentage),auto,我们今天就谈auto</p>
+      </span>
+      <span class="item__list">
+        <h4>auto</h4>
+        <p>我们知道，设置margin:0 auto;block元素会水平居中，想margin:auto垂直居中，但不起作用，这里谈谈block，block的width默认100%；如果我们设置block的width为50%;那么margin-right:会只能填充剩下的50%(如图1)，margin-left默认为0；如果设置margin:0 auto；那么margin-left和margin-right会自动填充各25%(如图2)，达到水平居中</p>
       </span>
       <figure>
-        <figcaption class="t-center">压缩的小图片</figcaption>
+        <figcaption class="t-center">图1</figcaption>
         <img src="demo/demo12/img1.jpg" class="img-center" alt="无法显示">
       </figure>
-      <span class="item__list">
-        <h4>模糊处理</h4>
-        <p>把小图片在canvas中进行模糊处理，也可以使用css3的属性filter:blur进行模糊处理，页面图片呈现模糊状态</p>
-      </span>
       <figure>
-        <figcaption class="t-center">canvas处理的图片</figcaption>
+        <figcaption class="t-center">图2</figcaption>
         <img src="demo/demo12/img2.jpg" class="img-center" alt="无法显示">
       </figure>
       <span class="item__list">
-        <h4>显示原图</h4>
-        <p>在页面加载完成之后，用js进行加载图片，当图片加载完成触发img的onload事件，显示原图图片，并隐藏canvas</p>
+        <h4>auto</h4>
+        <p>但是margin:auto在垂直方向不起作用呢，为什么呢？因为block的height是根据内容自适应的，没用剩余的空间，如何填充呢，但是没关系，毕竟存在这个值，有它生效的情况，那就是使用position:absolute;left:0;right:0;left:0;bottom:0;把它拉伸，然后设置width和height，margin:auto生效了，能垂直居中的，twitter移动端网页就是用此方法来显示图片的</p>
       </span>
-      <figure>
-        <figcaption class="t-center">原图片</figcaption>
-        <img src="demo/demo12/img3.jpg" class="img-center" alt="无法显示">
-      </figure>
-      <span class="item__list">
-        <h4>结语</h4>
-        <p>多翻翻一些漂亮的网站总能学到新的知识，关于本教程更多知识<a class="link out--link" href="https://jmperezperez.com/medium-image-progressive-loading-placeholder/" target="_blank">How Medium does progressive image loading</a></p>
-      </span>
+      <iframe height='265' scrolling='no' title='RKyXZY' src='//codepen.io/jzz7280/embed/RKyXZY/?height=265&theme-id=0&default-tab=css,result&embed-version=2' frameborder='no' allowtransparency='true' allowfullscreen='true' style='width: 100%;'>See the Pen <a href='http://codepen.io/jzz7280/pen/RKyXZY/'>RKyXZY</a> by jzz7280 (<a href='http://codepen.io/jzz7280'>@jzz7280</a>) on <a href='http://codepen.io'>CodePen</a>.</iframe>
     </div>
   </div>
 </section>
