@@ -7,16 +7,6 @@
         <p>关于<a class="link out--link" href="https://developer.mozilla.org/zh-CN/docs/Web/API/FileReader" target="_blank">FileReader</a> API</p>
       </span>
       <span class="item__list">
-        <h4>思路</h4>
-        <p>
-          1，创建一个 FileReader 实例 var oFReader = new FileReader();
-          <br/>
-          2，读取图片 oFReader.readAsDataURL(oFile);
-          <br/>
-          3，读取完毕触发onload事件 event.target.result 包含文件base64格式内容;
-        </p>
-      </span>
-      <span class="item__list">
         <h4>获取图片</h4>
         <p>我使用input[type="file"]来上传图片(图1)，之后触发change事件(图2)</p>
       </span>
