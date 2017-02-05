@@ -94,9 +94,10 @@
 
   about.addEventListener('click', function(){pagehandle(1)});
 
-  ajax('js/title.js?1814','text',function(data){
+  ajax('js/title.js','text',function(data){
     listloading && (listloading.style.display = 'none');
     var title = JSON.parse(data);
+    title.reverse();
     j.each(title, function(i,k){
       _div = div.cloneNode(true);
       log = _div.querySelector('.j-log');
