@@ -4,7 +4,7 @@
     <div class="item__body">
       <span class="item__list">
         <h4>nonzero</h4>
-        <p>这个值确定了某点属于该形状的“内部”还是“外部”。从点向任意方向的无限远处绘制射线，然后检测形状与射线相交的位置。开始于0数，射线上每次从左向右相交就加1，每次从右向左相交就减1。数一下相交次数，如果结果是0，点就在路径外面，如果结果大于0，点在路径里面。<a href="https://developer.mozilla.org/zh-CN/docs/Web/SVG/Attribute/fill-rule" target="_blank">(取自mdn)</a><br/>
+        <p>这个值确定了某点属于该形状的“内部”还是“外部”。从点向任意方向的无限远处绘制射线，然后检测形状与射线相交的位置。开始于0数，射线上每次从左向右相交就加1，每次从右向左相交就减1。数一下相交次数，如果结果是0，点就在路径外面，如果结果大于0，点在路径里面。<a class="link out--link" href="https://developer.mozilla.org/zh-CN/docs/Web/SVG/Attribute/fill-rule" target="_blank">(取自mdn)</a><br/>
         这个规则叫非零原则，跟线条的顺序有关，
         就是在一个闭合的图形内，随便找一个点，向无限远的地方画射线，经过的每一条线，如果这条线是从左向右(顺时针)就加1，如果这条线是从右向左(逆时针)就减1，最后相加为0，表示点在图形外面，不填充，大于0就表示在图形里面，填充
         </p>
@@ -15,7 +15,7 @@
       </figure>
       <span class="item__list">
         <h4>evenodd</h4>
-        <p>这个值用确定了某点属于该形状的“内部”还是“外部”。从点向任意方向的无限远处绘制射线，并数一数给定形状与射线相交的路径段的数目，如果数目是奇数的，点在内部，如果数目是偶数的，点在外部。<a href="https://developer.mozilla.org/zh-CN/docs/Web/SVG/Attribute/fill-rule" target="_blank">(取自mdn)</a><br/>
+        <p>这个值用确定了某点属于该形状的“内部”还是“外部”。从点向任意方向的无限远处绘制射线，并数一数给定形状与射线相交的路径段的数目，如果数目是奇数的，点在内部，如果数目是偶数的，点在外部。<a class="link out--link" href="https://developer.mozilla.org/zh-CN/docs/Web/SVG/Attribute/fill-rule" target="_blank">(取自mdn)</a><br/>
         这个规则叫奇偶原则，跟线条的条数有关，
         就是在一个闭合的图形内，随便找一个点，向无限远的地方画射线，经过的总条数为奇数，表示点在图形外面，不填充。经过的总条数为偶数数，表示在图形里面，填充
         </p>
