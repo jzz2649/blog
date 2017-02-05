@@ -1,7 +1,7 @@
 [{
     "index":1,
     "title":"一些css效果 [ 请使用新版chrome ]",
-    "href":"demo/ripple.html",
+    "href":"demo/demo1/ripple.html",
     "make":"css",
     "time":"2017-1-12"
   },
