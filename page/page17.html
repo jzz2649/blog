@@ -1,0 +1,51 @@
+<section class="body__list body--scroll">
+  <div class="body__item">
+    <h3 class="item__title i-action">使用FileReader预览图片</h3>
+    <div class="item__body">
+      <span class="item__list">
+        <h4>关于</h4>
+        <p>关于<a href="https://developer.mozilla.org/zh-CN/docs/Web/API/FileReader" target="_blank">FileReader</a> API</p>
+      </span>
+      <span class="item__list">
+        <h4>思路</h4>
+        <p>
+          1，创建一个 FileReader 实例 var oFReader = new FileReader();
+          <br/>
+          2，读取图片 oFReader.readAsDataURL(oFile);
+          <br/>
+          3，读取完毕触发onload事件 event.target.result 包含文件base64格式内容;
+        </p>
+      </span>
+      <span class="item__list">
+        <h4>获取图片</h4>
+        <p>我使用input[type="file"]来上传图片(图1)，之后触发change事件(图2)</p>
+      </span>
+      <figure>
+        <figcaption class="t-center">图1</figcaption>
+        <img src="demo/demo17/input.jpg" class="img-center" alt="无法显示">
+      </figure>
+      <figure>
+        <figcaption class="t-center">图2</figcaption>
+        <img src="demo/demo17/change.jpg" class="img-center" alt="无法显示">
+      </figure>
+      <span class="item__list">
+        <h4>FileReader</h4>
+        <p>
+          1，创建一个 FileReader 实例 var oFReader = new FileReader();
+          <br/>
+          2，读取图片 oFReader.readAsDataURL(oFile);
+          <br/>
+          3，读取完毕触发onload事件 event.target.result 包含文件base64格式内容;
+        </p>
+      </span>
+      <figure>
+        <figcaption class="t-center">代码介绍</figcaption>
+        <img src="demo/demo17/filereader.jpg" class="img-center" alt="无法显示">
+      </figure>
+      <span class="item__list">
+        <h4>结语</h4>
+        <p><a href="https://mdn.mozillademos.org/files/3698/image_upload_preview.html" target="_blank">这是mdn的一个例子</a>，关于图片上传，可以使用FormData在ajax中把event.target.result传给后台，如果使用压缩，可以用canvas的toDataURL进行压缩</p>
+      </span>
+    </div>
+  </div>
+</section>

@@ -91,4 +91,10 @@
     "href":"https://medium.freecodecamp.com/an-animated-guide-to-flexbox-d280cf6afc35#.o3csuacpx",
     "make":"css",
     "time":"2017-2-5"
+  },
+  {
+    "index":17,
+    "title":"使用FileReader预览图片",
+    "make":"js",
+    "time":"2017-2-5"
   }]
