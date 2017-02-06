@@ -1,0 +1,35 @@
+<section class="body__list body--scroll">
+  <div class="body__item">
+    <h3 class="item__title i-action">页面滚动，元素定位性能问题</h3>
+    <div class="item__body">
+      <span class="item__list">
+        <h4>问题</h4>
+        <p>第一次做页面滚动，元素在一定条件下固定，发现移动端会出现抖动问题，pc端性能强，不容易发现，经过思考后，解决了这个网站，过了一段时间，翻看一些网站的时候，发现有些网站都有这个问题，我决定分享下思路。这是那个有问题<a class="link" href="demo/demo17/scroll1.html" target="_blank">demo</a>(其实是我刚开始找工作时候做的一个简历)。出现问题的原因就是频繁的操作dom，滚动一下会触发很多次onscroll事件，并且每次都会操作一次dom，造成页面会出现抖动</p>
+      </span>
+      <figure>
+        <figcaption class="t-center">频繁的操作dom</figcaption>
+        <img src="demo/demo17/img1.jpg" class="img-center" alt="无法显示">
+      </figure>
+      <div class="video">
+        <h3 class="t-center _title">演示</h3>
+        <div class="_box">
+          <video src="demo/demo17/video1.mp4" autoplay loop style="max-width: 444px;">你的浏览器不支持video</video>
+        </div>
+      </div>
+      <span class="item__list">
+        <h4>解决</h4>
+        <p>我们的问题就是频繁的操作dom导致的，所以减少dom操作是关键，我们知道，滚动的时候，内容相同的时候，顶部的固定栏是不改变状态的，所以也就不用操作dom，所以定义两个变量，一个记录上一次滚动的状态，一个记录现在滚动的状态，发生改变的时候，才操作dom，改良后的<a class="link" href="demo/demo17/scroll1.html" target="_blank">demo</a></p>
+      </span>
+      <figure>
+        <figcaption class="t-center">特定条件下操作dom</figcaption>
+        <img src="demo/demo17/img2.jpg" class="img-center" alt="无法显示">
+      </figure>
+      <div class="video">
+        <h3 class="t-center _title">演示</h3>
+        <div class="_box">
+          <video src="demo/demo17/video2.mp4" autoplay loop style="max-width: 436px;">你的浏览器不支持video</video>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

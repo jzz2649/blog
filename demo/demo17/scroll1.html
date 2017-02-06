@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="author" content="jiangzhongzheng">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<title>未优化的例子</title>
+	<meta name="format-detection" content="telephone=no">
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/zepto/1.2.0/zepto.min.js"></script>
+	<script type="text/javascript">
+		document.addEventListener('DOMContentLoaded', function(){
+			'use strict';
+			var userAgent = navigator.userAgent;
+			var regexp = /(Chrome)\/(\d{2})/i;
+			var regexp1 = /(iPhone)\sOS\s(\d+)/i;
+			var chrome_version = regexp.exec(userAgent);
+			var safari_version = regexp1.exec(userAgent);
+			var body = document.querySelector('body');
+			var errorDom = document.createElement('div');
+			var close = document.createElement('div');
+				errorDom.style.cssText = 'position:fixed;top:0;padding:10px 0;font-size:18px;line-height:1em;width:100%;background-color:#ea4335;text-align:center;color:#fff;';
+				close.style.cssText = 'position:absolute;top:10px;right:10px;font-size:18px;line-height:1em;cursor:pointer;-webkit-user-select:none;';
+				close.innerHTML = '&times;';
+				close.classList.add('hover');
+			if(chrome_version || safari_version){
+				chrome_version && version(chrome_version);
+				safari_version && version(safari_version);				
+			}
+			if(!chrome_version){
+				if(!safari_version){
+					append_error('请使用chrome51及以上版本的浏览器');
+				}
+			}
+			function version(ver){
+				if(ver[1].toLowerCase() === 'iphone' && parseInt(ver[2], 10) < 9){
+					append_error('请使用ios9及以上版本的浏览器');
+					return ;
+				}
+				if(ver[1].toLowerCase() === 'chrome' && parseInt(ver[2], 10) < 51){
+					append_error('请使用chrome51及以上版本的浏览器');
+					return ;
+				}
+			}
+			function append_error(text){
+				errorDom.innerHTML=text;
+				body.appendChild(errorDom);
+				errorDom.appendChild(close);
+				body.style.cssText='padding-top:38px;';
+				close.addEventListener('click', closeFn);
+			}
+			function closeFn(){
+				errorDom.style.display='none';
+				body.style.cssText='padding-top:0px;';
+			}
+			/*--console.log(style)--*/
+			console.log('%c~欢迎~','font-size:36px;font-family:"Microsoft YaHei",arial;-webkit-text-stroke:1px #ea4335;-webkit-text-fill-color:#ea4335;');
+			console.log('%c相见即是缘分；\n我乐于挑战；\n你意趣相投；\n深入交流；\n↓↓↓↓↓↓','font-size:14px;line-height:16px;font-family:ff-clan-web-pro sans-serif;');
+			console.log('%cqq邮箱:1563382649@qq.con(非诚勿扰)','font-size:14px;line-height:16px;font-family:ff-clan-web-pro sans-serif;');
+		})
+	</script>
+	<link rel="icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAA+ElEQVQ4T7WTsZHCMBREtTAaQlyCAhsudADE0AEdYDqgA6ADSqAElwApJvBlh+3AHUDKiGNvFBg4jA2MB4Vf+k/7VyuIigtZv213+nVg+grvl5wnyXZlzl4Abae7gtbeTxqmZZAv5SpKudzFQT8HyIrPVJjLHgKMgrOUIYDmPeRMjuM4WJp6IaCygqPWw4aUfm4E0t8l20VWL1XgOF2XFLkRTPPppL/TNDyUemAcLjKRwCKKNv7nPKhsYhlAKddqSDkiYIEcvB2kVqs3A2lRCA9CmCRO3kriDcCK4sDLjL7+BbszYa3mgdw/fAVAkVzfNv9T8Cz/Rft/Iw6hEcTW1UgAAAAASUVORK5CYII=" type="image/png">
+	<style rel="stylesheet">
+		@font-face{
+			font-family: fzmt;
+			src: url('data:application/font-woff;base64,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');
+			font-style: normal;
+			font-weight: normal;
+		}
+		html,body{margin: 0;padding: 0;}
+		body{font-family: ff-clan-web-pro,gotham,helveticaarial,sans-serif;-webkit-font-smoothing:antialiased;-webkit-text-size-adjust:100%;-webkit-tap-highlight-color: transparent;}
+		img{vertical-align: top;}
+		.hover{color:#d2d2d2;}
+		.hover:hover{color:#fff;}
+		nav.nav, .nav-row{background-color: #4285f4;}
+		.main .box{padding-top: 10px;}
+		.box{max-width: 768px;margin: 0 auto;background-color: #f8f8f9;}
+		.main-title .box{background-color: #fff;}
+		.nav-row .resume{padding: 10px 0;font-size: 24px;line-height: 1em;font-family: fzmt;text-align: center;color: #fff;-webkit-user-select:none;}
+		.slide-aside{width: 30%;height: 100%;}
+		.slide-box{position: fixed;top: 0;right: 0;bottom: 0;left: 0;z-index: 10;visibility: hidden;}
+		.slide-bg{height: 100%;background-color: #d2d2d2;opacity: 0;}
+		.slide-aside{position: absolute;top: 0;left: 0;background-color: white;opacity: .9;transform: translate(-100%);will-change:transform;}
+		.slide-aside:before{content: '';display: block;height: 0;visibility: hidden;}
+		.show{visibility: visible;opacity: .3;transition-property: opacity;transition-duration: .3s;transition-timing-function: ease-in-out;}
+		.div{transform: translate(0);transition-property: transform;transition-duration: .5s; transition-timing-function: ease-in-out; }
+		button{position: fixed;top:54px;left:10px;display: inline-block;width: 50px;height: 50px;padding:0;border-width: 0;border-radius: 50%;font-size: 16px;font-family: arial sans-serif;text-align: center;white-space: nowrap;background-color: rgba(221,221,221,.94);color: white;outline: none;cursor: pointer;-webkit-appearance:button;-webkit-user-select:none;}
+		button:hover{box-shadow: 0 0 15px 0px rgba(100,100,100,.3);transition: box-shadow .3s ease-in-out;}
+		.saide-slide-box{transform:translateY(50%);}
+		ul,li{list-style: none;font-size: 16px;line-height: 1em;}
+		.aside-li{padding: 10px 0;text-align: center;margin-top: 20px;background-color: #fafafa;cursor: pointer;}
+		.aside-li:hover{background-color: #e3e3e3;}
+		.container{max-width: 454px;margin: 0 auto;}
+		.container-ul{padding: 0 10px;margin:0 auto;}
+		.container-ul > li{padding: 5px 0;text-align: left;}
+		.container-ul > li:before, .container-ul > li:after{content: '';display: table;}
+		.container-ul > li:after{clear: both;}
+		.container-ul > li > span{display: block;float: left;line-height: 20px;color: #717171;}
+		.container-ul > li > span:first-child{width: 36%;}
+		.container-ul > li > span:last-child{width: 64%;word-wrap: break-word;}
+		.container-ul.w100 > li > span{width: 100%;}
+		.container .title{padding:0 0 10px 10px;font-size: 20px;text-align: left;color: #494949;}
+		.icon{display: block;width: 40px;height: 20px;float: right;border:0;border-radius: 3px;text-align:center;margin: 5px 5px 0 0;color: #666;cursor: pointer;background-color: white;}
+		.icon:hover{background-color: #ddd;}
+		.tip{position: absolute;top: 100px;left:50%;visibility: hidden;font-size: 24px;line-height: 1em;color:#666;opacity: 0;transform: translate(-50%);}
+		.tip.fidein{visibility: visible;opacity: 1;transition: opacity .3s ease-in-out;will-change:opacity;}
+		.main-title{width: 100%;z-index: 9;}
+		.main-row{padding: 12px 0 8px 0;border-bottom: 2px solid transparent;}
+		.title{margin:0;padding: 0;font-size: 28px;line-height: 1em;text-align: center;color: #3e3e3e}
+		.title.lg-fidein{visibility: visible;opacity: 1;transition: opacity .8s ease-in-out;will-change:opacity;}
+		.hidden{visibility: hidden;opacity: 0;}
+		.visible{visibility: visible;}
+		.header img{width: 100%;}
+		.bottom .body{padding: 20px 0;background-color: #000;}
+		.copyright{margin: 0;text-align: center;}
+		.copyright span{color: #fff;}
+		.main-aside{display: none;}
+		.u-filter_blur20{filter: blur(20px);-webkit-filter:blur(20px);}
+		.u-filter-img{position: absolute;width: 100%;height: 100%;overflow: hidden;}
+		.j-show-img{position: absolute;display: block;top: 0;right: 0;left: 0;bottom: 0;width: 100%;height: 100%;}
+		@media screen and (min-width:571px){
+			.main-aside{display: block;}
+			.main .box, .main .main-row{padding: 0px;}
+			.main .box{background-color:#d8d8d8;}
+			.main .main-row{border-bottom-width: 0;}
+			.main .main-row:before, .main .main-row:after{content: '';display: table;}
+			.main .main-aside{float: left;width: 100px;height: 100%;}
+			.main-aside .aside-box{padding: 20px 0;}
+			.aside-header-title{text-align: center;}
+			.aside-header-title:after{content: 'x';display: inline-block;overflow: hidden;font-size: 16px;line-height: 20px;width: 0px;color: transparent;text-indent: -99em;}
+			.main-aside .aside-header-title p{display: inline-block;margin:0;padding:0;font-size:20px;text-align: center;vertical-align: -2px;color: #494949;}
+			.main .main-row:after{clear: both;}
+			.main .container{float: left;min-width: 454px;padding:20px calc(100% - 554px) 20px 0;background-color: #f8f8f9;}
+			.main .title{display: none;}
+		}
+		@media screen and (min-width:667px){
+			.main .main-aside{width: calc(100% - 550px);}
+			.main .container{float: left;min-width: 454px;padding:20px 96px 20px 0;background-color: #f8f8f9;}
+		}
+	</style>
+</head>
+<body>
+	<nav class="nav">
+		<section class="box">
+			<div class="nav-row">
+				<div class="resume">简历</div>
+			</div>
+		</section>
+	</nav>
+	<section class="main-title fixed">
+		<div class="box">
+			<div class="main-row">
+				<p class="title">个人信息</p>
+			</div>
+		</div>
+	</section>
+	<article class="main">
+		<section class="box">
+			<div class="body">
+				<div class="main-row">
+					<div class="main-aside">
+						<aside class="aside-box">
+							<div class="aside-body">
+								<div class="aside-container">
+									<div class="aside-header-title">
+										<p>个人信息</p>
+									</div>
+								</div>
+							</div>
+						</aside>
+					</div>
+					<div class="container">
+						<p class="title">个人信息</p>
+						<ul class="container-ul">
+							<li>
+								<span>姓名：</span><span>张三</span>
+							</li>
+							<li>
+								<span>性别：</span><span>男</span>
+							</li>
+							<li>
+								<span>学历：</span><span>大学</span>
+							</li>
+							<li>
+								<span>出身年份：</span><span>0000</span>
+							</li>
+							<li>
+								<span>工作年限：</span><span>0</span>
+							</li>
+							<li>
+								<span>居住地：</span><span>上海</span>
+							</li>
+							<li>
+								<span>电话：</span><span>000000000000</span>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</section>
+		<section class="box">
+			<div class="body">
+				<div class="main-row">
+					<div class="main-aside">
+						<aside class="aside-box">
+							<div class="aside-body">
+								<div class="aside-container">
+									<div class="aside-header-title">
+										<p>求职意向</p>
+									</div>
+								</div>
+							</div>
+						</aside>
+					</div>
+					<div class="container">
+						<p class="title">求职意向</p>
+						<ul class="container-ul">
+							<li>
+								<span>应聘职位：</span><span>前端开发</span>
+							</li>
+							<li>
+								<span>职位类型：</span><span>全职</span>
+							</li>
+							<li>
+								<span>薪资要求：</span><span>****/月</span>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</section>
+		<section class="box">
+			<div class="body">
+				<div class="main-row">
+					<div class="main-aside">
+						<aside class="aside-box">
+							<div class="aside-body">
+								<div class="aside-container">
+									<div class="aside-header-title">
+										<p>工作技能</p>
+									</div>
+								</div>
+							</div>
+						</aside>
+					</div>
+					<div class="container">
+						<p class="title">工作技能</p>
+						<ul class="container-ul">
+							<li>
+								<span>前端基础：</span><span>html, css, javascript</span>
+							</li>
+							<li>
+								<span>前端库及框架：</span><span>jquery, bootstrap, reactjs, requirejs, webpack, gulp</span>
+							</li>
+							<li>
+								<span>后端技能：</span><span>nodejs, mysql</span>
+							</li>
+							<li>
+								<span>设计软件：</span><span>photoshop, flash, Illustrator</span>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</section>
+		<section class="box">
+			<div class="body">
+				<div class="main-row">
+					<div class="main-aside">
+						<aside class="aside-box">
+							<div class="aside-body">
+								<div class="aside-container">
+									<div class="aside-header-title">
+										<p>项目经历</p>
+									</div>
+								</div>
+							</div>
+						</aside>
+					</div>
+					<div class="container">
+						<p class="title">项目经历</p>
+						<ul class="container-ul">
+							<li>
+								<span>公司：</span><span>上海某某有限公司</span>
+							</li>
+							<li>
+								<span>时间：</span><span>0000.0-至今</span>
+							</li>
+							<li>
+								<span>工作内容：</span><span>前端</span>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</section>
+		<section class="box">
+			<div class="body">
+				<div class="main-row">
+					<div class="main-aside">
+						<aside class="aside-box">
+							<div class="aside-body">
+								<div class="aside-container">
+									<div class="aside-header-title">
+										<p>教育经历</p>
+									</div>
+								</div>
+							</div>
+						</aside>
+					</div>
+					<div class="container">
+						<p class="title">教育经历</p>
+						<ul class="container-ul">
+							<li>
+								<span>时间：</span><span>2013.9-2016.7</span>
+							</li>
+							<li>
+								<span>学校：</span><span>某某大学</span>
+							</li>
+							<li>
+								<span>专业：</span><span>计算机</span>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</section>
+		<section class="box">
+			<div class="body">
+				<div class="main-row">
+					<div class="main-aside">
+						<aside class="aside-box">
+							<div class="aside-body">
+								<div class="aside-container">
+									<div class="aside-header-title">
+										<p>自我评价</p>
+									</div>
+								</div>
+							</div>
+						</aside>
+					</div>
+					<div class="container">
+						<p class="title">自我评价</p>
+						<ul class="container-ul w100">
+							<li>
+								<span>内容内容内容内容内容内容内容
+								内容内容内容内容内容内容内容
+								内容内容内容内容内容内容内容
+								内容内容内容内容内容内容</span>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</section>
+	</article>
+	<header class="header">
+		<div class="box">
+			<div class="header-row">
+				<div class="body" style="position: relative;overflow: hidden;width: 100%;height: 0;padding-bottom: 75%;">
+					<img src="data:image/jpeg;base64,/9j/4QAYRXhpZgAASUkqAAgAAAAAAAAAAAAAAP/sABFEdWNreQABAAQAAAAeAAD/4QMdaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wLwA8P3hwYWNrZXQgYmVnaW49Iu+7vyIgaWQ9Ilc1TTBNcENlaGlIenJlU3pOVGN6a2M5ZCI/PiA8eDp4bXBtZXRhIHhtbG5zOng9ImFkb2JlOm5zOm1ldGEvIiB4OnhtcHRrPSJBZG9iZSBYTVAgQ29yZSA1LjYtYzA2NyA3OS4xNTc3NDcsIDIwMTUvMDMvMzAtMjM6NDA6NDIgICAgICAgICI+IDxyZGY6UkRGIHhtbG5zOnJkZj0iaHR0cDovL3d3dy53My5vcmcvMTk5OS8wMi8yMi1yZGYtc3ludGF4LW5zIyI+IDxyZGY6RGVzY3JpcHRpb24gcmRmOmFib3V0PSIiIHhtbG5zOnhtcE1NPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvbW0vIiB4bWxuczpzdFJlZj0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL3NUeXBlL1Jlc291cmNlUmVmIyIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bXBNTTpEb2N1bWVudElEPSJ4bXAuZGlkOjg5RUYyQUI5ODhCRDExRTY4RjM0Q0FEMUFEQzc3QTY1IiB4bXBNTTpJbnN0YW5jZUlEPSJ4bXAuaWlkOjg5RUYyQUI4ODhCRDExRTY4RjM0Q0FEMUFEQzc3QTY1IiB4bXA6Q3JlYXRvclRvb2w9IkFkb2JlIFBob3Rvc2hvcCBDQyAyMDE1IFdpbmRvd3MiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0iMTBFMTg4M0IzNUQ2OTU1QUJDMjM5RUYzNDUzNEJDNDAiIHN0UmVmOmRvY3VtZW50SUQ9IjEwRTE4ODNCMzVENjk1NUFCQzIzOUVGMzQ1MzRCQzQwIi8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+/+4ADkFkb2JlAGTAAAAAAf/bAIQAEAsLCwwLEAwMEBcPDQ8XGxQQEBQbHxcXFxcXHx4XGhoaGhceHiMlJyUjHi8vMzMvL0BAQEBAQEBAQEBAQEBAQAERDw8RExEVEhIVFBEUERQaFBYWFBomGhocGhomMCMeHh4eIzArLicnJy4rNTUwMDU1QEA/QEBAQEBAQEBAQEBA/8AAEQgAHgAoAwEiAAIRAQMRAf/EAHwAAAIDAAAAAAAAAAAAAAAAAAUGAAMEAQADAQAAAAAAAAAAAAAAAAABAgMEEAACAQMCAwYFBQAAAAAAAAABAhEAAwQSBSExQVEiMkITFGFxkcEVgaGiMwYRAAIBAgUDBQAAAAAAAAAAAAECEQASIUEiAxMxYXGhwTJiBP/aAAwDAQACEQMRAD8AfyQBJ5VV7q0yK9s69fhA61RvGSMXbci8TBC6V4xxbuiPrQbatxx9Ax7zhGaDbLGFM+Xj1qL7wRwCNJEn2pGYzAzo2ct5jQPlPGrbOQl3gOB7Jn6EUG3LcsezZZMe4rXjKMVYH048RPZ8Kw4262sPGtaHVw0GJ5QYJHxqnKhQvAUDvS6lOLTTbUqnFyrWXYW/ZMow/UHqDUo3C26cImarIiay73t9zccE46XfRGoMxCaywXjpAkdaXsLanxbyvk99lEBHUHSZ5iSRypxrA/4v1G1x6nm8X2rN+nbLEFXRW+xypSFnHrQ4pttpSPa256yo4k9poblWFGPda3atu3eeFEMexFHZTGn4yDoiOs6vvWgezgf1/wAaQJuEg8mwuHRFBHrRQQdJk4+e9Dv8zj5WPt5GQoQXHNy2nmVWA4NUosmjSNEaekcv2qVotHFbcIt+WVCBbGVf/9k=" class="u-filter_blur20 u-filter-img" alt="无法显示">
+					<div class="j-show-img"></div>
+				</div>
+				<div class="bottom" style="position: relative;z-index: 1;">
+					<div class="body">
+						<p class="copyright"><span>&copy; 2016 Jiangzhongzheng</span></p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</header>
+	<button id="btn">详情</button>
+	<aside class="slide-box">
+		<div class="slide-bg"></div>
+		<div class="slide-aside">
+			<span class='icon' rule="button">关闭</span>
+			<section class="saide-slide-box">
+				<ui class="aside-ul">
+					<li class="aside-li">个人信息</li>
+					<li class="aside-li">求职意向</li>
+					<li class="aside-li">工作技能</li>
+					<li class="aside-li">项目经历</li>
+					<li class="aside-li">教育经历</li>
+					<li class="aside-li">自我评价</li>
+				</ui>
+			</section>
+			<div class="tip">none</div>
+		</div>
+	</aside>
+	<script type="text/javascript">
+	window.onload=function(){
+		'use strict';
+		var dw = document.body.clientWidth || screen.width;
+		var fixed = document.querySelector('.fixed'), mainDom = document.querySelector('.main'), resume = document.querySelector('.resume'), main_row = document.querySelector('.main-title .main-row'), main_box = $('.main > .box'), title_list = document.querySelectorAll('.container > .title');
+		var top = [0,1],box_top=[0,0],boolean=[-1,-1];
+		var box_list = {};
+		var btn = get_obj('#btn'),icon = get_obj('.icon'), tip = get_obj('.tip'), title = get_obj('.main-title .title'), body = get_obj('body');
+		var obj={d:get_obj('.slide-box'), d1:get_obj('.slide-bg'), d2:get_obj('.slide-aside')};
+		var list = $('.aside-li');
+		var obj_arr = ['d visible','d1 show','d2 div'];
+		var language_color = 'black';
+		var starttime, timer;
+		var m_regexp = /Mobile/i;
+		var mobile = m_regexp.exec(navigator.userAgent);
+		box_list.obj = new Array();
+		box_list.h = new Array();
+		box_list.top = new Array();
+		main_box.each(function(index,ele){
+			box_list.obj[index] = ele;
+			box_list.h[index] = ele.getBoundingClientRect().height;
+			box_list.top[index] = ele.offsetTop;
+		})
+		responseSize();
+	window.onscroll=function(){
+		if(resume.getBoundingClientRect().bottom>0){
+			main_row.style.borderBottomColor='transparent';
+			fixed.style.position = 'static';
+			mainDom.style.paddingTop='0px';
+		}else{
+			fixed.style.position = 'fixed';
+			fixed.style.top = '0';
+			mainDom.style.paddingTop='48px';
+			main_row.style.borderBottomColor='#4285f4';
+		}
+		slideFn();
+	}
+	function fn(){
+		var ele = box_list.top.findIndex(function(ele,index,arr){
+			return	(arr[index]-48)<= document.body.scrollTop && document.body.scrollTop < (arr[index]+box_list.h[index]-48);
+		});
+		return ele;
+	}
+	function slideFn(){
+		if(fn()>-1){
+			title.innerHTML=title_list[fn()].innerHTML;
+		}
+	}
+	function slideTo(index){
+		window.scrollTo(0,box_list.top[index]-48);
+	}
+	function arroperation(arr, ele){
+		arr.shift();
+		arr.push(ele);
+	}
+	window.onresize=function(){
+		responseSize();
+	}
+		function responseSize(){
+			dw = document.body.clientWidth || screen.width;
+			if(dw <= 375){
+				get_obj('.slide-aside').style.width='100%';
+			}else if(dw <= 768){
+				get_obj('.slide-aside').style.width='50%';
+			}else{
+				get_obj('.slide-aside').style.width='30%';
+			}
+		}
+		btn.addEventListener('mousedown', listener22);
+		btn.addEventListener('mouseup', listener33);
+		btn.addEventListener('touchstart', listener11);
+		btn.addEventListener('touchend', slistener);
+		function get_color(){
+			var R =parseInt(Math.random()*255, 10);
+			var G =parseInt(Math.random()*255, 10);
+			var B =parseInt(Math.random()*255, 10);
+			var color = '#'+R.toString(16)+G.toString(16)+B.toString(16);
+			language_color = '#'+(255-R).toString(16)+(255-G).toString(16)+(255-B).toString(16);
+			return color;
+		}
+		function get_obj(obj){
+			return document.querySelector(obj);
+		}
+		function add_toggle(obj_arr){
+			$.each(obj_arr,function(inedx,ele){
+				var arr = ele.split(' ');
+				obj[arr[0]].classList.toggle(arr[1]);
+			});
+		}
+		function listener(){
+			starttime = +new Date();
+		}
+		function leavelistner(){
+			if((+new Date()-starttime)>300){
+				return;
+			}
+				add_toggle(obj_arr);
+		}
+		function on_click(obj){
+			obj.addEventListener('mousedown', listener);
+			obj.addEventListener('mouseup', leavelistner);
+			obj.addEventListener('touchstart', listener);
+			obj.addEventListener('touchend', leavelistner);
+		}
+		function on_hover(obj_list){
+			obj_list.each(function(index,ele){
+				on_click(ele);
+				ele.addEventListener('mouseover', listener1);
+				ele.addEventListener('click', function(e){listener2(e,index)});
+				ele.addEventListener('touchend', function(e){listener2(e,index)});
+				ele.addEventListener('mouseout', listener1);
+			});
+		}
+		function listener1(e){
+			if(!!mobile){return;}
+			tip.innerHTML = e.currentTarget.innerHTML;
+			tip.classList.toggle('fidein');
+		}
+		function listener2(e,index){
+					slideTo(index);
+					title.innerHTML = e.currentTarget.innerHTML;
+					if(title.classList.contains('hidden')){
+						title.classList.remove('hidden');
+						title.classList.remove('lg-fidein');
+					}
+					title.classList.add('hidden');
+					// body.style.backgroundColor=get_color();
+					title.style.color=get_color();
+					timer = setTimeout(lg_fadein,0);
+		}
+		function lg_fadein(){
+			title.classList.add('lg-fidein');
+			// body.classList.add('bgcolor');
+			clearTimeout(timer);
+		}
+		function listener11(e){
+			body.addEventListener('touchmove', listener12);
+			e.stopPropagation();
+		}
+		function listener12(e){
+			var startX = e.targetTouches[0].clientX-35;
+			var startY = e.targetTouches[0].clientY-79;
+			disXY(startX,startY);
+			e.preventDefault();
+			e.stopPropagation();
+		}
+		function slistener(e){
+			body.removeEventListener('touchmove', listener12);
+			e.preventDefault();
+			e.stopPropagation();
+		}
+		function listener22(e){
+			btn.addEventListener('mousemove', listener44);
+			e.preventDefault();
+			e.stopPropagation();
+		}
+		function listener33(e){
+			btn.removeEventListener('mousemove', listener44);
+			e.preventDefault();
+			e.stopPropagation();
+		}
+		function listener44(e){
+			var startX = e.clientX-35;
+			var startY = e.clientY-79;
+			disXY(startX,startY);
+			e.preventDefault();
+			e.stopPropagation();
+		}
+		function disXY(disX,disY){
+				btn.style.transform='translate3d('+disX+'px,'+disY+'px,0)';
+				if(btn.getBoundingClientRect().left<0){
+					btn.style.transform='translate3d(-10px,'+disY+'px,0)';
+				}
+				if(btn.getBoundingClientRect().right>window.innerWidth){
+					btn.style.transform='translate3d('+(window.innerWidth-60)+'px,'+disY+'px,0)';
+				}
+				if(btn.getBoundingClientRect().top<0){
+					btn.style.transform='translate3d('+disX+'px,-54px,0)';
+				}
+				if(btn.getBoundingClientRect().bottom>window.innerHeight){
+					btn.style.transform='translate3d('+disX+'px,'+(window.innerHeight-104)+'px,0)';
+				}
+				if(btn.getBoundingClientRect().left <= 0 && btn.getBoundingClientRect().top <= 0){
+					btn.style.transform='translate3d(-10px,-54px,0)';
+				}
+				if(btn.getBoundingClientRect().left <= 0 && btn.getBoundingClientRect().bottom >= window.innerHeight){
+					btn.style.transform='translate3d(-10px,'+(window.innerHeight-104)+'px,0)';
+				}
+				if(btn.getBoundingClientRect().right >= window.innerWidth && btn.getBoundingClientRect().top <= 0){
+					btn.style.transform='translate3d('+(window.innerWidth-60)+'px,-54px,0)';
+				}
+				if(btn.getBoundingClientRect().right >= window.innerWidth && btn.getBoundingClientRect().bottom >= window.innerHeight){
+					btn.style.transform='translate3d('+(window.innerWidth-60)+'px,'+(window.innerHeight-104)+'px,0)';
+				}
+		}
+		on_click(btn);
+		on_click(icon);
+		on_hover(list);
+	}
+	</script>
+	<script>
+		(function(){
+			var imgDom = document.querySelector('.j-show-img');
+			var imgEle = new Image();
+			imgEle.src = 'https://d13yacurqjgara.cloudfront.net/users/602420/screenshots/2761259/landscape-.jpg';
+			imgEle.onload = function(e){
+				imgDom.appendChild(imgEle);
+			}
+		})();
+	</script>
+</body>
+</html>

@@ -112,6 +112,22 @@ a:hover {
   }
 }
 
+/*VIDEO*/
+
+.video > ._title {
+    margin-top: 10px;
+}
+
+.video > ._box{
+  background-color: #000;
+}
+
+.video video {
+  display: block;
+  width: 100%;
+  margin: auto;
+}
+
 /*-#img-*/
 figure img {
   display: block;
