@@ -386,6 +386,11 @@ figure img {
   margin-top: 4px;
 }
 
+.list__li[data-href] .list__title {
+  color: #FF032F;
+  text-decoration: underline;
+}
+
 .list__mack, .list__time {
   float: left;
   font-size: 14px;
