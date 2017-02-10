@@ -103,4 +103,10 @@
     "title":"页面滚动，元素定位性能问题",
     "make":"js",
     "time":"2017-2-6"
+  },
+  {
+    "index":18,
+    "title":"canvas和FileReader实现图片压缩",
+    "make":"js",
+    "time":"2017-2-10"
   }]

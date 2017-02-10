@@ -1,0 +1,23 @@
+<section class="body__list body--scroll">
+  <div class="body__item">
+    <h3 class="item__title i-action">canvas和FileReader实现图片压缩</h3>
+    <div class="item__body">
+      <span class="item__list">
+        <h4>说明</h4>
+        <p>移动端有时候拍出的图片都有4，5MB大小，如果很多张，用户在非wifi下，不仅浪费流量，而且上传很慢，用户体验很差，所以基于此问题，做了个简单的<a class="link" href="demo/demo18/imgCompress.html" target="_blank">demo</a>供大家参考</p>
+      </span>
+      <span class="item__list">
+        <h4>FileReader</h4>
+        <p>关于<a class="link out--link" href="https://developer.mozilla.org/zh-CN/docs/Web/API/FileReader" target="_blank">FileReader</a>，使用readAsDataURL(file)读取文件，完成之后触发onload事件，event对象中的result(event.target.result)属性中包含一个data: URL格式的字符串以表示所读取文件的内容</p>
+      </span>
+      <span class="item__list">
+        <h4>canvas</h4>
+        <p>关于<a class="link" href="https://developer.mozilla.org/zh-CN/docs/Web/API/Canvas_API/Tutorial" target="_blank">canvas</a>，创建一个Image实例对象，之后设置src属性为base64，图片加载完成之后触发onload事件。创建canvas元素，canvas上下文环境，使用canvas的<a class="link out--link" href="https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/drawImage" target="_blank">drawImage</a>绘制图片，设置<a class="link out--link" href="https://developer.mozilla.org/zh-CN/docs/Web/API/HTMLCanvasElement/toDataURL" target="_blank">toDataURL</a>进行压缩，第一个参数(可选)是：图片格式，默认为 image/png，第二个参数(可选)是：在指定图片格式为 image/jpeg 或 image/webp的情况下，可以从 0 到 1 的区间内选择图片的质量。如果超出取值范围，将会使用默认值 0.92。其他参数会被忽略。</p>
+      </span>
+      <span class="item__list">
+        <h4>结语</h4>
+        <p>关于代码部分我没有贴出来详解，大家可以看源码，主要部分是imgCompress方法</p>
+      </span>
+    </div>
+  </div>
+</section>

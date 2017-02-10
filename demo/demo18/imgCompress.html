@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no">
+  <title>imgcompress</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      -webkit-tap-highlight-color:transparent;
+    }
+    html, body {
+      font-size: 16px;
+      margin: 0;
+      -webkit-text-size-adjust: 100%;
+      -webkit-font-smoothing: antialiased;
+    }
+    input {
+      border-width: 0px;
+      margin: 0;
+      padding: 0;
+      outline-style: none;
+    }
+    .visibility--hidden {
+      position: absolute !important;
+      clip: rect(0,0,0,0);
+      margin: -1px !important;
+      padding: 0 !important;
+      border: 0 !important;
+      width: 1px !important;
+      height: 1px !important;
+      overflow: hidden !important;
+    }
+    .input {
+      margin: 10px auto;
+      text-align: center;
+    }
+    .file {
+      display: inline-block;
+      height: 40px;
+      line-height: 40px;
+      white-space: nowrap;
+      width: 100px;
+      background-color: #0076ee;
+      border-radius: 5px;
+      text-align: center;
+      color: #fff;
+    }
+    .submit {
+      margin: 0 auto;
+      width: 150px;
+      height: 40px;
+      line-height: 40px;
+      font-size: 16px;
+      font-weight: 700;
+      color: #fff;
+      background-color: #0076ee;
+      border-width: 0 !important;
+      border-radius: 20px;
+      cursor: pointer;
+    }
+    .img-box > img{
+      display: block;
+      margin: 0 auto;
+      max-width: 100%;
+      width: auto;
+      height: auto;
+      border-width: 0;
+    }
+  </style>
+</head>
+<body>
+  <div class="input">
+    <label class="file" for="id-file"><span>上传照片</span>
+      <input data-info="请上传图片" class="visibility--hidden" id="id-file" type="file" accept="image/*" value="上传">
+    </label>
+  </div>
+  <div class="input">
+    <input type="button" class="submit" id="id-submit" value="完成">
+  </div>
+  <div class="img-box">
+    <img src="" id="id-img" alt="">
+  </div>
+  <script>
+    (function(win, doc){
+      var fileDOM = gd('id-file');
+      var submitDOM = gd('id-submit');
+      var imgDOM = gd('id-img');
+
+      fileDOM.addEventListener('change', function(e){
+        if(fileDOM.files[0]){
+          this.previousElementSibling.textContent = '上传成功';
+        }else{
+          this.previousElementSibling.textContent = '上传照片';
+        }
+      });
+
+      submitDOM.addEventListener('click', function(e){
+
+        if(!fileDOM.files[0]){
+          fileDOM.dataset.info?fade({"text":fileDOM.dataset.info}):fade();
+          return;
+        }
+
+        imgCompress(fileDOM.files[0], function(base64){
+          imgDOM.src = base64;
+          fade({"text": "压缩完成"});
+        })
+      });
+
+      // 图片压缩
+      function imgCompress(file, callback) {
+
+        if (file.size > 10*1024*1024) {
+          fade({"text": "图片大小不能超过10MB"});
+          return;
+        }
+
+        var reader = new FileReader();
+
+        reader.onload = function(e){
+          var type = file.type; //文件类型
+          var size = file.size; //文件大小
+          var scale = 0.6; //压缩比例
+          var onsize = 0.6*1024*1024; //压缩条件大于size
+          var base64 = e.target.result; //文件base64
+          var w_scale = 640; //图片宽度限制
+
+          var img = new Image();
+
+          img.onload = function(e){
+            var width = img.width;
+            var height = img.height;
+            var canvas = doc.createElement('canvas');
+
+            if (width > w_scale) {
+              canvas.width = w_scale;
+              canvas.height = height*w_scale/width;
+            }else {
+              canvas.height = height;
+              canvas.width = width;
+            }
+
+            var ctx = canvas.getContext('2d');
+            ctx.drawImage(img ,0,0, canvas.width, canvas.height);
+
+            var dataURL;
+            if (size > onsize) {
+              dataURL = canvas.toDataURL(type, scale);
+            }else{
+              dataURL = canvas.toDataURL(type, 1);
+            }
+
+            callback&&callback(dataURL);
+            img = null;
+          }
+          
+          img.onerror = function(e){
+            callback&&callback(base64);
+          }
+
+          img.src = base64;
+        }
+
+        reader.onerror = function(e) {
+          fade({"text":"文件压缩失败"});
+        }
+
+        reader.readAsDataURL(file);
+      }
+
+      // 根据id获取dom
+      function gd(id) {
+        return doc.getElementById(id);
+      }
+
+      // 提示 
+      function fade(option){
+        var o = {
+          "text":"请填写完整",
+          "dom":document.body,
+          "s":30,
+          "loading":500,
+          "center":true,
+          "style":{
+            "position": "fixed",
+            "zIndex": "99",
+            "padding": "5px 10px",
+            "maxWidth": "80%",
+            "color": "#fff",
+            "borderRadius": "5px",
+            "backgroundColor": "rgba(0,0,0,.5)"
+          }
+        };
+        
+        for(var j in option){
+          if(option.hasOwnProperty(j)){
+            o[j] = option[j];
+          }
+        }
+
+        var div = createPup(o);
+        var i=1;
+        var s = 1/o['s'];
+        var timer;
+
+        setTimeout(function(){
+            _none();
+        }, o["loading"]);
+
+        function _none(){
+            if(i >= 0){
+              i -= s;
+              timer = requestAnimationFrame(_none);
+              div.style.opacity = i;
+            }else {
+              cancelAnimationFrame(timer);
+              o['dom'].removeChild(div);
+            }
+        }
+      }
+
+      function createPup(option){
+        var element = document.documentElement || document.body;
+        var div = document.createElement('div');
+        var o = option;
+
+        div.textContent = o['text'];
+
+        for(var i in o.style){
+          div.style[i] = o.style[i];
+        }
+
+        o['dom'].appendChild(div);
+
+        if(!!o.center){
+          div.style.top = (element.clientHeight - div.getBoundingClientRect().height)/2 + 'px';
+          div.style.left = (element.clientWidth - div.getBoundingClientRect().width)/2 + 'px';
+        }
+
+        return div;
+      }
+    })(window, document);
+  </script>
+</body>
+</html>
