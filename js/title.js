@@ -109,4 +109,10 @@
     "title":"canvas和FileReader实现图片压缩",
     "make":"js",
     "time":"2017-2-10"
+  },
+  {
+    "index":19,
+    "title":"canvas和createObjectURL实现图片压缩",
+    "make":"js",
+    "time":"2017-2-10"
   }]
