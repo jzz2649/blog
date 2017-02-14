@@ -121,5 +121,5 @@
     "title":"自做滑杆插件slider.js",
     "href":"https://github.com/jzz2649/slider",
     "make":"js",
-    "time":"2017-2-10"
+    "time":"2017-2-15"
   }]
