@@ -147,7 +147,7 @@
           if (size > onsize) {
             dataURL = canvas.toDataURL(type, scale);
           }else{
-            dataURL = canvas.toDataURL(type, 1);
+            dataURL = canvas.toDataURL(type);
           }
 
           callback&&callback(dataURL);
