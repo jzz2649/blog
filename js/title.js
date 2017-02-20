@@ -122,4 +122,18 @@
     "href":"https://github.com/jzz2649/slider",
     "make":"js",
     "time":"2017-2-15"
+  },
+  {
+    "index":21,
+    "title":"HTML & CSS is hard (but it doesn’t have to be)",
+    "href":"https://internetingishard.com/html-and-css/?utm_source=E4H&utm_medium=twitter&utm_campaign=useful-links",
+    "make":"js",
+    "time":"2017-2-20"
+  },
+  {
+    "index":22,
+    "title":"JavaScript Standard Style",
+    "href":"https://github.com/feross/standard/blob/master/RULES.md#javascript-standard-style",
+    "make":"js",
+    "time":"2017-2-20"
   }]
