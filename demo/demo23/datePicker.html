@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="format-detection" content="telephone=no">
+  <title>datePicker</title>
+  <style>
+    a {
+      text-decoration: none;
+    }
+    .datetime {
+      position: absolute;
+      margin-top: 1px;
+      padding-bottom: 10px;
+      left: 0;
+      z-index: 2;
+      width: 100%;
+      background: #fff;
+    }
+    .datetime > ._box {
+      position: relative;
+      max-width: 244px;
+      margin: 0 auto;
+      color: #484848;
+    }
+    .datetime table {
+      width: 100%;
+      table-layout: fixed;
+      border-collapse: collapse;
+    }
+
+    .date--header {
+      padding: 15px;
+    }
+
+    .date-prev,
+    .date-next {
+      padding: 7px 20px;
+      margin: -4px -20px; 
+      cursor: pointer;
+    }
+
+    .date-prev {
+      float: left;
+    }
+
+    .date-next {
+      float: right;
+    }
+
+    .date-prev:after,
+    .date-next:after {
+      content: '';
+      display: block;
+      width: 16px;
+      height: 16px;
+      background-position: center;
+      background-size: 10px 22px;
+      background-repeat: no-repeat;
+    }
+
+    .date-prev:after {
+      background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAWCAYAAAD5Jg1dAAAABHNCSVQICAgIfAhkiAAAAAFzUkdCAK7OHOkAAAAEZ0FNQQAAsY8L/GEFAAAACXBIWXMAAAsSAAALEgHS3X78AAAAHHRFWHRTb2Z0d2FyZQBBZG9iZSBGaXJld29ya3MgQ1M26LyyjAAAAItJREFUOE+Nk1sNgDAQBAsYQEIlIAUJSEAKEpCABCQgBQnc9MHfPSbZsA0bym0hBclDMxa76B2rV9lEs+gsK4VFZAaA0F2tDltd7arCTZ6Uy8qAd2JbE0JrtTrUgEwIuDV4hf9MokfEtAyBdwkN0zlEbj0QLhxCR9gJfRQdwm6/HQ6DAVP4V6jWJeUPdLATGoxdx+cAAAAASUVORK5CYII=');
+    }
+
+    .date-next:after {
+      background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAWCAYAAAD5Jg1dAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAALEgAACxIB0t1+/AAAABx0RVh0U29mdHdhcmUAQWRvYmUgRmlyZXdvcmtzIENTNui8sowAAACBSURBVCiRjdIxFQIxFETRy64BJERCJCABCSsBCUigpIwEJEQCJXIoNgUUkHlNmncmmf8DRcCCEy6JDDdsqdxQU7mn8hGPcU4pIzmSq71gxNleEKx/xNe4vuJ5CJIb+pK+Y8Ym2NhXmV/URCqCgccr7IJP0RLpajKG9UO4z9LKTIA3Bv8SPMozejgAAAAASUVORK5CYII=');
+    }
+
+    .date--title {
+      font-size: 15px;
+      font-weight: 700;
+      text-align: center;
+    }
+
+    .datetime th {
+      font-size: 0.8em;
+      color: #767676;
+      text-align: center;
+    }
+
+    .datetime td {
+      padding: 0;
+      font-size: 15px;
+      text-align: center;
+      font-weight: 700;
+      border: 1px solid #ccc;
+    }
+    .date-month {
+      margin-left: 5px;
+    }
+    .is-active {
+      color: #fff;
+      background: #0076EE;
+    }
+    .date-select {
+      display: block;
+      padding: 6px 0;
+      cursor: default;
+    }
+    .date-select,
+    .date-select:hover,
+    .date-select:active {
+      color: #484848;
+    }
+
+    .is-active.date-select,
+    .is-active.date-select:hover,
+    .is-active.date-select:active {
+      color: #fff;
+    }
+  </style>
+</head>
+<body>
+  <div class="datetime">
+    <div class="_box j-datetime-box">
+      <div class="date--header">
+        <a class="date-prev"></a>
+        <a class="date-next"></a>
+        <div class="date--title">
+          <span class="date-year"></span>年<span class="date-month"></span>
+        </div>
+      </div>
+      <div class="j-table"></div>
+    </div>
+  </div>
+  <script>
+    (function (win, doc) {
+      var box = doc.querySelector('.j-datetime-box')
+      var tableBox = doc.querySelector('.j-table')
+      var dateYear = doc.querySelector('.date-year')
+      var dateMonth = doc.querySelector('.date-month')
+      var _date = new Date()
+      var title = {
+        year: _date.getFullYear(),
+        month: _date.getMonth()
+      }
+
+      var state = {
+        year: _date.getFullYear(),
+        month: _date.getMonth(),
+        date: _date.getDate()
+      }
+
+      var theadContent = ['一', '二', '三', '四', '五', '六', '日']
+      var thead = doc.createElement('thead')
+      var tr = doc.createElement('tr')
+      var th
+      var thNum = 0
+
+      for (; thNum < theadContent.length; ++thNum) {
+        th = doc.createElement('th')
+        th.textContent = theadContent[thNum]
+        tr.appendChild(th)
+      }
+
+      thead.appendChild(tr)
+
+      dateYear.textContent = title.year
+      dateMonth.textContent = getMonth(title.year, title.month).month
+
+      datePicker(title.year, title.month)
+
+      box.addEventListener('click', function (e) {
+        var target = e.target
+        var elAll = doc.querySelectorAll('.date-select')
+        var len = elAll.length
+        var i = 0
+
+        if (target.tagName) {
+          if (target.classList.contains('date-select')) {
+            if (!target.classList.contains('is-active')) {
+              for (; i < len; i++) {
+                if (elAll[i].classList.contains('is-active')) {
+                  elAll[i].classList.remove('is-active')
+                }
+              }
+              state.year = title.year
+              state.month = title.month
+              state.date = parseInt(target.textContent)
+              target.classList.add('is-active')
+            }
+            e.preventDefault()
+            return
+          } else if (target.className === 'date-next') {
+            if (title.month === 11) {
+              dateYear.textContent = ++title.year
+            }
+            title.month = ++title.month % 12
+          } else if (target.className === 'date-prev') {
+            if (title.month !== 0) {
+              --title.month
+            } else {
+              dateYear.textContent = --title.year
+              title.month = 11
+            }
+          } else {
+            return
+          }
+
+          dateMonth.textContent = getMonth(title.year, title.month).month
+          datePicker(title.year, title.month)
+        }
+      })
+
+      function datePicker (year, month) {
+        var date = new Date(year, month, 1)
+        var table = setTable(month, getMonth(year, month).day, date.getDay())
+        tableBox.innerHTML = ''
+        tableBox.appendChild(table)
+      }
+
+      function setTable (month, day, weeks) {
+        var week = (weeks === 0) ? 7 : weeks
+        var len = Math.ceil((week - 1 + day) / 7)
+        var w = 7
+        var i = 0
+        var j = 0
+        var d = 0
+        var max = 0
+        var table = doc.createElement('table')
+        var tbody = doc.createElement('tbody')
+        var tr
+
+        for (; i < len; i++) {
+          tr = doc.createElement('tr')
+          j = 0
+          for (; j < w; j++) {
+            ++max
+
+            if (max < week || d >= day) {
+              tr.appendChild(setTD(0))
+              continue
+            }
+
+            tr.appendChild(setTD(++d))
+          }
+          tbody.appendChild(tr)
+        }
+
+        table.appendChild(thead)
+        table.appendChild(tbody)
+        return table
+      }
+
+      function setTD (n) {
+        var td = doc.createElement('td')
+        var a = doc.createElement('a')
+        if (n !== 0) {
+          a.href = '#'
+          a.className = 'date-select'
+          if (state.year === title.year && state.month === title.month && state.date === n) {
+            a.className = 'date-select is-active'
+          }
+          a.textContent = n
+          td.appendChild(a)
+        } else {
+          td.className = 'date-unselect date-disabled'
+        }
+
+        return td
+      }
+
+      function getMonth (year, Month) {
+        switch (Month) {
+          case 0:
+            return {day: 31, month: '一月'}
+          case 1:
+            return {day: (year % 4 === 0 && year % 100 !== 0 || year % 400 === 0) ? 29 : 28, month: '二月'}
+          case 2:
+            return {day: 31, month: '三月'}
+          case 3:
+            return {day: 30, month: '四月'}
+          case 4:
+            return {day: 31, month: '五月'}
+          case 5:
+            return {day: 30, month: '六月'}
+          case 6:
+            return {day: 31, month: '七月'}
+          case 7:
+            return {day: 31, month: '八月'}
+          case 8:
+            return {day: 30, month: '九月'}
+          case 9:
+            return {day: 31, month: '十月'}
+          case 10:
+            return {day: 30, month: '十一月'}
+          case 11:
+            return {day: 31, month: '十二月'}
+          default:
+            break
+        }
+      }
+    }(window, document))
+
+  </script>
+</body>
+</html>

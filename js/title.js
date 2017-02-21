@@ -136,4 +136,11 @@
     "href":"https://github.com/feross/standard/blob/master/RULES.md#javascript-standard-style",
     "make":"js",
     "time":"2017-2-20"
+  },
+  {
+    "index":23,
+    "title":"自做的一个日期选择demo",
+    "href":"demo/demo23/datePicker.html",
+    "make":"js",
+    "time":"2017-2-21"
   }]
