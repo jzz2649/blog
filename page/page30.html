@@ -1,0 +1,31 @@
+<section class="body__list body--scroll">
+  <div class="body__item">
+    <h3 class="item__title i-action">CSS变量与XSS</h3>
+    <div class="item__body">
+      <span class="item__list">
+        <h4>说明</h4>
+        <p>前面讲过css变量的一些简单用法，这里不再讨论,现在就谈谈css变量与<a class="link out--link" href="http://baike.baidu.com/link?url=DL1KeJG5ZFNZHyYkIv6miCSbWRP8yT1MvmuVK2gLDJ8VBxZqusyY76GpmUs_VYo8lJ2nkG0bkQ6p52NrZuAanq" target="_blank">XSS</a></p>
+      </span>
+      <span class="item__list">
+        <h4>问题</h4>
+        <p>下面的这段js代码会执行的</p>
+      </span>
+      <figure>
+        <figcaption class="t-center">写在css变量中的js代码</figcaption>
+        <img src="demo/demo30/img1.jpg" class="img-center" alt="无法显示">
+      </figure>
+      <span class="item__list">
+        <h4>实现</h4>
+        <p>可以通过js获取css变量中的值，然后使用eval方法来执行</p>
+      </span>
+      <figure>
+        <figcaption class="t-center">示例代码</figcaption>
+        <img src="demo/demo30/img2.jpg" class="img-center" alt="无法显示">
+      </figure>
+      <span class="item__list">
+        <h4>结语</h4>
+        <p>资料来源于<a class="link out--link" href="https://twitter.com/GregorAdams" target="_blank">GregorAdams</a></p>
+      </span>
+    </div>
+  </div>
+</section>

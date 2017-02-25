@@ -183,4 +183,10 @@
     "title":"初入python的元类(metaclass)",
     "make":"python",
     "time":"2017-2-24"
+  },
+  {
+    "index":30,
+    "title":"CSS变量与XSS",
+    "make":"css",
+    "time":"2017-2-25"
   }]
