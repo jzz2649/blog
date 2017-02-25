@@ -170,4 +170,17 @@
     "title":"一些前端大神的博客",
     "make":"css",
     "time":"2017-2-21"
+  },
+  {
+    "index":28,
+    "title":"JavaScript启动性能",
+    "href":"https://medium.com/dev-channel/javascript-start-up-performance-69200f43b201#.zigqumwiq",
+    "make":"js",
+    "time":"2017-2-24"
+  },
+  {
+    "index":29,
+    "title":"初入python的元类(metaclass)",
+    "make":"python",
+    "time":"2017-2-24"
   }]
