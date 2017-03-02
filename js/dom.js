@@ -125,6 +125,9 @@
             setVal(time, v)
             break
           case 'href':
+            if (v.substr(0, 4) === 'demo') {
+              _div.classList.add('_href')
+            }
             setHref(_div, v)
             break
           default:

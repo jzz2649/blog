@@ -1,0 +1,67 @@
+<section class="body__list body--scroll">
+  <div class="body__item">
+    <h3 class="item__title i-action">初入python的元类(metaclass)</h3>
+    <div class="item__body">
+      <span class="item__list">
+        <h4>说明</h4>
+        <p>刚入python不久，而且有过其他编程基础(java)，所以对编程基础比较看中，我入门看的是<a class="link out--link" href="http://www.liaoxuefeng.com/wiki/0014316089557264a6b348958f449949df42a6d3a2e542c000" target="_blank">廖雪峰(python3)</a>的教程，其中对于metaclass记忆比较深，也是毕竟难理解的一部分。</p>
+      </span>
+      <span class="item__list">
+        <h4>个人理解</h4>
+        <p>如有不对，请大神指正</p>
+      </span>
+      <span class="item__list">
+        <h4>type</h4>
+        <p>type()可以查看一个对象的类型，也可以通过type()创建一个类，使用方法type('className', (object,), dict(className=func))创建类
+          <br>
+          <br>
+          1,class的名称；
+          <br>
+          2,继承的父类集合，注意Python支持多重继承，如果只有一个父类，别忘了tuple的单元素写法；
+          <br>
+          3,class的方法名称与函数绑定，
+        </p>
+      </span>
+      <figure>
+        <figcaption class="t-center">使用type创建类</figcaption>
+        <img src="demo/demo29/type.jpg" class="img-center" alt="无法显示">
+      </figure>
+      <span class="item__list">
+        <h4>metaclass</h4>
+        <p>metaclass直译为元类，metaclass是类的模板，所以从type类型派生。不需要从'object'继承。
+          <br>
+          <br>
+          cls:当前准备创建的类的对象；
+          <br>
+          name:类的名字；
+          <br>
+          bases:类的父类集合
+          <br>
+          attrs：类的成员方法集合。
+          <br>
+          <br>
+          最主要的是attrs对象，给继承的类扩展成员变量或者成员方法
+        </p>
+      </span>
+      <figure>
+        <figcaption class="t-center">python2.x示例代码</figcaption>
+        <img src="demo/demo29/py2.jpg" class="img-center" alt="无法显示">
+      </figure>
+      <figure>
+        <figcaption class="t-center">python3.x示例代码</figcaption>
+        <img src="demo/demo29/py3.jpg" class="img-center" alt="无法显示">
+      </figure>
+      <span class="item__list">
+        <h4>结语</h4>
+        <p>资料参考：
+        <br>
+        <a class="link out--link" href="http://blog.jobbole.com/21351/" target="_blank">1，深刻理解Python中的元类(metaclass)</a>
+        <br>
+        <a class="link out--link" href="http://stackoverflow.com/questions/100003/what-is-a-metaclass-in-python" target="_blank">2，What is a metaclass in Python?</a>
+        <br>
+        <a class="link out--link" href="http://www.liaoxuefeng.com/wiki/0014316089557264a6b348958f449949df42a6d3a2e542c000/0014319106919344c4ef8b1e04c48778bb45796e0335839000" target="_blank">3，廖雪峰(python3)之使用元类</a>
+        </p>
+      </span>
+    </div>
+  </div>
+</section>

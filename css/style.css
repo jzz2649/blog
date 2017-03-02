@@ -391,6 +391,10 @@ figure img {
   text-decoration: underline;
 }
 
+.list__li._href[data-href] .list__title {
+  color: #00bcd4;
+}
+
 .list__mack, .list__time {
   float: left;
   font-size: 14px;
