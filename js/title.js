@@ -19,7 +19,7 @@
   },
   {
     "index":4,
-    "title":"How I started drawing CSS Images",
+    "title":"我开始使用css画图",
     "href":"https://blog.prototypr.io/how-i-started-drawing-css-images-3fd878675c89#.9eunkiw5m",
     "make":"css",
     "time":"2017-1-15"
@@ -125,14 +125,14 @@
   },
   {
     "index":21,
-    "title":"HTML & CSS is hard (but it doesn’t have to be)",
+    "title":"HTML和CSS很难(并不一定)",
     "href":"https://internetingishard.com/html-and-css/?utm_source=E4H&utm_medium=twitter&utm_campaign=useful-links",
     "make":"js",
     "time":"2017-2-20"
   },
   {
     "index":22,
-    "title":"JavaScript Standard Style",
+    "title":"JavaScript标准规范",
     "href":"https://github.com/feross/standard/blob/master/RULES.md#javascript-standard-style",
     "make":"js",
     "time":"2017-2-20"
@@ -146,21 +146,21 @@
   },
   {
     "index":24,
-    "title":"Deep dive CSS: font metrics, line-height and vertical-align",
+    "title":"深入理解CSS字体的line-height与vertical-align",
     "href":"http://iamvdo.me/en/blog/css-font-metrics-line-height-and-vertical-align",
     "make":"css",
     "time":"2017-2-21"
   },
   {
     "index":25,
-    "title":"Making boring layouts less boring with CSS Exclusions",
+    "title":"CSS Exclusions: Making Boring Layouts Less Boring",
     "href":"https://webdesign.tutsplus.com/tutorials/css-exclusions--cms-28087?utm_source=E4H&utm_medium=twitter&utm_campaign=useful-links",
     "make":"css",
     "time":"2017-2-21"
   },
   {
     "index":26,
-    "title":"Grid by Example",
+    "title":"网格布局(Grid)例子",
     "href":"http://gridbyexample.com/",
     "make":"css",
     "time":"2017-2-21"
@@ -189,4 +189,18 @@
     "title":"CSS变量与XSS",
     "make":"css",
     "time":"2017-2-25"
+  },
+  {
+    "index":31,
+    "title":"不用Media来实现CSS的响应式",
+    "href":"https://www.sitepoint.com/responsive-css-patterns-without-media-queries/",
+    "make":"css",
+    "time":"2017-3-4"
+  },
+  {
+    "index":32,
+    "title":"180个免费的线性渐变",
+    "href":"https://webgradients.com/?utm_source=E4H&utm_medium=twitter&utm_campaign=useful-links",
+    "make":"css",
+    "time":"2017-3-4"
   }]
