@@ -69,11 +69,42 @@
     </section>
     <footer class="footer f-bottom">
       <div class="copyright">&copy; 2017 JiangZhongZheng</div>
-      <div class="about j-about">
-        <a href="javascript:void(0);">关于博客</a>
+      <div class="about">
+        <a href="javascript:void(0);" class="j-about">关于博客</a>
       </div>
     </footer>
+    <div class="u-toggle j-toggle" title="隐藏">off</div>
   </main>
-  <script src="js/dom.js"></script>
+  <script>
+    (function($){
+      var main = $.querySelector('main');
+      var toggle = $.querySelector('.j-toggle');
+      var classlist = toggle.classList;
+
+      if (localStorage.getItem('full')) {
+        classlist.add('i-toggle');
+        main.className = 'i-full';
+        toggle.textContent = 'on';
+        toggle.title = '显示';
+      }
+
+      toggle.addEventListener('click', function(e){
+        if (classlist.contains('i-toggle')) {
+          classlist.remove('i-toggle');
+          main.className = '';
+          toggle.textContent = 'off';
+          toggle.title = '隐藏';
+          localStorage.removeItem('full');
+        } else {
+          classlist.add('i-toggle');
+          main.className = 'i-full';
+          toggle.textContent = 'on';
+          toggle.title = '显示';
+          localStorage.setItem('full','yes');
+        }
+      });
+    })(document);
+  </script>
+  <script src="js/dom.js" async></script>
 </body>
 </html>
