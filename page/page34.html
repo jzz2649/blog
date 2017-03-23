@@ -1,0 +1,42 @@
+<section class="body__list body--scroll">
+  <div class="body__item">
+    <h3 class="item__title i-action">position: fixed失效</h3>
+    <div class="item__body">
+      <span class="item__list">
+        <h4>说明</h4>
+        <p>在我的印象中，position: fixed可是无人能挡的(是我的无知)，跟往常一样，使用fixed属性，之后打开chrome一看，不对，看了一番，也没写js啊，后来发现用了transform属性(其实google了下)，才知道问题所在</p>
+      </span>
+      <div style="display: none;">
+        <style>
+          .demo34 {
+            width: 100px;
+            height: 100px;
+            border: 1px solid red;
+            margin: 5px auto 15px;
+          }
+          .demo34 div { position: fixed; width: 100px;height: 100px;top: 0;left:0; }
+          .demo34_d1 {transform: translate(0);}
+          .demo34_d2 {transform: scale(1);}
+          .demo34_d3 {transform: rotate(0);}
+          .demo34_d4 {transform: skew(0,0);}
+          .demo34_d5 {transform: translate3d(0,0,0);}
+          .demo34_d1 div{background: blue}
+          .demo34_d2 div{background: red}
+          .demo34_d3 div{background: yellow}
+          .demo34_d4 div{background: black}
+          .demo34_d5 div{background: #d2d2d2}
+        </style>
+      </div>
+      <p style="text-align: center;">transform: translate(0)</p>
+      <div class="demo34 demo34_d1"><div></div></div>
+      <p style="text-align: center;">transform: scale(1)</p>
+      <div class="demo34 demo34_d2"><div></div></div>
+      <p style="text-align: center;">transform: rotate(0)</p>
+      <div class="demo34 demo34_d3"><div></div></div>
+      <p style="text-align: center;">transform: skew(0,0)</p>
+      <div class="demo34 demo34_d4"><div></div></div>
+      <p style="text-align: center;">transform: translate3d(0,0,0)</p>
+      <div class="demo34 demo34_d5"><div></div></div>
+    </div>
+  </div>
+</section>
