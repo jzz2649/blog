@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>表单ui</title>
+  <link rel="stylesheet" href="input.css">
+  <style>
+    .title {
+      margin: 10px 0 5px 0;
+    }
+  </style>
+</head>
+<body>
+  <div class="title">三种配色</div>
+  <div>
+    <span style="vertical-align: middle;">默认</span>
+    <div class="input-checkbox checkbox--checked checked--full">
+      <input type="checkbox" name="color" value="defalut" class="checkbox--hidden" checked disabled>
+      <label></label>
+    </div>
+    <span style="vertical-align: middle;">淡蓝色</span>
+    <div class="input-checkbox checkbox--checked checked--full input--lightblue">
+      <input type="checkbox" name="color" value="lightblue" class="checkbox--hidden" checked disabled>
+      <label></label>
+    </div>
+    <span style="vertical-align: middle;">红色</span>
+    <div class="input-checkbox checkbox--checked checked--full input--red">
+      <input type="checkbox" name="color" value="red" class="checkbox--hidden" checked disabled>
+      <label></label>
+    </div>
+  </div>
+  <div class="input-group">
+    <div class="title">切换</div>
+    <div>
+      <div class="input-checkbox checkbox--slide">
+        <input type="checkbox" class="checkbox--hidden">
+        <label></label>
+      </div>
+      <div class="input-checkbox checkbox--slide checkbox--slide--lightblue">
+        <input type="checkbox" class="checkbox--hidden">
+        <label></label>
+      </div>
+      <div class="input-checkbox checkbox--slide checkbox--slide--red">
+        <input type="checkbox" class="checkbox--hidden">
+        <label></label>
+      </div>
+    </div>
+    <div class="title">多选</div>
+    <div>
+      <div class="input-checkbox checkbox--checked checked--full">
+        <input type="checkbox" class="checkbox--hidden">
+        <label></label>
+      </div>
+      <div class="input-checkbox checkbox--checked checked--full input--lightblue">
+        <input type="checkbox" class="checkbox--hidden">
+        <label></label>
+      </div>
+      <div class="input-checkbox checkbox--checked checked--full input--red">
+        <input type="checkbox" class="checkbox--hidden">
+        <label></label>
+      </div>
+    </div>
+    <div class="title">单选</div>
+    <div>
+      <div class="input-checkbox checkbox--checked checked--full">
+        <input type="radio" name="radio" class="checkbox--hidden">
+        <label></label>
+      </div>
+      <div class="input-checkbox checkbox--checked checked--full input--lightblue">
+        <input type="radio" name="radio" class="checkbox--hidden">
+        <label></label>
+      </div>
+      <div class="input-checkbox checkbox--checked checked--full input--red">
+        <input type="radio" name="radio" class="checkbox--hidden">
+        <label></label>
+      </div>
+    </div>
+    <div class="title">多选</div>
+    <div>
+      <div class="input-checkbox checkbox--checked checked--small">
+        <input type="checkbox" class="checkbox--hidden">
+        <label></label>
+      </div>
+      <div class="input-checkbox checkbox--checked checked--small input--lightblue">
+        <input type="checkbox" class="checkbox--hidden">
+        <label></label>
+      </div>
+      <div class="input-checkbox checkbox--checked checked--small input--red">
+        <input type="checkbox" class="checkbox--hidden">
+        <label></label>
+      </div>
+    </div>
+    <div class="title">单选</div>
+    <div>
+      <div class="input-checkbox checkbox--checked checked--small">
+        <input type="radio" name="radio1" class="checkbox--hidden">
+        <label></label>
+      </div>
+      <div class="input-checkbox checkbox--checked checked--small input--lightblue">
+        <input type="radio" name="radio1" class="checkbox--hidden">
+        <label></label>
+      </div>
+      <div class="input-checkbox checkbox--checked checked--small input--red">
+        <input type="radio" name="radio1" class="checkbox--hidden">
+        <label></label>
+      </div>
+    </div>
+    <div class="title">输入框</div>
+    <div style="max-width: 300px;margin: 10px 0;">
+      <div class="input-input">
+        <input type="text" required>
+        <span class="input_highlight"></span>
+        <span class="input_bar"></span>
+        <label>Name</label>
+      </div>
+    </div>
+    <div style="max-width: 300px;margin: 10px 0;">
+      <div class="input-input input--lightblue">
+        <input type="text" required>
+        <span class="input_highlight"></span>
+        <span class="input_bar"></span>
+        <label>Name</label>
+      </div>
+    </div>
+    <div style="max-width: 300px;margin: 10px 0;">
+      <div class="input-input input--red">
+        <input type="text" required>
+        <span class="input_highlight"></span>
+        <span class="input_bar"></span>
+        <label>Name</label>
+      </div>
+    </div>
+  </div>
+  <div style="margin-top: 20px;">说明：关于滑杆和日期我已经写过插件，可以配合使用</div>
+</body>
+</html>

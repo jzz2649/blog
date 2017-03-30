@@ -215,4 +215,18 @@
     "title":"position: fixed失效",
     "make":"css",
     "time":"2017-3-23"
+  },
+  {
+    "index":35,
+    "title":"学习SVG动画",
+    "href":"https://medium.com/@aniboaz/animate-svg-4fa7dd00e860",
+    "make":"svg",
+    "time":"2017-3-29"
+  },
+  {
+    "index":36,
+    "title":"一组表单相关css",
+    "href":"demo/demo36/input.html",
+    "make":"css",
+    "time":"2017-3-31"
   }]
