@@ -167,19 +167,45 @@
   z-index: 2;
 }
 
-.checked--heart .input--bind:before {
-  top: -14px;
-  left: -15px;
-  width: 50px;
-  height: 50px;
-  background-image: url('../img/animation.png');
+.checked--heart .input--bind:before,
+.checked--praised .input--bind:before,
+.checked--fave .input--bind:before {
+  background-repeat: no-repeat;
   background-size: auto 100%; 
   background-position-x: 0;
   background-color: transparent;
 }
 
+.checked--heart .input--bind:before {
+  top: -14px;
+  left: -15px;
+  width: 50px;
+  height: 50px;
+  background-image: url('../img/heart_animation.png');
+}
+
+.checked--praised .input--bind:before {
+  top: -8px;
+  left: -1px;
+  width: 23px;
+  height: 28px;
+  background-image: url('../img/praised_animation.png');
+}
+
+.checked--fave .input--bind:before {
+  top: -14px;
+  left: -15px;
+  width: 50px;
+  height: 50px;
+  background-image: url('../img/fave_animation.png');
+}
+
 .checked--heart .input--bind,
-.checked--heart .input--bind:after {
+.checked--praised .input--bind,
+.checked--fave .input--bind,
+.checked--heart .input--bind:after,
+.checked--praised .input--bind:after,
+.checked--fave .input--bind:after {
   border-color: transparent !important;
   background-color: transparent !important;
 }
@@ -227,6 +253,23 @@
   100% {background-position-x: -1400px;}
 }
 
+.checked--praised input:checked ~ .input--bind:before {
+  animation: PraisedAnimation 0.6s steps(20);
+  animation-fill-mode: forwards;
+}
+
+@keyframes PraisedAnimation {
+  100% {background-position-x: -460px;}
+}
+
+.checked--fave input:checked ~ .input--bind:before {
+  animation: FaveAnimation 1.6s steps(95);
+  animation-fill-mode: forwards;
+}
+
+@keyframes FaveAnimation {
+  100% {background-position-x: -4750px;}
+}
 
 /*#INPUT COLOR*/
 
@@ -239,7 +282,9 @@
   background-color: #4CD964;
 }
 
-.checked--heart input:checked + .input--bind:before {
+.checked--heart input:checked + .input--bind:before,
+.checked--praised input:checked + .input--bind:before,
+.checked--fave input:checked + .input--bind:before {
   background-color: transparent !important;
 }
 
