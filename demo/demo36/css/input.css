@@ -15,7 +15,7 @@
   cursor: pointer;
 }
 
-.input-input>input {
+.input-input > input {
   margin: 0;
   padding: 7px 5px;
   width: 100%;
@@ -124,11 +124,11 @@
   margin: 0;
   padding: 0;
   opacity: 0 !important;
-  background: transparent;
+  background-color: transparent;
   cursor: pointer;
 }
 
-.input-checkbox label {
+.input-checkbox .input--bind {
   position: relative;
   z-index: 1;
   display: block;
@@ -136,11 +136,11 @@
   height: 24px;
   border: 2px solid #e7e7e7;
   border-radius: 12px;
-  cursor: pointer;
+  /*cursor: pointer;*/
   transition: all .2s linear 0s;
 }
 
-.input-checkbox label:before {
+.input-checkbox .input--bind:before {
   content: '';
   position: absolute;
   top: 0;
@@ -148,26 +148,43 @@
   width: 100%;
   height: 20px;
   border-radius: 10px;
-  background: #fff;
+  background-color: #fff;
   will-change: transform;
   transition: transform .3s linear 0s;
 }
 
-.checkbox--slide label:before {
+.checkbox--slide .input--bind:before {
   transform: scale(1);
 }
 
-.checked--full label:before {
+.checked--full .input--bind:before {
   transform: scale(.8);
   z-index: 2;
 }
 
-.checked--small label:before {
+.checked--small .input--bind:before {
   transform: scale(.1);
   z-index: 2;
 }
 
-.input-checkbox label:after {
+.checked--heart .input--bind:before {
+  top: -14px;
+  left: -15px;
+  width: 50px;
+  height: 50px;
+  background-image: url('../img/animation.png');
+  background-size: auto 100%; 
+  background-position-x: 0;
+  background-color: transparent;
+}
+
+.checked--heart .input--bind,
+.checked--heart .input--bind:after {
+  border-color: transparent !important;
+  background-color: transparent !important;
+}
+
+.input-checkbox .input--bind:after {
   content: '';
   position: absolute;
   top: -1px;
@@ -176,61 +193,74 @@
   height: 20px;
   border: 1px solid #e7e7e7;
   border-radius: 50%;
-  background: #fff;
+  background-color: #fff;
 }
 
-.checkbox--slide label:after {
+.checkbox--slide .input--bind:after {
   box-shadow: 0 2px 2px rgba(0,0,0,.2);
   will-change: left;
   transition: left .3s linear 0s;
 }
 
-.checkbox--slide input:checked + label:before {
+.checkbox--slide input:checked ~ .input--bind:before {
   transform: scale(0);
 }
 
-.checkbox--slide input:checked + label:after {
+.checkbox--slide input:checked ~ .input--bind:after {
   left: 15px;
 }
 
-.checked--full input:checked + label:before {
+.checked--full input:checked ~ .input--bind:before {
   transform: scale(1);
 }
 
-.checked--small input:checked + label:before {
+.checked--small input:checked ~ .input--bind:before {
   transform: scale(0.6);
+}
+
+.checked--heart input:checked ~ .input--bind:before {
+  animation: HeartAnimation 1s steps(28);
+  animation-fill-mode: forwards;
+}
+
+@keyframes HeartAnimation {
+  100% {background-position-x: -1400px;}
 }
 
 
 /*#INPUT COLOR*/
 
-.checkbox--slide input:checked + label {
-  background: #4CD964;
+.checkbox--slide input:checked + .input--bind {
+  background-color: #4CD964;
   border-color: #4CD964;
 }
 
-.checkbox--checked input:checked + label:before {
-  background: #4CD964;
+.checkbox--checked input:checked + .input--bind:before {
+  background-color: #4CD964;
 }
 
-.checked--small input:checked + label,
-.checked--small input:checked + label::after {
+.checked--heart input:checked + .input--bind:before {
+  background-color: transparent !important;
+}
+
+.checked--small input:checked + .input--bind,
+.checked--small input:checked + .input--bind::after {
   border-color: #4CD964;
 }
 
 /*#COLOR==lightblue*/
 
-.checkbox--slide--lightblue input:checked + label {
-  background: #00bcd4;
+.checkbox--slide--lightblue input:checked ~ .input--bind {
+  background-color: #00bcd4;
   border-color: #00bcd4;
 }
 
-.input--lightblue input:checked + label:before {
-  background: #00bcd4;
+.input--lightblue input:checked ~ .input--bind:before {
+  background-color: #00bcd4;
 }
 
-.checked--small.input--lightblue input:checked + label,
-.checked--small.input--lightblue input:checked + label::after {
+.checked--small.input--lightblue input:checked ~ .input--bind,
+.checked--small.input--lightblue input:checked ~ .input--bind::after {
   border-color: #00bcd4;
 }
 
@@ -255,17 +285,17 @@
 
 /*#COLOR==red*/
 
-.checkbox--slide--red input:checked + label {
-  background: #FF032F;
+.checkbox--slide--red input:checked ~ .input--bind {
+  background-color: #FF032F;
   border-color: #FF032F;
 }
 
-.input--red input:checked + label:before {
-  background: #FF032F;
+.input--red input:checked ~ .input--bind:before {
+  background-color: #FF032F;
 }
 
-.checked--small.input--red input:checked + label,
-.checked--small.input--red input:checked + label::after {
+.checked--small.input--red input:checked ~ .input--bind,
+.checked--small.input--red input:checked ~ .input--bind::after {
   border-color: #FF032F;
 }
 
