@@ -1,0 +1,15 @@
+<section class="body__list body--scroll">
+  <div class="body__item">
+    <h3 class="item__title i-action">css实现固定元素在部分区域显示</h3>
+    <div class="item__body">
+      <span class="item__list">
+        <h4>说明</h4>
+        <p>经常看到一些展示页面，随着鼠标的滚动，固定的元素在部分位置区域显示，js可以实现，css也可以实现，今天讲得方式就是用css</p>
+      </span>
+      <span class="item__list">
+        <h4>思路</h4>
+        <p>固定不动的元素当然用position: fixed;属性咯，但是这样，不都浮动起来了么，我们在他父元素的盒子上加上clip: rect(0, auto, auto, 0);属性(别忘了加position: absolute;)，这样在不属于他的部分就会被裁剪掉，当然，我也不想细讲，可以看看这个<a class="link" href="demo/demo37/fixed.html" target="_blank">demo</a>，自己看demo里面的代码，相信你能看懂(其实这个方法我也是在google的一个页面上看到的)</p>
+      </span>
+    </div>
+  </div>
+</section>
