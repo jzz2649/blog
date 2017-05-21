@@ -1,0 +1,27 @@
+<section class="body__list body--scroll">
+  <div class="body__item">
+    <h3 class="item__title i-action">新手巧用javascript事件冒泡</h3>
+    <div class="item__body">
+      <span class="item__list">
+        <h4>说明</h4>
+        <p>之前在imooc写过此手记<a class="link out--link" href="http://www.imooc.com/article/17519" target="_blank">链接</a>，但还是在这里简单说说</p>
+      </span>
+      <span class="item__list">
+        <h4>问题</h4>
+        <p>通常一个操作(比如鼠标点击动作)，我们会绑定一个事件，比如用dom.onclick或者dom.addEventListener来绑定事件，如果是很多点击动作，而且都是重复的，那岂不是需要绑定很多遍(如日期插件<a class="link out--link" href="https://github.com/jzz2649/datePicker" target="_blank">链接</a>)，而且这种dom都在改变，需要不断的绑定，事件绑定多了也影响性能</p>
+      </span>
+      <figure>
+        <figcaption class="t-center">绑定所有dom</figcaption>
+        <img src="demo/demo38/img1.jpg" class="img-center" alt="无法显示">
+      </figure>
+      <span class="item__list">
+        <h4>思路</h4>
+        <p>绑定一个事件，只要点击到子元素，都会冒泡到这个绑定对象上(子元素没有阻止冒泡)，所以利用事件冒泡，我们只要绑定到一个固定的祖先元素上就可以了，e.target可以知道具体那个子元素</p>
+      </span>
+      <figure>
+        <figcaption class="t-center">利用事件冒泡</figcaption>
+        <img src="demo/demo38/img2.jpg" class="img-center" alt="无法显示">
+      </figure>
+    </div>
+  </div>
+</section>

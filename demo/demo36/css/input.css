@@ -273,11 +273,7 @@
 
 /*#INPUT COLOR*/
 
-.checkbox--slide input:checked + .input--bind {
-  background-color: #4CD964;
-  border-color: #4CD964;
-}
-
+.checkbox--slide input:checked + .input--bind,
 .checkbox--checked input:checked + .input--bind:before {
   background-color: #4CD964;
 }
@@ -288,6 +284,7 @@
   background-color: transparent !important;
 }
 
+.checkbox--slide input:checked + .input--bind,
 .checked--small input:checked + .input--bind,
 .checked--small input:checked + .input--bind::after {
   border-color: #4CD964;
@@ -295,20 +292,14 @@
 
 /*#COLOR==lightblue*/
 
-.checkbox--slide--lightblue input:checked ~ .input--bind {
-  background-color: #00bcd4;
-  border-color: #00bcd4;
-}
-
-.input--lightblue input:checked ~ .input--bind:before {
-  background-color: #00bcd4;
-}
-
+.checkbox--slide--lightblue input:checked ~ .input--bind,
 .checked--small.input--lightblue input:checked ~ .input--bind,
 .checked--small.input--lightblue input:checked ~ .input--bind::after {
   border-color: #00bcd4;
 }
 
+.checkbox--slide--lightblue input:checked ~ .input--bind,
+.input--lightblue input:checked ~ .input--bind:before,
 .input--lightblue .input_bar::before,
 .input--lightblue .input_bar::after {
   background-color: #00bcd4;
@@ -330,20 +321,14 @@
 
 /*#COLOR==red*/
 
-.checkbox--slide--red input:checked ~ .input--bind {
-  background-color: #FF032F;
-  border-color: #FF032F;
-}
-
-.input--red input:checked ~ .input--bind:before {
-  background-color: #FF032F;
-}
-
+.checkbox--slide--red input:checked ~ .input--bind,
 .checked--small.input--red input:checked ~ .input--bind,
 .checked--small.input--red input:checked ~ .input--bind::after {
   border-color: #FF032F;
 }
 
+.checkbox--slide--red input:checked ~ .input--bind,
+.input--red input:checked ~ .input--bind:before,
 .input--red .input_bar::before,
 .input--red .input_bar::after {
   background-color: #FF032F;
