@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>付款</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+  <style>
+    html {
+      width: 100%;
+      height: 100%;
+      font-size: 16px;
+      font-family: sans-serif; /* 1 */
+      line-height: 1.15; /* 2 */
+      -ms-text-size-adjust: 100%; /* 3 */
+      -webkit-text-size-adjust: 100%; /* 3 */
+    }
+    * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+    body {
+      width: 100%;
+      height: 100%;
+      margin: 0 auto;
+      overflow-x: hidden;
+      background-color: #262C35;
+    }
+    p {
+      margin: 0;
+      padding: 0;
+    }
+    .main {
+      position: relative;
+    }
+    .calculator-panel {
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: 1;
+      width: 100%;
+      height: 100%;
+      padding-bottom: 100%;
+    }
+    .calculator-panel .row {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      padding: 0 10px;
+      padding-bottom: 2px;
+    }
+    .panel {
+      position: relative;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      color: #D9AF5C;
+    }
+    .panel-box {
+      position: relative;
+      height: 100%;
+      padding-bottom: 3.625rem;
+      font-size: 0rem;
+      /*padding-bottom: 20px;*/
+      /*border-bottom: 1px solid #666;*/
+    }
+    .panel-box:after {
+      content: 'x';
+      display: inline-block;
+      height: 100%;
+      width: 0px;
+      overflow: hidden;
+      visibility: hidden;
+      vertical-align: middle;
+    }
+    .panel-box-row {
+      position: relative;
+      display: inline-block;
+      width: 100%;
+      vertical-align: middle;
+    }
+    .price {
+      /*padding-right: 40px;*/
+      /*height: 60px;*/
+      height: 3.75rem;
+      text-align: center;
+      /*font-size: 48px;*/
+      font-size: 3rem;
+      /*font-weight: 700;*/
+    }
+    .close {
+      position: absolute;
+      top: 5px;
+      right: 0;
+      width: 20px;
+      height: 20px;
+      display: none;
+      border-radius: 50%;
+      background-color: #D9AF5C;
+    }
+    .close:before,
+    .close:after {
+      content:'';
+      position: absolute;
+      width: 18px;
+      height: 2px;
+      top: 9px;
+      left: 1px;
+      border-radius: 1px;
+      background-color: #333;
+    }
+    .close:before {
+      transform: rotate(45deg);
+    }
+    .close:after {
+      transform: rotate(-45deg);
+    }
+    .tip {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      /*height: 58px;
+      padding: 20px 0;*/
+      height: 3.625rem;
+      padding: 1.25rem 0;
+      font-size: 1rem;
+      border-top: 1px solid #666;
+      text-align: right;
+    }
+    .calculator {
+      position: fixed;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      z-index: 1;
+      width: 100%;
+      overflow: hidden;
+    }
+    .calculator-box {
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      z-index: 2;
+      margin: -1px;
+      margin-top: 0;
+      background-color: #fff;
+    }
+    table {
+      border-collapse: collapse;
+      border-spacing: 0;
+      table-layout: fixed;
+      width: 100%;
+      margin: 0;
+      padding: 0;
+    }
+    tr,td {
+      margin: 0;
+      padding: 0;
+      border: 1px solid #E5E5E5;
+      text-align: center;
+      vertical-align: middle;
+    }
+    table ._box {
+      position: relative;
+      padding-top: 100%;
+    }
+    table .btn {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      display: table-cell;
+      /*font-size: 32px;*/
+      font-size: 2rem;
+      /*font-weight: 700;*/
+      color: #333;
+      text-align: center;
+      vertical-align: middle;
+      -webkit-user-select: none;
+      user-select: none;
+    }
+    table .collect {
+      padding-bottom: 100%;
+    }
+    table .collect .btn {
+      color: #fff;
+      background-color: #d2d2d2;
+    }
+    table .collect .is-send {
+      /*background-color: #D9AF5C;*/
+      background-image: -webkit-linear-gradient(145deg,#E8C16F,#CA9209);
+      background-image: linear-gradient(145deg,#E8C16F,#CA9209);
+    }
+    table .collect ._text {
+      display: inline-block;
+      vertical-align: middle;
+    }
+    table .btn:after {
+      content: 'x';
+      display: inline-block;
+      height: 100%;
+      vertical-align: middle;
+      width: 0px;
+      overflow: hidden;
+      visibility: hidden;
+    }
+    table .is-gathering:before {
+      height: 100%;
+    }
+    td .active:active {
+      background-color: #d2d2d2;
+    }
+    td .collect .is-send:active{
+      /*background-color: #D9AF5C;*/
+    }
+    .del:before {
+      content: '';
+      display: block;
+      width: 100%;
+      height: 100%;
+      background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFAAAABQCAMAAAC5zwKfAAAASFBMVEUAAABUVFRUVFRUVFRUVFRUVFRUVFRUVFRUVFRUVFRUVFRUVFRUVFRUVFRUVFRUVFRUVFRUVFRUVFRUVFRUVFRUVFRUVFRUVFSsxRTbAAAAF3RSTlMAmPtQnLD2Y1f07Op0antdR7sYFAiONepfb7AAAADgSURBVFjD7dZJDoMwEETRDoR5ztT3v2mWFaskMCqy67+CBU8YsLFFURRFUfSPPlvt+/XV44S3ekbVKe/9sv2e3md7pftsh7kLngTe3EdTQfZ0EN5kKsieDsJr7LehS067gcADr0g9q5PL3GsCD7yFB+Z0nAvevWgNQWEP4DkPDnsMslfijER4meCYeCTCywUrh8eiw9NBjFoYsnyHeCn6M2RRf8sQW/07ZFGfKegGUZ3LEBd1tWFRXw95Sbz4J9WoIIsiyOKkgiyKIIuztFliUdzOcetWZGw4oyiKoii6qi91tB92+68cYQAAAABJRU5ErkJggg==');
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: 60% auto;
+    }
+    /*.del:active:before {
+       background-image: url('del2.png');
+    }*/
+    .is-close {
+      display: block;
+    }
+    .is-delete:before {
+      background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFAAAABQCAMAAAC5zwKfAAAAS1BMVEUAAAD/Pj7/Pj7/Pj7/Pj7/Pj7/Pj7/Pj7/Pj7/Pj7/Pj7/Pj7/Pj7/Pj7/Pj7/Pj7/Pj7/Pj7/Pj7/Pj7/Pj7/Pj7/Pj7/Pj7/Pj6fb8WAAAAAGHRSTlMA/VGX+uuZsGj2nFr0YRZ7SbubdXIIjjUCKtxHAAAA4klEQVRYw+3WyxKCMBBE0VFBRHkK6vz/l7rsil2FQ7Xu5q5gwSkgJMSyLMuyLPtHr7n17epm2OFNHqjZ5T0ftt3gddg7uo/2NXfBk8CT+2ICyN5hNQVk72ICGPAk8Pzp1V1x2tVBEF5vRW1xmXsbA+Hd+MGcjqPgHR6J5AXAq1dHQyTCAxj0WIQXBpfCIxFeFGwcHosOTwERvDC44pHlO8Sg6O+QRX2UWdS/Q54q+kzBZFbnMoviasNiL6+HLEYCqIsAhd+UAEJUQRZ1EOIobZZYFLdz3DRXgQ1nlmVZlmW/6g1DJiBX9/MCSgAAAABJRU5ErkJggg==');
+    }
+  </style>
+  <script>
+    var isMobile = (function(){
+      var browser = ['iphone', 'android', 'ipad'];
+      var userAgent = navigator.userAgent;
+      for (var i = 0; i < browser.length; i++) {
+        if(~userAgent.toLowerCase().indexOf(browser[i].toLowerCase())){
+          return browser[i];
+        }
+      }
+      return false;
+    })();
+  </script>
+</head>
+<body>
+  <div class="main">
+    <div class="calculator j-calculator">
+    <div class="calculator-panel">
+      <div class="row">
+        <div class="panel">
+          <div class="panel-box"><div class="panel-box-row">
+              <div class="price j-price">0.00</div>
+              <div class="close j-close"></div>
+            </div></div>
+          <div class="tip"><p class="j-tip" style="float: right;"></p></div>
+        </div>
+      </div>
+    </div>
+    <div class="calculator-box j-calculator">
+      <table>
+        <tbody>
+          <tr>
+            <td><div class="_box"><div class="btn is-number active" data-value="7">7</div></div></td>
+            <td><div class="_box"><div class="btn is-number active" data-value="8">8</div></div></td>
+            <td><div class="_box"><div class="btn is-number active" data-value="9">9</div></div></td>
+            <td><div class="_box"><div class="btn del is-del j-del"></div></div></td>
+          </tr>
+          <tr>
+            <td><div class="_box"><div class="btn is-number active" data-value="4">4</div></div></td>
+            <td><div class="_box"><div class="btn is-number active" data-value="5">5</div></div></td>
+            <td><div class="_box"><div class="btn is-number active" data-value="6">6</div></div></td>
+            <td><div class="_box"><div class="btn active is-add">+</div></div></td>
+          </tr>
+          <tr>
+            <td><div class="_box"><div class="btn is-number active" data-value="1">1</div></div></td>
+            <td><div class="_box"><div class="btn is-number active" data-value="2">2</div></div></td>
+            <td><div class="_box"><div class="btn is-number active" data-value="3">3</div></div></td>
+            <td rowspan="2"><div class="_box collect"><div class="btn is-gathering"><div class="_text">去<br>收<br>款</div></div></div></td>
+          </tr>
+          <tr>
+            <td colspan="2"><div class="_box" style="padding-top: 50%"><div class="btn is-number active" data-value="0">0</div></div></td>
+            <td><div class="_box"><div class="btn active is-decimal">.</div></div></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    </div>
+  </div>
+  <!-- <script src="./js/mui.min.js"></script>
+  <script src="./js/common.js?v=1129"></script> -->
+  <script>
+    (function(){
+      // 主要用来处理窗口大小改变
+      window.addEventListener('resize',resize);
+      document.addEventListener('DOMContentLoaded',resize);
+
+      var html = document.documentElement || document.querySelector('html');
+      var calculator = document.querySelector('.j-calculator');
+      var dw = isMobile ? screen.width : window.innerWidth;
+      var fontSize = dw / 20;
+      var width = window.innerWidth;
+
+      if (dw / window.innerHeight > 0.7) {
+        width = window.innerHeight * 0.7;
+      }
+
+      function resize(e){
+        dw = isMobile ? screen.width : window.innerWidth;
+        fontSize = dw / 20;
+        if (isMobile) {
+          html.style.fontSize = fontSize + 'px';
+        } else if (dw / window.innerHeight < 0.7) {
+          width = dw;
+          html.style.fontSize = fontSize + 'px';
+          calculator.style.width = '100%';
+          calculator.style.left = '0';
+        } else {
+          calculator.style.width = width + 'px';
+          calculator.style.left = ( dw - width ) / 2 + 'px';
+        }
+      }
+    })();
+  </script>
+  <!-- <script>
+    var main = null;
+    var self = null;
+    mui.plusReady(function() {
+      main = plus.webview.getLaunchWebview();
+      self = plus.webview.currentWebview();
+    });
+    if (!getLocal('_uinfo')) {
+      mui.fire(main, 'op', {
+        action: 30
+      });
+    }
+  </script> -->
+  <script>
+    (function(win,doc){
+      var calculator = doc.querySelector('.j-calculator');
+      var close = doc.querySelector('.j-close');
+      var tip = doc.querySelector('.j-tip');
+      var price = doc.querySelector('.j-price');
+      var del = doc.querySelector('.is-del');
+      var gathering = doc.querySelector('.is-gathering');
+
+      /**
+       * @object status 存储当前状态
+       * @props prices 输入的所有金额
+       * @props state 当前存储状态 1:数值,2:加号
+       */
+      var status = {
+        prices:['0'],
+        currPrice:0,
+        state:1
+      }
+      // 是否发送提交
+      var isSend = 0;
+      var MaxPrice = 50000;
+
+      if (isMobile) {
+        calculator.addEventListener('touchstart', function(event){
+          clickHandle(event)
+        });
+      } else {
+        calculator.addEventListener('click', function(event){
+          clickHandle(event)
+        });
+      }
+
+      close.addEventListener('click', function(e){
+        status.prices = ['0'];
+        status.currPrice = 0;
+        status.state = 1;
+        price.textContent = '0.00';
+        tip.textContent = '';
+        isSendFN(0);
+      });
+
+      function clickHandle(e){
+        var target = e.target;
+        var classList = target.classList;
+        if(classList.contains('btn')){
+          if (classList.contains('is-number')) {
+            handle(1,target.dataset.value);
+          } else if(classList.contains('is-decimal')) {
+            handle(0);
+          } else if (classList.contains('is-add')) {
+            handle(2);
+          } else if (classList.contains('is-del')) {
+            handle(3);
+          } else if (classList.contains('is-gathering')) {
+            handle(4);
+          }
+        } else if (classList.contains('_text')) {
+            handle(4);
+        }
+      }
+
+      /**
+       * @func handle 点击处理函数
+       * @parma type 当前点击类型 0:小数点,1:数值,2:加号,3:删除,4:收款
+       * @parma value 当前的值
+       */
+      function handle(type,value){
+        var length = status.prices.length;
+        var currPrice = status.prices[length-1];
+        var textContent = '';
+
+        switch (type) {
+          case 0:
+            if (~(currPrice.indexOf('.'))) {
+              return;
+            } else {
+              currPrice += '.';
+            }
+            status.prices[length-1] = currPrice;
+            text(false);
+            break;
+          case 1:
+            // if (lin2limit(currPrice)) {
+            //   return;
+            // }
+            status.state = 1;
+            if (currPrice !== '0') {
+              if (lin2limit(currPrice)) {
+                currPrice = currPrice.slice(0, -1) + value;
+              } else {
+                currPrice += value;  
+              }
+            } else {
+              currPrice = value;
+            }
+            status.prices[length-1] = currPrice;
+            if (isMaxPrice(status.prices)) {
+              status.prices[length-1] = status.prices[length-1].slice(0,-1);
+              return;
+            }
+            isSendFN(currPrice)
+            text(false);
+            break;
+          case 2:
+            if (status.prices[length-1] === '0') {
+              return;
+            }
+            if (status.state === 1) {
+              status.prices.push('0');
+            }
+            status.state = 2;
+            text(true);
+            break;
+          case 3:
+            if (parseFloat(status.prices[length-1])===0) {
+              status.prices[length-1] = '0';
+              if(length>1){
+                text(true);
+              }else {
+                text(false);
+              }
+            }
+            if (!isSend) {
+              return;
+            }
+
+            if (status.state === 1) {
+              if (status.prices[length-1] === '' || status.prices[length-1] === '0' || status.prices[length-1] === '0.') {
+                status.state = 2;
+                status.prices.pop();
+                text(true);
+              } else {
+                status.prices[length-1] = status.prices[length-1].slice(0,-1) || '0';
+                text(false);
+                if (status.prices[length-1] === '0') {
+                  status.state = 2;
+                  status.prices.pop();
+                  if(length===1){
+                    status.prices[0] = '0';
+                  }
+                  text(true);
+                }
+              }
+            } else {
+              status.state = 1;
+              if (status.prices[length-1] === '0') {
+                status.prices.pop();
+              }
+              text(false);
+            }
+            isSendFN(status.prices[length-1]);
+            break;
+          case 4:
+            if (gathering.classList.contains('is-send')) {
+              if (isMaxPrice(status.prices)) {
+                return;
+              }
+              var options = {
+                amount: status.currPrice.toFixed(2).toString(),
+                bgcolor: '#262C35'
+              };
+              // mui.fire(main, 'op', {
+              //   action: 15,
+              //   options: options
+              // });
+              // setTimeout(function() {
+              //   self.hide('none');
+              // }, 500);
+            }
+            break;
+        }
+      }
+
+      function text(endisadd){
+        var length = status.prices.length;
+        var textContent = '';
+        var priceValue = 0;
+
+        for (var i=0; i< length; i++) {
+          priceValue += parseFloat(status.prices[i]);
+          if (i === length-1 && status.prices[length-1] === '0') {
+            continue;
+          }
+          if (i < length-1) {
+            textContent += status.prices[i]+'+';
+          } else {
+            if (endisadd) {
+              textContent += status.prices[i]+'+';
+            } else {
+              textContent += status.prices[i];
+            }
+          }
+        }
+        if (priceValue > MaxPrice) {
+          return;
+        }
+        status.currPrice = priceValue;
+        if(~priceValue.toString().indexOf('.')&&priceValue.toString().split('.')[1].length>2){
+          price.textContent = priceValue;
+        } else {
+          price.textContent = priceValue.toFixed(2);
+        }
+        tip.textContent = textContent;
+      }
+
+      /**
+       * @func isSendFN是否发送数据
+       * @parma value 对比值
+       */
+      function isSendFN(value){
+        var length = status.prices.length;
+        var currPrice = status.prices[length-1];
+        if (length === 1 && parseFloat(value) === 0) {
+          if(isSend){
+            gathering.classList.remove('is-send');
+            del.classList.remove('is-delete');
+            close.classList.remove('is-close');
+          }
+          isSend = 0;
+        } else {
+          if (!isSend) {
+            gathering.classList.add('is-send');
+            del.classList.add('is-delete');
+            close.classList.add('is-close');
+          }
+          isSend = 1;
+        }
+      }
+
+      /**
+       * 字符.号后面长度是否大于等于2
+       * @parma str字符串
+       */
+
+       function lin2limit(str) {
+        if (~(str.indexOf('.'))) {
+          if(str.split('.')[1].length>=2){
+            return true;
+          }
+        }
+        return false;
+       }
+
+       /**
+       * 所有金额是否大于50000
+       * @parma str字符串
+       */
+
+       function isMaxPrice(prices) {
+        var length = prices.length;
+        var price = 0;
+        for (var i=0; i<length; i++) {
+          price += parseFloat(prices[i]);
+        }
+        if (price > MaxPrice) {
+          // mui.toast('超过最大限额50000元');
+          alert('超过最大限额50000元')
+          return true;
+        }
+        return false;
+       }
+    })(window,document);
+  </script>
+</body>
+</html>
