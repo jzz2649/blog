@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>menu</title>
+  <style>
+    [data-is-leaf="box"] .children {
+      height: 0px;
+      padding-left: 10px;
+      overflow-y: hidden;
+    }
+    .leaf-icon {
+      cursor: pointer;
+      position: relative;
+    }
+    .leaf-icon,
+    [data-is-leaf="false"]{
+      padding-left: 12px;
+    }
+    .leaf-icon:before,
+    .leaf-icon:after {
+      content: '';
+      position: absolute;
+      background: #333;
+    }
+    .leaf-icon:before {
+      width: 9px;
+      height: 1px;
+      left: 0;
+      top: 12px;
+    }
+    .leaf-icon:after {
+      width: 1px;
+      height: 9px;
+      left: 4px;
+      top: 8px;
+    }
+    .leaf-icon[data-show="true"]:after{
+      background: transparent;
+    }
+    .leaf-icon[data-show="false"]:after{
+      background: #333;
+    }
+  </style>
+</head>
+<body>
+  <div class="main"></div>
+  <script>
+    var menu = [
+      {
+        name:"第一级",
+        value:11,
+        children:[{
+          name:"第一子级",
+          value:112,
+          children:[{
+            name:"第一子子级",
+            value:1311,
+            children:[{
+              name:"第一子子子级",
+              value:13111
+            },{
+              name:"第一子子子子级",
+              value:13112,
+              children:[{
+                name:"第一子子子子子级",
+                value:13111
+              },{
+                name:"第一子子子子子子级",
+                value:13112
+              }]
+            }]
+          },{
+            name:"第三子子级",
+            value:1312,
+            children:[{
+              name:"第三子子子级",
+              value:13111
+            },{
+              name:"第三子子子级",
+              value:13112
+            }]
+          }]
+        }]
+      },
+      {
+        name:"第二级",
+        value:12,
+        children:[{
+          name:"第二子级",
+          value:121,
+          children:[{
+            name:"第三子子级",
+            value:1311,
+            children:[{
+              name:"第三子子子级",
+              value:13111
+            },{
+              name:"第三子子子级",
+              value:13112,
+              children:[{
+                name:"第三子子子级",
+                value:13111
+              },{
+                name:"第三子子子级",
+                value:13112
+              }]
+            }]
+          },{
+            name:"第三子子级",
+            value:1312,
+            children:[{
+              name:"第三子子子级",
+              value:13111
+            },{
+              name:"第三子子子级",
+              value:13112
+            }]
+          }]
+        }]
+      },
+      {
+        name:"第三级",
+        value:13,
+        children:[{
+          name:"第三子级",
+          value:131,
+          children:[{
+            name:"第三子子级",
+            value:1311,
+            children:[{
+              name:"第三子子子级",
+              value:13111
+            },{
+              name:"第三子子子级",
+              value:13112,
+              children:[{
+                name:"第三子子子级",
+                value:13111
+              },{
+                name:"第三子子子级",
+                value:13112
+              }]
+            }]
+          },{
+            name:"第三子子级",
+            value:1312,
+            children:[{
+              name:"第三子子子级",
+              value:13111
+            },{
+              name:"第三子子子级",
+              value:13112
+            }]
+          }]
+        }]
+      },
+      {
+        name:"第四级",
+        value:14,
+        children:[{
+          name:"第四子级",
+          value:141
+        },{
+          name:"第四子级1",
+          value:1411,
+          children:[{
+              name:"第三子子子级",
+              value:13111,
+              children:[{
+                name:"第三子子子级",
+                value:13111
+              },{
+                name:"第三子子子级",
+                value:13112
+              }]
+            },{
+              name:"第三子子子级",
+              value:13112
+            }]
+        }]
+      }
+    ];
+  </script>
+  <script src="menu.js"></script>
+  <script>
+    document.querySelector('.main').appendChild(slider(menu));
+  </script>
+</body>
+</html>
