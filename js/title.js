@@ -270,7 +270,7 @@
   },
   {
     "index":43,
-    "title":"MDN上关于Gird布局详细教程",
+    "title":"MDN上关于Grid布局详细教程",
     "href":"https://mozilladevelopers.github.io/playground/",
     "make":"css",
     "time":"2017-10-3"
