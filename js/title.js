@@ -274,4 +274,11 @@
     "href":"https://mozilladevelopers.github.io/playground/",
     "make":"css",
     "time":"2017-10-3"
+  },
+  {
+    "index":44,
+    "title":"WebAssembly和WebAppManifest用于演示的小游戏",
+    "href":"https://www.funkykarts.rocks/demo.html",
+    "make":"js",
+    "time":"2017-10-5"
   }]
