@@ -281,4 +281,11 @@
     "href":"https://www.funkykarts.rocks/demo.html",
     "make":"js",
     "time":"2017-10-5"
+  },
+  {
+    "index":45,
+    "title":"create-react-app + react-router4 按需加载",
+    "href":"https://serverless-stack.com/chapters/code-splitting-in-create-react-app.html",
+    "make":"js",
+    "time":"2017-11-1"
   }]
