@@ -1,0 +1,70 @@
+<section class="body__list body--scroll">
+  <div class="body__item">
+    <h3 class="item__title i-action">动态import导入js</h3>
+    <div class="item__body">
+      <span class="item__list">
+        <h4>说明</h4>
+        <p>此功能第一次知道是在create-react-app<a class="link out--link" href="https://github.com/facebookincubator/create-react-app/blob/master/packages/react-scripts/template/README.md#code-splitting" target="_blank">README.md</a>中提到过</p>
+      </span>
+      <span class="item__list">
+        <h4>使用</h4>
+        <p>使用<code style="background: #666;color:white;padding: 2px;">import('./script.js')</code>来导入一个js文件，返回的是一个<mark>promise</mark>对象，所以可以使用<mark>then</mark>来链式调用</p>
+      </span>
+      <span class="item__list">
+        <h4>例如</h4>
+        <p>如果<mark>script.js</mark>有如下方法</p>
+        <div style="padding:1px 10px;clear:both;">
+          <pre style="line-height:1.5;background: #666;color:white;">
+  <code>export function a(){}
+  export function b(){}
+  export default function c(){}</code></pre>
+        </div>
+      </span>
+      <span class="item__list">
+        <h4>取值</h4>
+        <p>那么<mark>modules</mark>对象(随便命名)里面有<mark>a,b,default</mark>方法</p>
+        <div style="padding:1px 10px;clear:both;">
+          <pre style="line-height:1.5;background: #666;color:white;">
+  <code>import('./script.js').then(modules=>{
+    modules.a()
+    modules.b()
+    modules.default()
+  })</code></pre>
+        </div>
+      </span>
+      <span class="item__list">
+        <h4>解构</h4>
+        <p>可以使用解构对象来取值,注意:对于<mark>export default</mark>出来的对象,在解构的时候要起个别名,直接解构会报异常</p>
+        <div style="padding:1px 10px;clear:both;">
+          <pre style="line-height:1.5;background: #666;color:white;">
+  <code>import('./script.js').then({a,b,default:c}=>{
+    a()
+    b()
+    c()
+  })</code></pre>
+        </div>
+      </span>
+      <span class="item__list">
+        <h4>注意</h4>
+        <p>如下会出错,<mark>default</mark>要起别名</p>
+        <div style="padding:1px 10px;clear:both;">
+          <pre style="line-height:1.5;background: #666;color:white;">
+  <code>import('./script.js').then({default}=>{
+    //handle
+  })</code></pre>
+        </div>
+      </span>
+      <span class="item__list">
+        <h4>async</h4>
+        <p>可以使用<mark>async/await</mark></p>
+        <div style="padding:1px 10px;clear:both;">
+          <pre style="line-height:1.5;background: #666;color:white;">
+  <code>async function m() {
+    return await import('./a.js');
+  }
+  m().then(modules => modules.default())</code></pre>
+        </div>
+      </span>
+    </div>
+  </div>
+</section>
